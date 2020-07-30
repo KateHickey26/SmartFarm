@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from KirktonApp import views
 
 urlpatterns = [
+    path('', views.index, name='index'), #this maps the url to the index view in the KirktonApp app
+    path('KirktonApp/', include('KirktonApp.urls')), # this maps any urls startting with KirktonApp/ to be handled by KirktonApp
     path('admin/', admin.site.urls),
 ]
