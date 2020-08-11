@@ -22,8 +22,12 @@ def home(request):
     # found in the Mapbox account settings and getting started instructions
     # see https://www.mapbox.com/account/ under the "Access tokens" section
     mapbox_access_token = 'pk.my_mapbox_access_token'
-    return render(request, 'default.html',
+    return render(request, 'KirktonApp/default.html',
                   { 'mapbox_access_token': mapbox_access_token })
+
+#about page
+def about(request):
+    return render(request, 'KirktonApp/about.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -45,10 +49,4 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect(reverse('default.html'))
-
-#to be added to
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect(reverse('default.html'))
+    return redirect(reverse('KirktonApp/default.html'))
