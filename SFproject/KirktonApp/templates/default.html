@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+{% extends KirktonApp/base.html %}
+
 <html>
-  <head>
-    <title>Interactive maps for Django web apps</title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
-  </head>
-  <body>
-   <h1>Kirkton Map</h1>
+
+    <body>
+
+  <!-- map -->
+ <div class="container" name="main body" >
    <div id='map' width="100%" style='height: 600px;'></div>
    <script>
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
@@ -17,5 +16,7 @@
        zoom: 9
      });
    </script>
+</div>
+
   </body>
 </html>
