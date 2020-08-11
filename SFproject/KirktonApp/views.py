@@ -17,7 +17,7 @@ import json
 #def index(request):
     #return HttpResponse("Testing views.py")
 
-def default_map(request):
+def home(request):
     # TODO: move this token to Django settings from an environment variable
     # found in the Mapbox account settings and getting started instructions
     # see https://www.mapbox.com/account/ under the "Access tokens" section

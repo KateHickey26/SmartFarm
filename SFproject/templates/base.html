@@ -1,4 +1,91 @@
 <!DOCTYPE html>
+
 <html>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<head>
+  <title>Interactive maps for Django web apps</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+  <html lang="en">
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.js"></script>
+<script async src="https://cse.google.com/cse.js?cx=002858639642519775440:wqougxmojpz"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+ <h1>
+   Kirkton App
+   {% block title_block %}
+  {% endblock %}
+</h1>
+    <base href="/KirktonApp/">
+
+</head>
+
+<body>
+ <!-- log in button -->
+ <header style="background-color: #D0D0D0;">
+      <div class="container" name="header" >
+        <div class="row">
+          <div class="col-5 align-self-center">
+              <div class="row mt-4 md-2 py-2 justify-content-end" name="login" >
+                  {% if user.is_authenticated %}
+                    <div class="row justify-content-center">
+                      <div class="col-3 mx-1">Welcome {{user.username}} !</div>
+                        <div class="col-2 mx-1">
+                          <form method="get" action="{% url 'KirktonApp:logout' %}">
+                              <button class="btn btn-outline-primary px-4">Logout</button>
+                          </form>
+                          </div>
+                      </div>
+                      {% else %}
+                      <div class="col">
+                      <form method="get" action="{% url 'KirktonApp:login' %}">
+                          <button class="btn btn-outline-primary px-4">Login</button>
+                      </form>
+                      </div>
+                      {% endif %}
+                  </div>
+            </div>
+          </div>
+        </div>
+                  <!-- search function --> <!--
+                  <div class="row mx-2 my-2 py-2 justify-content-end" name="search" >
+                      <div style="width:100%;">
+                          <div class="gcse-searchbox-only"></div>
+                     </div>
+                   </div> -->
+</header>
+
+<div>
+    {% block body_block %}
+    {% endblock %}
+</div>
+
+<!--Below is a footer that contains a short blurb about the company, some useful links to other parts of the website,
+     and contact details where users can reach us. Helps keep the website neat. -->
+<footer class="page-footer font-small blue-grey lighten-5">
+    <div class="container text-center text-md-left mt-5">
+        <div class="row mt-3 dark-grey-text">
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-justify text-lg-center">
+                <h6 class="text-uppercase font-weight-bold">Website Links</h6>
+                <p>
+                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About Us</a>
+                </p>
+                <p>
+                  <a class="nav-link" href="{% url 'KirktonApp:login' %}">:Log in</a>
+                </p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <p>Glasgow, UK</p>
+                <p>2032000h@student.glasgow.ac.uk</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center text-black-50 py-3">
+        <a class="dark-grey-text" >KirktonApp</a>
+    </div>
+</footer>
+</body>
+</html>

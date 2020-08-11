@@ -20,8 +20,9 @@ from django.conf import settings
 from KirktonApp import views
 
 urlpatterns = [
-    #path('', views.index, name='index'), #this maps the url to the index view in the KirktonApp app
-    path('', include('KirktonApp.urls')),
+    #this maps the url to the home view in the KirktonApp app
+    path('', views.home, name='home'),
+    path('KirktonApp/', include('KirktonApp.urls')),
     #path('KirktonApp/', include('KirktonApp.urls')), # this maps any urls startting with KirktonApp/ to be handled by KirktonApp
     path('admin/', admin.site.urls),
 ]
