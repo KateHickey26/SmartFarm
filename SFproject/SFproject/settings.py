@@ -23,6 +23,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'm)-252*nw4*sqlw1jevz0pb_i(6194vac_ey#_6jel=a021jg2'
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyD0Q0N6J4nz39K9ka1LWlBh812KLz-vjno'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'KirktonApp',
+    'django_google_maps',
 ]
 
 MIDDLEWARE = [
