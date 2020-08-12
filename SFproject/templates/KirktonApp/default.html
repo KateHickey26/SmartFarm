@@ -1,18 +1,63 @@
 {% extends 'KirktonApp/base.html' %}
 
+{% block header %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
 {% block body_block %}
 
+<div id='map'></div>
   <!-- map -->
  <div class="container" name="main body" >
    <div id='map' width="100%" style='height: 600px;'></div>
    <script>
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
+
+     // map style and zoom
      var map = new mapboxgl.Map({
        container: 'map',
        style: 'mapbox://styles/mapbox/satellite-streets-v10',
        center: [-4.66, 56.42],
        zoom: 9
      });
+
+     var geojson = {
+       type: 'Feature',
+       features: [
+        {% for sensor in sensors %}
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [{{ sensor.coord_h }}, {{ sensor.coord_v }}]
+          },
+          properties: {
+            title: '{{ sensor.name }}',
+            description: '{{ sensor.status }}' // use method to have diff colours?
+          }
+        },
+        {% endfor %}
+        ]
+      };
+
+      // add markers to map
+      geojson.features.forEach(function(marker) {
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker-green';
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .addTo(map);
+      });
+
+
+
    </script>
 </div>
 

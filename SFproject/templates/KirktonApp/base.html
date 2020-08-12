@@ -3,8 +3,6 @@
 <html>
 <head>
   <title>Interactive maps for Django web apps</title>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
   <html lang="en">
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.js"></script>
 <script async src="https://cse.google.com/cse.js?cx=002858639642519775440:wqougxmojpz"></script>
@@ -72,7 +70,7 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-justify text-lg-center">
                 <h6 class="text-uppercase font-weight-bold">Website Links</h6>
                 <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:home' %}">Home</a>
+                  <a class="nav-link" href="{% url 'KirktonApp:login' %}">Home</a>
                 </p>
                 <p>
                     <a class="nav-link" href="{% url 'KirktonApp:about'%}">About Us</a>
@@ -80,7 +78,7 @@
                 <p>
                   <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
                 </p>
-              
+
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
