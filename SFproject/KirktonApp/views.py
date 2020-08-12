@@ -24,7 +24,9 @@ def home(request):
     mapbox_access_token = 'pk.my_mapbox_access_token'
     sensors = Sensor.objects.all() # could add status equals here
     return render(request, 'KirktonApp/default.html',
-                  { 'mapbox_access_token': mapbox_access_token },{'sensors':sensors})
+                  { 'mapbox_access_token': mapbox_access_token })
+                 # {'sensors':sensors}
+
 
 #about page
 def about(request):
