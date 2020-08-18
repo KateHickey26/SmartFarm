@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-  <title>Interactive maps for Django web apps</title>
+   <title> Interactive map for Kirkton Farm </title>
+
+   <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+
   <html lang="en">
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.js"></script>
 <script async src="https://cse.google.com/cse.js?cx=002858639642519775440:wqougxmojpz"></script>
@@ -11,14 +16,14 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<header style="background-color: #D0D0D0;">
- <h1>
-   Kirkton App
-   {% block title_block %}
-  {% endblock %}
-</h1>
-<!-- log in button -->
+  <header style="background-color: #bfc9f0;">
+    <h1>
+      Kirkton App
+      {% block title_block %}
+     {% endblock %}
+   </h1>
 
+   <!-- log in button -->
      <div class="container" name="header" >
        <div class="row">
          <div class="col-5 align-self-center">
@@ -51,10 +56,9 @@
                   </div> -->
 </header>
 
-    <base href="/KirktonApp/">
+  <base href="/KirktonApp/">
 
 </head>
-
 <body>
 
 <div>
@@ -62,7 +66,7 @@
     {% endblock %}
 </div>
 
-<!--Below is a footer that contains a short blurb about the company, some useful links to other parts of the website,
+<!--Below is a footer that contains a short blurb about the site, some useful links to other parts of the website,
      and contact details where users can reach us. Helps keep the website neat. -->
 <footer class="page-footer font-small blue-grey lighten-5">
     <div class="container text-center text-md-left mt-5">
@@ -78,7 +82,6 @@
                 <p>
                   <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
                 </p>
-
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
