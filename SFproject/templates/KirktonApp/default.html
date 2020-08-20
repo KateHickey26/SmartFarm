@@ -7,6 +7,7 @@
    <div id='map' width="100%" style='height: 600px;'></div>
    <script>
 
+$(function(){
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
      // //adding variable bounds to the map
@@ -31,9 +32,9 @@
 
 
      //geojson for Sensors with correct locations
-     var geojson_sensors = {
-       type: 'FeatureCollection',
-         features: [
+     var geojson = {
+       "type": "FeatureCollection",
+         "features": [
            {
              "type": "Feature",
              "properties": {
@@ -133,67 +134,77 @@
                "type": "Point"
              }
            }
-         ],
-         "type": "FeatureCollection"
-       }
-       ]
+         ]
+        //, "type": "FeatureCollection"
+    //   }
+    //   ]
      };
 
      // add markers to map
-    // geojson_sensors.features.function(marker){
+    //geojson.features.function(marker){
 
-       // create a HTML element for each feature
-       var el = document.createElement('div');
-       el.className = 'marker-light-red';
+       // // create a HTML element for each feature
+       // var el = document.createElement('div');
+       // el.className = 'marker-light-red';
 
 
      // make a marker for each feature and add to the map
+     geojson.features.forEach(function(marker){
+       var el = document.createElement('div');
+       el.className = 'marker';
+     //   new mapboxgl.Marker(el)
+     //    .setLngLat(marker.geometry.coordinates)
+     //    .setPopup(new mapboxgl.Popup()
+     //    .setHTML(marker.properties.title))
+     //    .addTo(map);
+     // });
+  // });
     new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
     .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
     .setHTML(marker.properties.title + marker.properties.description))
     .addTo(map);
     });
+});
 
 
-
-   // add GEOjson polygon layers, for each area of farm
-      map.on('load', function() {
-        // i think the issue is with the source?
-      map.addSource('kirkton', {
-        'type': 'geojson',
-        'data': {
-          'type': 'FeatureCollection',
-          'features': {
-            {
-            'type': 'Feature',
-            'geometry': [
-              'type': 'Polygon',
-              'coordinates':[
-            [
-            // polygon adding to map
-            // these coordinates arent correct
-            // but will show a triangle on the area near sensors for now - to check it works
-              [56.2702, -4.3930],
-              [56.2627, -4.3826],
-              [52.2633, -4.4001]
-            ]
-          ]
-        }
-      },
-    });
-
-    map.addLayer({
-           'id': 'farm-boundary',
-           'type': 'fill',
-           'source': 'kirkton',
-           'paint': {
-               'fill-color': '#888888',
-               'fill-opacity': 0.4
-           },
-           'filter': ['==', '$type', 'Polygon']
-       });
-   });
+   // // add GEOjson polygon layers, for each area of farm
+   //    map.on('load', function() {
+   //      // i think the issue is with the source?
+   //    map.addSource('kirkton', {
+   //      'type': 'geojson',
+   //      'data': {
+   //        'type': 'FeatureCollection',
+   //        'features': {
+   //          {
+   //          'type': 'Feature',
+   //          'geometry': [
+   //            'type': 'Polygon',
+   //            'coordinates':[
+   //          [
+   //          // polygon adding to map
+   //          // these coordinates arent correct
+   //          // but will show a triangle on the area near sensors for now - to check it works
+   //            [56.2702, -4.3930],
+   //            [56.2627, -4.3826],
+   //            [52.2633, -4.4001]
+   //          ]
+   //        ]
+   //      }
+   //    },
+   //  });
+   //
+   //  map.addLayer({
+   //         'id': 'farm-boundary',
+   //         'type': 'fill',
+   //         'source': 'kirkton',
+   //         'paint': {
+   //             'fill-color': '#888888',
+   //             'fill-opacity': 0.4
+   //         },
+   //         'filter': ['==', '$type', 'Polygon']
+   //     });
+   // });
 
 
    //  // allow user to draw a polygon area
