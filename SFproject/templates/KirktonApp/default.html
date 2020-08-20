@@ -6,8 +6,12 @@
  <div class="container" name="main body" >
 
    <div id='map' width="100%" style='height: 600px;'></div>
-   <script>
+   <div class='SideBar'>
+     <div><strong>Sensor Name:</strong> <span id='name'></span></div>
+     <div><strong>Location:</strong> <span id='loc'></span></div>
+   </div>
 
+   <script>
 
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
@@ -24,7 +28,6 @@
        center: [-4.7118, 56.4361],
        zoom: 8
        //maxBounds: bounds // Sets bounds using 'bounds' variable
-
      });
 
      // adds zoom buttons and compass
@@ -229,6 +232,8 @@
         map.on('mouseleave', 'park_sensors', function() {
             map.getCanvas().style.cursor = '';
             popup.remove();
+
+
         });
 
 
@@ -261,8 +266,6 @@
             map.setFeatureState({
               sourse: 'kirkton',
               id: sensorID,
-            }, {
-              click: true
             });
           }
 
@@ -336,11 +339,6 @@
 
 
    </script>
-
-   <div class='SideBar'>
-     <div><strong>Sensor Name:</strong> <span id='name'></span></div>
-     <div><strong>Location:</strong> <span id='loc'></span></div>
-   </div>
 
  </div>
 
