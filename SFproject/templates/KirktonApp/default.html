@@ -39,6 +39,7 @@
             'type': 'geojson',
             'data': {
               'type': 'FeatureCollection',
+              'generateID': true, // this ensures all features have unique IDs for the sidebar info
               'features': [
                 {
                   'type': 'Feature',
@@ -222,8 +223,7 @@
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
-        });
-
+            });
 
         // Change it back to a pointer when it leaves.
         map.on('mouseleave', 'park_sensors', function() {
@@ -231,7 +231,44 @@
             popup.remove();
         });
 
+
+        // variables for sidebar info
+        var  nameDisplay = document.getElementById('name');
+        var locDisplay = document.getElementById('loc');
+
+        map.on('click', 'park_sensors', (e) => {
+          var sensorName = e.features[0].properties.title;
+          var sensorLoc = e.features[0].properties.coordinates; // could change this to a place name instead, or area name
+
+          // check whether features exist
+          if (e.features.lenght >0){
+            // display name and location in sidebar
+            nameDisplay.textContent = sensorName;
+            locDisplay.textContent = sensorLoc;
+
+            // if sensorID for the clicked feature is not nill,
+            // use removeFeatureState to reset to default behaviour
+            if(sesnorID){
+              map.removeFeatureState({
+                source:'kirkton',
+                id: sensorID
+              });
+            }
+
+            sensorID = e.features[0].id;
+
+            // when clicked, update feature state for the feature clicked
+            map.setFeatureState({
+              sourse: 'kirkton',
+              id: sensorID,
+            }, {
+              click: true
+            });
+          }
+
      });
+
+   });
 
 
 
@@ -296,12 +333,14 @@
    //          alert('Use the draw tools to draw a polygon!');
    //        }
    //      }
+
+
    </script>
 
    <div class='SideBar'>
      <div><strong>Sensor Name:</strong> <span id='name'></span></div>
      <div><strong>Location:</strong> <span id='loc'></span></div>
-   </div>\
+   </div>
 
  </div>
 
