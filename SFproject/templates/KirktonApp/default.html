@@ -7,7 +7,7 @@
    <div id='map' width="100%" style='height: 600px;'></div>
    <script>
 
-$(function(){
+
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
      // //adding variable bounds to the map
@@ -21,8 +21,8 @@ $(function(){
        container: 'map',
        style: 'mapbox://styles/mapbox/satellite-streets-v10',
        center: [-4.7118, 56.4361],
-       zoom: 9,
-      // maxBounds: bounds // Sets bounds using 'bounds' variable
+       zoom: 8
+       //maxBounds: bounds // Sets bounds using 'bounds' variable
 
      });
 
@@ -31,114 +31,209 @@ $(function(){
      map.addControl(nav, "top-right");
 
 
-     //geojson for Sensors with correct locations
-     var geojson = {
-       "type": "FeatureCollection",
-         "features": [
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "LoRaWAN Gateway 1",
-               "description": "No description"
+     // add GEOjson polygon layers, for each area of farm
+        map.on('load', function() {
+          // i think the issue is with the source?
+          map.addSource('kirkton', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'geometry': {
+                  'type': 'Polygon',
+                  'coordinates': [
+                  [
+              // polygon adding to map
+              // these coordinates arent correct
+              // but will show a triangle on the area near sensors for now - to check it works
+                    [-4.3616, 56.2908],
+                    [-4.3532, 56.2237],
+                    [-4.4508, 56.2609]
+                  ]
+                ]
+            }
+          },
+          //geojson for Sensors with correct locations
+          {
+            // 'type': 'FeatureCollection',
+            //   "features": [
+            //     {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'LoRaWAN Gateway 1',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.3937, 56.2509]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'LoRaWAN Gateway 2',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.4040, 56.2519]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Level Sensor 1',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.3921, 56.2455]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Sensor 2',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.3946, 56.2458]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Sensor 3',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.3936, 56.2510]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Sensor 4',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.4015, 56.2617]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Sensor 5',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.4006, 56.2607]
+                  }
+                },
+                {
+                  'type': 'Feature',
+                  'properties': {
+                    'title': 'River Sensor 6',
+                    'description': 'No description'
+                  },
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-4.3942, 56.2616]
+                  }
+                },
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "title": "Centre of map",
+                    "description": "No description"
+                  },
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [-4.7118, 56.4361]
+                  }
+                }
+          //    ]
+             //, "type": "FeatureCollection"
+         //   }
+          ]
+        }//;
+
+        });
+
+      map.addLayer({
+             'id': 'farm-boundary',
+             'type': 'fill',
+             'source': 'kirkton',
+             'paint': {
+                 'fill-color': '#888888',
+                 'fill-opacity': 0.4
              },
-             "geometry": {
-               "coordinates": [56.2509, -4.3937],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "LoRaWAN Gateway 2",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2519, -4.4040],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Level Sensor 1",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2455, -4.3921],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 2",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2458, -4.3946],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 3",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2510, -4.3936],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 4",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2617, -4.4015],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 5",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2607, -4.4006],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 6",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2616, -4.3942],
-               "type": "Point"
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "Air temperature and relative humidity sensor",
-               "description": "No description"
-             },
-             "geometry": {
-               "coordinates": [56.2508, -4.3939],
-               "type": "Point"
-             }
-           }
-         ]
-        //, "type": "FeatureCollection"
-    //   }
-    //   ]
-     };
+             'filter': ['==', '$type', 'Polygon']
+         });
+
+         map.addLayer({
+                'id': 'park_sensors',
+                'type': 'circle',
+                'source': 'kirkton',
+              /*   'layout': {
+                                    'icon-image': '{icon}-15',
+                                    'icon-allow-overlap': true
+                                }, */
+                 'paint': {
+                    'circle-radius': 6,
+                    'circle-color': '#B42222'
+                },
+               'filter': ['==', '$type', 'Point']
+
+            });
+
+            // Create a popup, but don't add it to the map yet.
+            var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+            });
+
+          // When a click event occurs on a feature in the places layer, open a popup at the
+          // location of the feature, with description HTML from its properties.
+          map.on('mouseenter', 'park_sensors', function(e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'park_sensors', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+     });
+
+
+
 
      // add markers to map
     //geojson.features.function(marker){
@@ -148,63 +243,25 @@ $(function(){
        // el.className = 'marker-light-red';
 
 
-     // make a marker for each feature and add to the map
-     geojson.features.forEach(function(marker){
-       var el = document.createElement('div');
-       el.className = 'marker';
-     //   new mapboxgl.Marker(el)
-     //    .setLngLat(marker.geometry.coordinates)
-     //    .setPopup(new mapboxgl.Popup()
-     //    .setHTML(marker.properties.title))
-     //    .addTo(map);
-     // });
-  // });
-    new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML(marker.properties.title + marker.properties.description))
-    .addTo(map);
-    });
-});
+  //    // make a marker for each feature and add to the map
+  //    geojson.features.forEach(function(marker){
+  //      var el = document.createElement('div');
+  //      el.className = 'marker';
+  //    //   new mapboxgl.Marker(el)
+  //    //    .setLngLat(marker.geometry.coordinates)
+  //    //    .setPopup(new mapboxgl.Popup()
+  //    //    .setHTML(marker.properties.title))
+  //    //    .addTo(map);
+  //    // });
+  // // });
+  //   new mapboxgl.Marker(el)
+  //     .setLngLat(marker.geometry.coordinates)
+  //     .setPopup(new mapboxgl.Popup() // add popups
+  //     .setHTML(marker.properties.title + marker.properties.description))
+  //     .addTo(map);
+  //   });
 
 
-   // // add GEOjson polygon layers, for each area of farm
-   //    map.on('load', function() {
-   //      // i think the issue is with the source?
-   //    map.addSource('kirkton', {
-   //      'type': 'geojson',
-   //      'data': {
-   //        'type': 'FeatureCollection',
-   //        'features': {
-   //          {
-   //          'type': 'Feature',
-   //          'geometry': [
-   //            'type': 'Polygon',
-   //            'coordinates':[
-   //          [
-   //          // polygon adding to map
-   //          // these coordinates arent correct
-   //          // but will show a triangle on the area near sensors for now - to check it works
-   //            [56.2702, -4.3930],
-   //            [56.2627, -4.3826],
-   //            [52.2633, -4.4001]
-   //          ]
-   //        ]
-   //      }
-   //    },
-   //  });
-   //
-   //  map.addLayer({
-   //         'id': 'farm-boundary',
-   //         'type': 'fill',
-   //         'source': 'kirkton',
-   //         'paint': {
-   //             'fill-color': '#888888',
-   //             'fill-opacity': 0.4
-   //         },
-   //         'filter': ['==', '$type', 'Polygon']
-   //     });
-   // });
 
 
    //  // allow user to draw a polygon area
