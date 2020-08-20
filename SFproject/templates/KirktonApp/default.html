@@ -159,12 +159,13 @@ $(function(){
      //    .addTo(map);
      // });
   // });
-    new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML(marker.properties.title + marker.properties.description))
-    .addTo(map);
-    });
+         var m = new mapboxgl.Marker(el)
+             .setLngLat([marker.geometry.coordinates[1], marker.geometry.coordinates[0]])
+             .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                 .setHTML(marker.properties.title + marker.properties.description))
+             .addTo(map);
+         m.togglePopup();
+     });
 });
 
 
