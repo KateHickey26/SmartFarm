@@ -6,28 +6,14 @@
  <div class="container" name="main body" >
 
 
-   <div id = 'Sidepanel' class='sidepanel'>
+   <div id = 'Sidepanel' class='sidepanel'> Sensors
      <a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>&times;</a>
      <div><strong>Sensor Name:</strong> <span id='name'></span></div>
      <div><strong>Location:</strong> <span id='loc'></span></div>
    </div>
 
-   <div id="main">
-     <button class="openbtn" onclick="openNav()">☰ Toggle Side panel</button>
-    <div id='map' width="100%" style='height: 600px;'></div>
-  </div>
+    <div id='map' width="100%" style='height: 600px;'>Map</div>
 
-<script>
-  /* Set the width of the sidebar to 250px (show it) */
-  function openNav() {
-    document.getElementById("Sidepanel").style.width = "250px";
-  }
-
-/* Set the width of the sidebar to 0 (hide it) */
-function closeNav() {
-  document.getElementById("Sidepanel").style.width = "0";
-}
-</script>
 
    <script>
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
@@ -249,44 +235,42 @@ function closeNav() {
         map.on('mouseleave', 'park_sensors', function() {
             map.getCanvas().style.cursor = '';
             popup.remove();
-
-
         });
 
 
-        // variables for sidebar info
-        var  nameDisplay = document.getElementById('name');
-        var locDisplay = document.getElementById('loc');
+        // // variables for sidebar info
+        // var  nameDisplay = document.getElementById('name');
+        // var locDisplay = document.getElementById('loc');
 
-        map.on('click', 'park_sensors', (e) => {
-          var sensorName = e.features[0].properties.title;
-          var sensorLoc = e.features[0].properties.coordinates; // could change this to a place name instead, or area name
-
-          // check whether features exist
-          if (e.features.lenght >0){
-            // display name and location in sidebar
-            nameDisplay.textContent = sensorName;
-            locDisplay.textContent = sensorLoc;
-
-            // if sensorID for the clicked feature is not nill,
-            // use removeFeatureState to reset to default behaviour
-            if(sesnorID){
-              map.removeFeatureState({
-                source:'kirkton',
-                id: sensorID
-              });
-            }
-
-            sensorID = e.features[0].id;
-
-            // when clicked, update feature state for the feature clicked
-            map.setFeatureState({
-              sourse: 'kirkton',
-              id: sensorID,
-            });
-          }
-
-     });
+     //    map.on('click', 'park_sensors', (e) => {
+     //      var sensorName = e.features[0].properties.title;
+     //      var sensorLoc = e.features[0].properties.coordinates; // could change this to a place name instead, or area name
+     //
+     //      // check whether features exist
+     //      if (e.features.lenght >0){
+     //        // display name and location in sidebar
+     //        nameDisplay.textContent = sensorName;
+     //        locDisplay.textContent = sensorLoc;
+     //
+     //        // if sensorID for the clicked feature is not nill,
+     //        // use removeFeatureState to reset to default behaviour
+     //        if(sesnorID){
+     //          map.removeFeatureState({
+     //            source:'kirkton',
+     //            id: sensorID
+     //          });
+     //        }
+     //
+     //        sensorID = e.features[0].id;
+     //
+     //        // when clicked, update feature state for the feature clicked
+     //        map.setFeatureState({
+     //          sourse: 'kirkton',
+     //          id: sensorID,
+     //        });
+     //      }
+     //
+     // });
 
    });
 
