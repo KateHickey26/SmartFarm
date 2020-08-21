@@ -32,66 +32,240 @@
      const nav = new mapboxgl.NavigationControl();
      map.addControl(nav, "top-right");
 
-     // assigns a unique id to each sensor
+     // sensor GeoJSON
+     var sensors = {
+        "type": "FeatureCollection",
+          "features": [
+            {
+             "type": "Feature",
+             "properties": {
+               "title": "LoRaWAN Gateway 1",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.3937, 56.2509]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "LoRaWAN Gateway 2",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.4040, 56.2519]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Level Sensor 1",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.3921, 56.2455]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Sensor 2",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.3946, 56.2458]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Sensor 3",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.3936, 56.2510]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Sensor 4",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.4015, 56.2617]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Sensor 5",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.4006, 56.2607]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "River Sensor 6",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.3942, 56.2616]
+             }
+           },
+           {
+             "type": "Feature",
+             "properties": {
+               "title": "Centre of map",
+               "description": "No description"
+             },
+             "geometry": {
+               "type": "Point",
+               "coordinates": [-4.7118, 56.4361]
+             },
+           }
+         ]
+        };
+
+     // assigns a unique id to each sensor, used in sidebar
      sensors.features.forEach(function(sensors, i){
        sensors.properties.id = i;
       });
 
-     // add GEOjson polygon layers, for each area of farm
         map.on('load', function(e) {
-          // i think the issue is with the source?
-          map.addSource('kirkton', {
-            'type': 'geojson',
-            'data': {
-              'type': 'FeatureCollection',
-              'generateID': true, // this ensures all features have unique IDs for the sidebar info
-              'features': [
-                {
-                  'type': 'Feature',
-                  'geometry': {
-                  'type': 'Polygon',
-                  'coordinates': [
-                  [
-              // polygon adding to map
-              // these coordinates arent correct
-              // but will show a triangle on the area near sensors for now - to check it works
-                    [-4.3616, 56.2908],
-                    [-4.3532, 56.2237],
-                    [-4.4508, 56.2609]
-                  ]
-                ]
+          map.addSource("places", {
+            "type": "geojson",
+            "data": sensors
+          });
+
+        /**
+         * Add all the things to the page:
+         * - The location listings on the side of the page
+         * - The markers onto the map
+        */
+        buildLocationList(stores);
+        addMarkers();
+      });
+
+      // map.addLayer({
+      //        'id': 'farm-boundary',
+      //        'type': 'fill',
+      //        'source': 'kirkton',
+      //        'paint': {
+      //            'fill-color': '#888888',
+      //            'fill-opacity': 0.4
+      //        },
+      //        'filter': ['==', '$type', 'Polygon']
+      //    });
+
+         // map.addLayer({
+         //        'id': 'sensors',
+         //        'type': 'circle',
+         //        // add a geojson  source containing sensor coordinates and info
+         //        "source": {
+         //          "type": "geojson",
+         //          "data": Kirkton
+         //        },
+         //         'paint': {
+         //            'circle-radius': 6,
+         //            'circle-color': '#B42222'
+         //        },
+         //       'filter': ['==', '$type', 'Point']
+         //
+         //    });
+
+         /**
+       * Add a marker to the map for every sensor
+      **/
+      function addMarkers() {
+        /* For each feature in the GeoJSON object above: */
+        sensors.features.forEach(function(marker) {
+          /* Create a div element for the marker. */
+          var el = document.createElement('div');
+          /* Assign a unique `id` to the marker. */
+          el.id = "marker-" + marker.properties.id;
+          /* Assign the `marker` class to each marker for styling. */
+          el.className = 'marker';
+
+          /**
+           * Create a marker using the div element
+           * defined above and add it to the map.
+          **/
+          new mapboxgl.Marker(el, { offset: [0, -23] })
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+
+
+            /**
+           * Listen to the element and when it is clicked, do three things:
+           * 1. Fly to the point
+           * 2. Close all other popups and display popup for clicked store
+           * 3. Highlight listing in sidebar (and remove highlight for all other listings)
+          **/
+          el.addEventListener('click', function(e){
+            /* Fly to the point */
+            flyToStore(marker);
+            /* Close all other popups and display popup for clicked store */
+            createPopUp(marker);
+            /* Highlight listing in sidebar */
+            var activeItem = document.getElementsByClassName('active');
+            e.stopPropagation();
+            if (activeItem[0]) {
+              activeItem[0].classList.remove('active');
             }
-          },
-          ]
-        }//;
+            var listing = document.getElementById('listing-' + marker.properties.id);
+            listing.classList.add('active');
+          });
         });
+      }
 
-      map.addLayer({
-             'id': 'farm-boundary',
-             'type': 'fill',
-             'source': 'kirkton',
-             'paint': {
-                 'fill-color': '#888888',
-                 'fill-opacity': 0.4
-             },
-             'filter': ['==', '$type', 'Polygon']
-         });
 
-         map.addLayer({
-                'id': 'sensors',
-                'type': 'circle',
-                // add a geojson  source containing sensor coordinates and info
-                "source": {
-                  "type": "geojson",
-                  "data": Kirkton
-                },
-                 'paint': {
-                    'circle-radius': 6,
-                    'circle-color': '#B42222'
-                },
-               'filter': ['==', '$type', 'Point']
+      /**
+ * Add a listing for each store to the sidebar.
+**/
+function buildLocationList(data) {
+  data.features.forEach(function(sensors, i){
+    /**
+     * Create a shortcut for `store.properties`,
+     * which will be used several times below.
+    **/
+    var prop = store.properties;
 
-            });
+    /* Add a new listing section to the sidebar. */
+    var listings = document.getElementById('listings');
+    var listing = listings.appendChild(document.createElement('div'));
+    /* Assign a unique `id` to the listing. */
+    listing.id = "listing-" + prop.id;
+    /* Assign the `item` class to each listing for styling. */
+    listing.className = 'item';
+
+    /* Add the link to the individual listing created above. */
+    var link = listing.appendChild(document.createElement('a'));
+    link.href = '#';
+    link.className = 'title';
+    link.id = "link-" + prop.id;
+    link.innerHTML = prop.address;
+
+    /* Add details to the individual listing. */
+    var details = listing.appendChild(document.createElement('div'));
+    details.innerHTML = prop.city;
+    if (prop.phone) {
+      details.innerHTML += ' · ' + prop.phoneFormatted;
+    }
+
+
+
 
             // Create a popup, but don't add it to the map yet.
             var popup = new mapboxgl.Popup({
