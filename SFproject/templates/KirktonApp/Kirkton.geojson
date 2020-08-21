@@ -1,0 +1,104 @@
+var sensors = {
+   "type": "FeatureCollection",
+     "features": [
+       {
+        "type": "Feature",
+        "properties": {
+          "title": "LoRaWAN Gateway 1",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3937, 56.2509]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "LoRaWAN Gateway 2",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4040, 56.2519]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Level Sensor 1",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3921, 56.2455]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Sensor 2",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3946, 56.2458]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Sensor 3",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3936, 56.2510]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Sensor 4",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4015, 56.2617]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Sensor 5",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4006, 56.2607]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Sensor 6",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3942, 56.2616]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Centre of map",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.7118, 56.4361]
+        },
+      }
+    ]
+   }

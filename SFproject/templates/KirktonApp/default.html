@@ -2,18 +2,13 @@
 
 {% block body_block %}
 
-  <!-- map -->
+
  <div class="container" name="main body" >
 
-
-   <div id = 'Sidepanel' class='sidepanel'> Sensors
-     <a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>&times;</a>
-     <div><strong>Sensor Name:</strong> <span id='name'></span></div>
-     <div><strong>Location:</strong> <span id='loc'></span></div>
-   </div>
-
-    <div id='map' width="100%" style='height: 600px;'>Map</div>
-
+ <!-- Side panel -->
+    <div class='sidebar pad2'>Sensors</div>
+<!-- Map -->
+    <div id='map' class='map pad2'>Map</div>
 
    <script>
      mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
@@ -37,9 +32,13 @@
      const nav = new mapboxgl.NavigationControl();
      map.addControl(nav, "top-right");
 
+     // assigns a unique id to each sensor
+     sensors.features.forEach(function(sensors, i){
+       sensors.properties.id = i;
+      });
 
      // add GEOjson polygon layers, for each area of farm
-        map.on('load', function() {
+        map.on('load', function(e) {
           // i think the issue is with the source?
           map.addSource('kirkton', {
             'type': 'geojson',
@@ -63,115 +62,8 @@
                 ]
             }
           },
-          //geojson for Sensors with correct locations
-          {
-            // 'type': 'FeatureCollection',
-            //   "features": [
-            //     {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'LoRaWAN Gateway 1',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.3937, 56.2509]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'LoRaWAN Gateway 2',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.4040, 56.2519]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Level Sensor 1',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.3921, 56.2455]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Sensor 2',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.3946, 56.2458]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Sensor 3',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.3936, 56.2510]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Sensor 4',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.4015, 56.2617]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Sensor 5',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.4006, 56.2607]
-                  }
-                },
-                {
-                  'type': 'Feature',
-                  'properties': {
-                    'title': 'River Sensor 6',
-                    'description': 'No description'
-                  },
-                  'geometry': {
-                    'type': 'Point',
-                    'coordinates': [-4.3942, 56.2616]
-                  }
-                },
-                {
-                  "type": "Feature",
-                  "properties": {
-                    "title": "Centre of map",
-                    "description": "No description"
-                  },
-                  "geometry": {
-                    "type": "Point",
-                    "coordinates": [-4.7118, 56.4361]
-                  }
-                }
-          //    ]
-             //, "type": "FeatureCollection"
-         //   }
           ]
         }//;
-
         });
 
       map.addLayer({
@@ -186,13 +78,13 @@
          });
 
          map.addLayer({
-                'id': 'park_sensors',
+                'id': 'sensors',
                 'type': 'circle',
-                'source': 'kirkton',
-              /*   'layout': {
-                                    'icon-image': '{icon}-15',
-                                    'icon-allow-overlap': true
-                                }, */
+                // add a geojson  source containing sensor coordinates and info
+                "source": {
+                  "type": "geojson",
+                  "data": Kirkton
+                },
                  'paint': {
                     'circle-radius': 6,
                     'circle-color': '#B42222'
@@ -209,7 +101,7 @@
 
           // When a click event occurs on a feature in the places layer, open a popup at the
           // location of the feature, with description HTML from its properties.
-          map.on('mouseenter', 'park_sensors', function(e) {
+          map.on('mouseenter', 'sensors', function(e) {
             // Change the cursor style as a UI indicator.
             map.getCanvas().style.cursor = 'pointer';
 
@@ -232,7 +124,7 @@
             });
 
         // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'park_sensors', function() {
+        map.on('mouseleave', 'sensors', function() {
             map.getCanvas().style.cursor = '';
             popup.remove();
         });
