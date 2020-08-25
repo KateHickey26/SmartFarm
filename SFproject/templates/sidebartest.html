@@ -32,6 +32,7 @@
         left:0;
       }
 
+
       #header{
         height: 200px;
       } */
@@ -217,10 +218,10 @@
      </h1>
 
      <!-- log in button -->
-       <div id="header" class="container" name="header">
+       <div id="header" class="container">
          <div class="row">
            <div class="col-5 align-self-center">
-               <div class="row mt-4 md-2 py-2 justify-content-end" name="login" >
+               <div class="row mt-4 md-2 py-2 justify-content-end"  >
                    {% if user.is_authenticated %}
                      <div class="row justify-content-center">
                        <div class="col-3 mx-1">Welcome {{user.username}} !</div>
