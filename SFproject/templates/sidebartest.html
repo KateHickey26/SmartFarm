@@ -16,7 +16,7 @@
         padding:10px 5px 15px 20px;
         -webkit-font-smoothing:antialiased;
       }
-      #map-container{
+      /* #map-container{
         position:relative;
         height: 600px;
         width:66.6666%;
@@ -34,7 +34,7 @@
 
       #header{
         height: 200px;
-      }
+      } */
 
       * {
         -webkit-box-sizing:border-box;
@@ -54,6 +54,14 @@
         padding:20px;
       }
 
+      .map {
+        position:absolute;
+        left:33.3333%;
+        width:66.6666%;
+        top:0;bottom:0;
+      }
+
+
       h1 {
         font-size:22px;
         margin:0;
@@ -71,31 +79,42 @@
         color:#101010;
       }
 
+/* adds colour and sytle to the "Sensors" heading */
+      .heading {
+        background:#fff;
+        border-bottom:1px solid #eee;
+        min-height:60px;
+        line-height:60px;
+        padding:0 10px;
+        background-color: #00853e;
+        color: #fff;
+      }
 
-      .listings {
+
+      .sensors {
         height:100%;
         overflow:auto;
         padding-bottom:60px;
       }
 
-      .listings .item {
+      .sensors .item {
         display:block;
         border-bottom:1px solid #eee;
         padding:10px;
         text-decoration:none;
       }
 
-      .listings .item:last-child { border-bottom:none; }
-      .listings .item .title {
+      .sensors .item:last-child { border-bottom:none; }
+      .sensors .item .title {
         display:block;
         color:#00853e;
         font-weight:700;
       }
 
-      .listings .item .title small { font-weight:400; }
-      .listings .item.active .title,
-      .listings .item .title:hover { color:#8cc63f; }
-      .listings .item.active {
+      .sensors .item .title small { font-weight:400; }
+      .sensors .item.active .title,
+      .sensors .item .title:hover { color:#8cc63f; }
+      .sensors .item.active {
         background-color:#f8f8f8;
       }
       ::-webkit-scrollbar {
@@ -117,7 +136,7 @@
         cursor: pointer;
         height: 56px;
         width: 56px;
-        background-image: url(marker.png);
+        /* background-image: url(marker.png); */
         background-color: rgba(0, 0, 0, 0);
       }
 
@@ -179,12 +198,11 @@
       .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
         border-bottom-color: #91c949;
       }
+
     </style>
     <header style="background-color: #bfc9f0;">
       <h1>
         Kirkton App
-        {% block title_block %}
-       {% endblock %}
      </h1>
 
      <!-- log in button -->
@@ -216,12 +234,13 @@
 
   </head>
 
+
   <body>
     <div class='sidebar'>
       <div class='heading'>
-        <h1>Our locations</h1>
+        <h1>Sensors</h1>
       </div>
-      <div id='listings' class='listings'></div>
+      <div id='sensors' class='sensors'></div>
     </div>
     <div id='map' class='map'></div>
     <script>
@@ -352,7 +371,7 @@
               "geometry": {
                 "type": "Point",
                 "coordinates": [-4.7118, 56.4361]
-              },
+              }
             }
           ]
          };
@@ -426,8 +445,8 @@
             if (activeItem[0]) {
               activeItem[0].classList.remove('active');
             }
-            var listing = document.getElementById('listing-' + marker.properties.id);
-            listing.classList.add('active');
+            var sensor = document.getElementById('sensor-' + marker.properties.id);
+            sensor.classList.add('active');
           });
         });
       }
@@ -444,22 +463,22 @@
           var prop = sensor.properties;
 
           /* Add a new listing section to the sidebar. */
-          var listings = document.getElementById('listings');
-          var listing = listings.appendChild(document.createElement('div'));
+          var sensors = document.getElementById('sensors');
+          var sensor = sensors.appendChild(document.createElement('div'));
           /* Assign a unique `id` to the listing. */
-          listing.id = "listing-" + prop.id;
+          sensor.id = "sensor-" + prop.id;
           /* Assign the `item` class to each listing for styling. */
-          listing.className = 'item';
+          sensor.className = 'item';
 
           /* Add the link to the individual listing created above. */
-          var link = listing.appendChild(document.createElement('a'));
+          var link = sensor.appendChild(document.createElement('a'));
           link.href = '#';
           link.className = 'title';
           link.id = "link-" + prop.id;
           link.innerHTML = prop.address;
 
           /* Add details to the individual listing. */
-          var details = listing.appendChild(document.createElement('div'));
+          var details = sensor.appendChild(document.createElement('div'));
           details.innerHTML = prop.city;
           if (prop.phone) {
             details.innerHTML += ' · ' + prop.phoneFormatted;
@@ -475,9 +494,9 @@
           link.addEventListener('click', function(e){
             for (var i=0; i < data.features.length; i++) {
               if (this.id === "link-" + data.features[i].properties.id) {
-                var clickedListing = data.features[i];
-                flyToSensor(clickedListing);
-                createPopUp(clickedListing);
+                var clickedSensor = data.features[i];
+                flyToSensor(clickedSensor);
+                createPopUp(clickedSensor);
               }
             }
             var activeItem = document.getElementsByClassName('active');
@@ -489,10 +508,7 @@
         });
       }
 
-      /**
-       * Use Mapbox GL JS's `flyTo` to move the camera smoothly
-       * a given center point.
-      **/
+      // method for "flying to" a sensor
       function flyToSensor(currentFeature) {
         map.flyTo({
           center: currentFeature.geometry.coordinates,
@@ -500,9 +516,7 @@
         });
       }
 
-      /**
-       * Create a Mapbox GL JS `Popup`.
-      **/
+      // method for popup
       function createPopUp(currentFeature) {
         var popUps = document.getElementsByClassName('mapboxgl-popup');
         if (popUps[0]) popUps[0].remove();
@@ -512,6 +526,7 @@
             '<h4>' + currentFeature.properties.address + '</h4>')
           .addTo(map);
       }
+
     </script>
   </body>
 </html>
