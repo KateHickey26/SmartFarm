@@ -6,425 +6,287 @@
  <div class="container" name="main body" >
 
  <!-- Side panel -->
-    <div class='sidebar'>
-    <div class='sidebar-content'>
-        <h1>Sensors</h1>
-    </div>
-    <div id='sensors' class='sensors'></div>
-    </div>
+ <div class='sidebar'>
+   <div class='heading'>
+     <h1>Sensors</h1>
+   </div>
+   <div id='sensors' class='sensors'></div>
+ </div>
+ <div id='map' class='map'></div>
+ <script>
+   // This will let you use the .remove() function later on
+   if (!('remove' in Element.prototype)) {
+     Element.prototype.remove = function() {
+       if (this.parentNode) {
+           this.parentNode.removeChild(this);
+       }
+     };
+   }
 
-<!-- Map -->
-    <div id='map' class='map'></div>
+   mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
-   <script>
-     // This will let you use the .remove() function later on
-      if (!('remove' in Element.prototype)) {
-        Element.prototype.remove = function() {
-          if (this.parentNode) {
-              this.parentNode.removeChild(this);
-          }
-        };
-      }
-     mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
+   // //adding variable bounds to the map
+   // var bounds = [
+   //    [-4.60, 56.00], // Southwest coordinates
+   //    [-4.10, 56.88] // Northeast coordinates
+   //  ];
 
-     // //adding variable bounds to the map
-     // var bounds = [
-     //    [-4.60, 56.00], // Southwest coordinates
-     //    [-4.10, 56.88] // Northeast coordinates
-     //  ];
+   // map style
+   var map = new mapboxgl.Map({
+     container: 'map',
+     style: 'mapbox://styles/mapbox/satellite-streets-v10',
+     center: [-4.7118, 56.4361],
+     zoom: 8
+     //maxBounds: bounds // Sets bounds using 'bounds' variable
+   });
 
-     // map style and zoom
-     var map = new mapboxgl.Map({
-       container: 'map',
-       style: 'mapbox://styles/mapbox/satellite-streets-v10',
-       center: [-4.7118, 56.4361],
-       zoom: 8
-       //maxBounds: bounds // Sets bounds using 'bounds' variable
+   // sensor GeoJSON data
+   var sensors = {
+      "type": "FeatureCollection",
+        "features": [
+          {
+           "type": "Feature",
+           "properties": {
+             "title": "LoRaWAN Gateway 1",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.3937, 56.2509]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "LoRaWAN Gateway 2",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.4040, 56.2519]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Level Sensor 1",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.3921, 56.2455]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Sensor 2",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.3946, 56.2458]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Sensor 3",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.3936, 56.2510]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Sensor 4",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.4015, 56.2617]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Sensor 5",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.4006, 56.2607]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "River Sensor 6",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.3942, 56.2616]
+           }
+         },
+         {
+           "type": "Feature",
+           "properties": {
+             "title": "Centre of map",
+             "description": "No description"
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [-4.7118, 56.4361]
+           }
+         }
+       ]
+      };
+
+   /**
+    * Assign a unique id to each sensor to associate each point on
+    * the map with a listing in the sidebar
+   */
+
+   sensors.features.forEach(function(sensor, i){
+
+     sensor.properties.id = i;
+
+   });
+
+
+   map.on('load', function (e) {
+     // add geojson data as source
+     map.addSource("places", {
+       "type": "geojson",
+       "data": sensors
      });
 
-     // adds zoom buttons and compass
-     const nav = new mapboxgl.NavigationControl();
-     map.addControl(nav, "top-right");
+     // add sidebar list and map markers to page
+     buildLocationList(sensors);
+     addMarkers();
+   });
 
-     // sensor GeoJSON
-     var sensors = {
-        "type": "FeatureCollection",
-          "features": [
-            {
-             "type": "Feature",
-             "properties": {
-               "title": "LoRaWAN Gateway 1",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.3937, 56.2509]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "LoRaWAN Gateway 2",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.4040, 56.2519]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Level Sensor 1",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.3921, 56.2455]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 2",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.3946, 56.2458]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 3",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.3936, 56.2510]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 4",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.4015, 56.2617]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 5",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.4006, 56.2607]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "River Sensor 6",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.3942, 56.2616]
-             }
-           },
-           {
-             "type": "Feature",
-             "properties": {
-               "title": "Centre of map",
-               "description": "No description"
-             },
-             "geometry": {
-               "type": "Point",
-               "coordinates": [-4.7118, 56.4361]
-             }
+   // method for adding markers to the map for each sensor
+   function addMarkers() {
+     /* For each feature in the GeoJSON object above: */
+     sensors.features.forEach(function(marker) {
+       /* Create a div element for the marker. */
+       var el = document.createElement('div');
+       /* Assign a unique `id` to the marker. */
+       el.id = "marker-" + marker.properties.id;
+       /* Assign the `marker` class to each marker for styling. */
+       el.className = 'marker';
+
+       /**
+        * Create a marker using the div element
+        * defined above and add it to the map.
+       **/
+       new mapboxgl.Marker(el, { offset: [0, -23] })
+         .setLngLat(marker.geometry.coordinates)
+         .addTo(map);
+
+       /**
+        * Listen to the element and when it is clicked, do three things:
+        * 1. Fly to the point
+        * 2. Close all other popups and display popup for clicked sensor
+        * 3. Highlight listing in sidebar (and remove highlight for all other listings)
+       **/
+
+       el.addEventListener('click', function(e){
+         /* Fly to the point */
+         flyToSensor(marker);
+         /* Close all other popups and display popup for clicked sensor */
+         createPopUp(marker);
+         /* Highlight listing in sidebar */
+         var activeItem = document.getElementsByClassName('active');
+         e.stopPropagation();
+         if (activeItem[0]) {
+           activeItem[0].classList.remove('active');
+         }
+         var sensor = document.getElementById('sensor-' + marker.properties.id);
+         sensor.classList.add('active');
+       });
+     });
+   }
+
+   // add each sensor to the sidebar
+   function buildLocationList(data) {
+     data.features.forEach(function(sensor, i){
+       /**
+        * Create a shortcut for `sensor.properties`,
+        * which will be used several times below.
+       **/
+       var prop = sensor.properties;
+
+       /* Add a new listing section to the sidebar. */
+       var sensors = document.getElementById('sensors');
+       var sensor = sensors.appendChild(document.createElement('div'));
+       /* Assign a unique `id` to the listing. */
+       sensor.id = "sensor-" + prop.id;
+       /* Assign the `item` class to each listing for styling. */
+       sensor.className = 'item';
+
+       /* Add the link to the individual listing created above. */
+       var link = sensor.appendChild(document.createElement('a'));
+       link.href = '#';
+       link.className = 'title';
+       link.id = "link-" + prop.id;
+       link.innerHTML = prop.address;
+
+       /* Add details to the individual listing. */
+       var details = sensor.appendChild(document.createElement('div'));
+       details.innerHTML = prop.city;
+       if (prop.phone) {
+         details.innerHTML += ' · ' + prop.phoneFormatted;
+       }
+
+       /**
+        * Listen to the element and when it is clicked, do four things:
+        * 1. Update the `currentFeature` to the sensor associated with the clicked link
+        * 2. Fly to the point
+        * 3. Close all other popups and display popup for clicked sensor
+        * 4. Highlight listing in sidebar (and remove highlight for all other listings)
+       **/
+
+      link.addEventListener('click', function(e){
+         for (var i=0; i < data.features.length; i++) {
+           if (this.id === "link-" + data.features[i].properties.id) {
+             var clickedSensor = data.features[i];
+             flyToSensor(clickedSensor);
+             createPopUp(clickedSensor);
            }
-         ]
-        };
+         }
+         var activeItem = document.getElementsByClassName('active');
+         if (activeItem[0]) {
+           activeItem[0].classList.remove('active');
+         }
+         this.parentNode.classList.add('active');
+       });
+     });
+   }
 
-     // assigns a unique id to each sensor, used in sidebar
-     sensors.features.forEach(function(sensors, i){
-       sensors.properties.id = i;
-      });
+   // method for "flying to" a sensor
+   function flyToSensor(currentFeature) {
+     map.flyTo({
+       center: currentFeature.geometry.coordinates,
+       zoom: 15
+     });
+   }
 
-
-        map.on('load', function(e) {
-          // below ia instead of  addLayer()
-          map.addSource("places", {
-            "type": "geojson",
-            "data": sensors
-          });
-
-
-        /**
-         * Add all the things to the page:
-         * - The location listings on the side of the page
-         * - The markers onto the map
-        */
-        buildLocationList(stores);
-        addMarkers();
-      });
-
-      // map.addLayer({
-      //        'id': 'farm-boundary',
-      //        'type': 'fill',
-      //        'source': 'kirkton',
-      //        'paint': {
-      //            'fill-color': '#888888',
-      //            'fill-opacity': 0.4
-      //        },
-      //        'filter': ['==', '$type', 'Polygon']
-      //    });
-
-         // map.addLayer({
-         //        'id': 'sensors',
-         //        'type': 'circle',
-         //        // add a geojson  source containing sensor coordinates and info
-         //        "source": {
-         //          "type": "geojson",
-         //          "data": Kirkton
-         //        },
-         //         'paint': {
-         //            'circle-radius': 6,
-         //            'circle-color': '#B42222'
-         //        },
-         //       'filter': ['==', '$type', 'Point']
-         //
-         //    });
-
-         /**
-       * Add a marker to the map for every sensor
-      **/
-      function addMarkers() {
-        /* For each feature in the GeoJSON object above: */
-        sensors.features.forEach(function(marker) {
-          /* Create a div element for the marker. */
-          var el = document.createElement('div');
-          /* Assign a unique `id` to the marker. */
-          el.id = "marker-" + marker.properties.id;
-          /* Assign the `marker` class to each marker for styling. */
-          el.className = 'marker';
-
-          /**
-           * Create a marker using the div element
-           * defined above and add it to the map.
-          **/
-          new mapboxgl.Marker(el, { offset: [0, -23] })
-            .setLngLat(marker.geometry.coordinates)
-            .addTo(map);
-
-
-            /**
-           * Listen to the element and when it is clicked, do three things:
-           * 1. Fly to the point
-           * 2. Close all other popups and display popup for clicked store
-           * 3. Highlight listing in sidebar (and remove highlight for all other listings)
-          **/
-
-          el.addEventListener('click', function(e){
-            /* Fly to the point */
-            flyToStore(marker);
-            /* Close all other popups and display popup for clicked store */
-            createPopUp(marker);
-            /* Highlight listing in sidebar */
-            var activeItem = document.getElementsByClassName('active');
-            e.stopPropagation();
-            if (activeItem[0]) {
-              activeItem[0].classList.remove('active');
-            }
-            var listing = document.getElementById('listing-' + marker.properties.id);
-            listing.classList.add('active');
-          });
-        });
-      }
-
-
-      /**
- * Add a listing for each store to the sidebar.
-**/
-
-function buildLocationList(data) {
-  data.features.forEach(function(sensors, i){
-
-    /**
-     * Create a shortcut for `store.properties`,
-     * which will be used several times below.
-    **/
-
-    var prop = store.properties;
-
-    /* Add a new listing section to the sidebar. */
-
-    var listings = document.getElementById('listings');
-    var listing = listings.appendChild(document.createElement('div'));
-    /* Assign a unique `id` to the listing. */
-    listing.id = "listing-" + prop.id;
-    /* Assign the `item` class to each listing for styling. */
-    listing.className = 'item';
-
-    /* Add the link to the individual listing created above. */
-    var link = listing.appendChild(document.createElement('a'));
-    link.href = '#';
-    link.className = 'title';
-    link.id = "link-" + prop.id;
-    link.innerHTML = prop.address;
-
-    /* Add details to the individual listing. */
-    var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.city;
-    if (prop.phone) {
-      details.innerHTML += ' · ' + prop.phoneFormatted;
-    }
-
-
-
-
-        //     // Create a popup, but don't add it to the map yet.
-        //     var popup = new mapboxgl.Popup({
-        //     closeButton: false,
-        //     closeOnClick: false
-        //     });
-        //
-        //   // When a click event occurs on a feature in the places layer, open a popup at the
-        //   // location of the feature, with description HTML from its properties.
-        //   map.on('mouseenter', 'sensors', function(e) {
-        //     // Change the cursor style as a UI indicator.
-        //     map.getCanvas().style.cursor = 'pointer';
-        //
-        //     var coordinates = e.features[0].geometry.coordinates.slice();
-        //     var description = e.features[0].properties.description;
-        //
-        //     // Ensure that if the map is zoomed out such that multiple
-        //     // copies of the feature are visible, the popup appears
-        //     // over the copy being pointed to.
-        //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        //     }
-        //
-        //     // Populate the popup and set its coordinates
-        //     // based on the feature found.
-        //     popup
-        //         .setLngLat(coordinates)
-        //         .setHTML(description)
-        //         .addTo(map);
-        //     });
-        //
-        // // Change it back to a pointer when it leaves.
-        // map.on('mouseleave', 'sensors', function() {
-        //     map.getCanvas().style.cursor = '';
-        //     popup.remove();
-        // });
-
-
-        // // variables for sidebar info
-        // var  nameDisplay = document.getElementById('name');
-        // var locDisplay = document.getElementById('loc');
-
-     //    map.on('click', 'park_sensors', (e) => {
-     //      var sensorName = e.features[0].properties.title;
-     //      var sensorLoc = e.features[0].properties.coordinates; // could change this to a place name instead, or area name
-     //
-     //      // check whether features exist
-     //      if (e.features.lenght >0){
-     //        // display name and location in sidebar
-     //        nameDisplay.textContent = sensorName;
-     //        locDisplay.textContent = sensorLoc;
-     //
-     //        // if sensorID for the clicked feature is not nill,
-     //        // use removeFeatureState to reset to default behaviour
-     //        if(sesnorID){
-     //          map.removeFeatureState({
-     //            source:'kirkton',
-     //            id: sensorID
-     //          });
-     //        }
-     //
-     //        sensorID = e.features[0].id;
-     //
-     //        // when clicked, update feature state for the feature clicked
-     //        map.setFeatureState({
-     //          sourse: 'kirkton',
-     //          id: sensorID,
-     //        });
-     //      }
-     //
-     // });
-
-  // });
-
-
-
-
-     // add markers to map
-    //geojson.features.function(marker){
-
-       // // create a HTML element for each feature
-       // var el = document.createElement('div');
-       // el.className = 'marker-light-red';
-
-
-  //    // make a marker for each feature and add to the map
-  //    geojson.features.forEach(function(marker){
-  //      var el = document.createElement('div');
-  //      el.className = 'marker';
-  //    //   new mapboxgl.Marker(el)
-  //    //    .setLngLat(marker.geometry.coordinates)
-  //    //    .setPopup(new mapboxgl.Popup()
-  //    //    .setHTML(marker.properties.title))
-  //    //    .addTo(map);
-  //    // });
-  // // });
-  //   new mapboxgl.Marker(el)
-  //     .setLngLat(marker.geometry.coordinates)
-  //     .setPopup(new mapboxgl.Popup() // add popups
-  //     .setHTML(marker.properties.title + marker.properties.description))
-  //     .addTo(map);
-  //   });
-
-
-
-
-   //  // allow user to draw a polygon area
-   //  var draw = new MapboxDraw({
-   //    displayControlsDefault: false,
-   //    controls: {
-   //      polygon: true,
-   //      trash: true
-   //    }
-   //  });
-   //  map.addControl(draw);
-   //
-   //  map.on('draw.create', updateArea);
-   //  map.on('draw.delete', updateArea);
-   //  map.on('draw.update', updateArea);
-   //
-   //  function updateArea(e) {
-   //    var data = draw.getAll();
-   //    var answer = document.getElementById('calculated-area');
-   //    if (data.features.length > 0) {
-   //      var area = turf.area(data);
-   //      // restrict to area to 2 decimal points
-   //      var rounded_area = Math.round(area * 100) / 100;
-   //      answer.innerHTML =
-   //        '<p><strong>' +
-   //        rounded_area +
-   //        '</strong></p><p>square meters</p>';
-   //      } else {
-   //        answer.innerHTML = '';
-   //        if (e.type !== 'draw.delete')
-   //          alert('Use the draw tools to draw a polygon!');
-   //        }
-   //      }
+   // method for popup
+   function createPopUp(currentFeature) {
+     var popUps = document.getElementsByClassName('mapboxgl-popup');
+     if (popUps[0]) popUps[0].remove();
+     var popup = new mapboxgl.Popup({closeOnClick: false})
+       .setLngLat(currentFeature.geometry.coordinates)
+       .setHTML(currentFeature.properties.title +
+         '<h4>' + currentFeature.properties.address + '</h4>')
+       .addTo(map);
+   }
 
 
    </script>
