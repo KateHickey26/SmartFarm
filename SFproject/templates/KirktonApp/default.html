@@ -146,11 +146,9 @@
        ]
       };
 
-   /**
-    * Assign a unique id to each sensor to associate each point on
-    * the map with a listing in the sidebar
-   */
 
+    // Assigning a unique id to each sensor to associate each point on
+    // the map with a listing in the sidebar
    sensors.features.forEach(function(sensor, i){
 
      sensor.properties.id = i;
@@ -181,10 +179,9 @@
        /* Assign the `marker` class to each marker for styling. */
        el.className = 'marker';
 
-       /**
-        * Create a marker using the div element
-        * defined above and add it to the map.
-       **/
+
+      //  Create a marker using the div element
+      //   defined above and add it to the map.
        new mapboxgl.Marker(el, { offset: [0, -23] })
          .setLngLat(marker.geometry.coordinates)
          .addTo(map);
@@ -216,28 +213,28 @@
    // add each sensor to the sidebar
    function buildLocationList(data) {
      data.features.forEach(function(sensor, i){
-       /**
-        * Create a shortcut for `sensor.properties`,
-        * which will be used several times below.
-       **/
+
+       // veriable for sensor properties
        var prop = sensor.properties;
 
-       /* Add a new listing section to the sidebar. */
+       // add new sensor list to side bar
        var sensors = document.getElementById('sensors');
        var sensor = sensors.appendChild(document.createElement('div'));
-       /* Assign a unique `id` to the listing. */
+
+       // Assign a unique `id` to the listing.
        sensor.id = "sensor-" + prop.id;
-       /* Assign the `item` class to each listing for styling. */
+
+       // Assign the `item` class to each listing for styling.
        sensor.className = 'item';
 
-       /* Add the link to the individual listing created above. */
+       // Add the link to the individual listing created above.
        var link = sensor.appendChild(document.createElement('a'));
        link.href = '#';
        link.className = 'title';
        link.id = "link-" + prop.id;
        link.innerHTML = prop.address;
 
-       /* Add details to the individual listing. */
+       // Add details to the individual listing.
        var details = sensor.appendChild(document.createElement('div'));
        details.innerHTML = prop.city;
        if (prop.phone) {
@@ -258,6 +255,7 @@
              var clickedSensor = data.features[i];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
+             // add method here for button in pop up to see graph? or in sidebar?
            }
          }
          var activeItem = document.getElementsByClassName('active');
