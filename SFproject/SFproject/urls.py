@@ -25,4 +25,5 @@ urlpatterns = [
     path('KirktonApp/', include('KirktonApp.urls')),
     #path('KirktonApp/', include('KirktonApp.urls')), # this maps any urls startting with KirktonApp/ to be handled by KirktonApp
     path('admin/', admin.site.urls),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]

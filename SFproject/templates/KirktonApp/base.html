@@ -1,3 +1,6 @@
+{% load static %}
+{% load staticfiles %}
+
 <!DOCTYPE html>
 
 <html>
@@ -7,10 +10,6 @@
 
    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
-
-
-
-  <html lang="en">
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.js"></script>
 
 <script async src="https://cse.google.com/cse.js?cx=002858639642519775440:wqougxmojpz"></script>
@@ -222,77 +221,22 @@ a:hover {
 }
 </style>
 
-  <header style="background-color: #bfc9f0;">
-    <h1>
-      Smart Fields
-      {% block title_block %}
-     {% endblock %}
-   </h1>
-
-   <!-- log in button -->
-     <div class="container" name="header" >
-       <div class="row">
-         <div class="col-5 align-self-center">
-             <div class="row mt-4 md-2 py-2 justify-content-end" name="login" >
-                 {% if user.is_authenticated %}
-                   <div class="row justify-content-center">
-                     <div class="col-3 mx-1">Welcome {{user.username}} !</div>
-                       <div class="col-2 mx-1">
-                         <form method="get" action="{% url 'KirktonApp:logout' %}">
-                             <button class="btn btn-outline-primary px-4">Logout</button>
-                         </form>
-                         </div>
-                     </div>
-                     {% else %}
-                     <div class="col">
-                     <form method="get" action="{% url 'KirktonApp:login' %}">
-                         <button class="btn btn-outline-primary px-4">Login</button>
-                     </form>
-                     </div>
-                     {% endif %}
-                 </div>
-           </div>
-         </div>
-       </div>
-</header>
+    {% include 'partials/_topbar.html' %}
 
   <base href="/KirktonApp/">
+        <script src = "https://cdn.plot.ly/plotly-latest.min.js"><</script>
+
 
 </head>
 <body>
 
-<div>
-    {% block body_block %}
+<div class="row">
+    {% block content %}
+
     {% endblock %}
 </div>
 
-<!--Below is a footer that contains a short blurb about the site, some useful links to other parts of the website,
-     and contact details where users can reach us. Helps keep the website neat. -->
-<footer class="page-footer font-small blue-grey lighten-5">
-    <div class="container text-center text-md-left mt-5">
-        <div class="row mt-3 dark-grey-text">
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-justify text-lg-center">
-                <h6 class="text-uppercase font-weight-bold">Website Links</h6>
-                <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:home' %}">Home</a>
-                </p>
-                <p>
-                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About Us</a>
-                </p>
-                <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
-                </p>
-            </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                <p>Glasgow, UK</p>
-                <p>2032000h@student.glasgow.ac.uk</p>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright text-center text-black-50 py-3">
-        <a class="dark-grey-text" >KirktonApp</a>
-    </div>
-</footer>
+{% include 'partials/_footer.html' %}
+
 </body>
 </html>

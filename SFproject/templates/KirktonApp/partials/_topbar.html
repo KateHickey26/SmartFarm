@@ -1,0 +1,33 @@
+<header style="background-color: #bfc9f0;">
+    <h1>
+      Smart Fields
+      {% block title_block %}
+     {% endblock %}
+   </h1>
+
+   <!-- log in button -->
+     <div class="container" name="header" >
+       <div class="row">
+         <div class="col-5 align-self-center">
+             <div class="row mt-4 md-2 py-2 justify-content-end" name="login" >
+                 {% if user.is_authenticated %}
+                   <div class="row justify-content-center">
+                     <div class="col-3 mx-1">Welcome {{user.username}} !</div>
+                       <div class="col-2 mx-1">
+                         <form method="get" action="{% url 'KirktonApp:logout' %}">
+                             <button class="btn btn-outline-primary px-4">Logout</button>
+                         </form>
+                         </div>
+                     </div>
+                     {% else %}
+                     <div class="col">
+                     <form method="get" action="{% url 'KirktonApp:login' %}">
+                         <button class="btn btn-outline-primary px-4">Login</button>
+                     </form>
+                     </div>
+                     {% endif %}
+                 </div>
+           </div>
+         </div>
+       </div>
+</header>

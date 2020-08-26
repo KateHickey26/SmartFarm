@@ -1,20 +1,20 @@
 {% extends 'KirktonApp/base.html' %}
+{% load static %}
 
-{% block body_block %}
+{% block content %}
+    {% load plotly_dash %}
 
 
  <div class="container" name="main body" >
 
- <!-- Side panel -->
- <div class='sidebar'>
-   <div class='heading'>
-     <h1>Sensors</h1>
-   </div>
-   <div id='sensors' class='sensors'></div>
- </div>
+     {% include 'partials/_sidebar.html' %}
+
  <div id='map' class='map'></div>
- <script>
+
+<script>
+
    // This will let you use the .remove() function later on
+
    if (!('remove' in Element.prototype)) {
      Element.prototype.remove = function() {
        if (this.parentNode) {
@@ -152,7 +152,6 @@
    sensors.features.forEach(function(sensor, i){
 
      sensor.properties.id = i;
-
    });
 
 
@@ -214,7 +213,7 @@
    function buildLocationList(data) {
      data.features.forEach(function(sensor, i){
 
-       // veriable for sensor properties
+       // variable for sensor properties
        var prop = sensor.properties;
 
        // add new sensor list to side bar
@@ -287,9 +286,7 @@
    }
 
 
-   </script>
-
+</script>
  </div>
-
 
 {% endblock %}
