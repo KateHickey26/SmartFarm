@@ -13,23 +13,23 @@
 
 <script>
 
-const xlabels = []; //global variables
-const ydistances = [];
+
 chartIt();
 
 async function chartIt(){
-    await getData(); // makes this function wait until all the data has been retrieved
+    const data = await getData(); // makes this function wait until all the data has been retrieved
     const ctx = document.getElementById('chart').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: xlabels,
+            labels: data.xs,
             datasets: [{
-                label: 'River Level Sensor 775',
-                   data: ydistances,
-                   backgroundColor: ['rgba(255, 99, 132, 0.2)' ],
-                   borderColor:['rgba(255, 99, 132, 1)'],
-                 borderWidth: 1
+                label: 'River Level distance, at River Level Sensor 775',
+                data: data.ys,
+                backgroundColor:'rgba(255, 99, 132, 0.2)',
+                borderColor:'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                fill: false
             }]
         }
     });
@@ -58,6 +58,9 @@ async function chartIt(){
 
     getData();
     async function getData(){
+        const xs = [];
+        const ys = [];
+
         const response = await fetch('static/RiverLevelSensor775.csv');
         const data = await response.text();
 
@@ -68,13 +71,15 @@ async function chartIt(){
         table.forEach(row => {
             const columns = row.split(',');
             const timestamp = columns[0];
-            xlabels.push(timestamp); // as each timestamp is read, it is added to the array to be a label on the x axis of the graph
+            xs.push(timestamp); // as each timestamp is read, it is added to the array to be a label on the x axis of the graph
             const timezone = columns[1];
             const distance = columns[2];
-            ydistances.push(distance);
+            ys.push(distance);
          //   console.log(timestamp, distance);
         });
+        return { xs, ys };
     }
+
 
 </script>
 </div>
