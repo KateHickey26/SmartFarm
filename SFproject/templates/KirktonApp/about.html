@@ -1,4 +1,5 @@
 {% extends 'KirktonApp/base.html' %}
+{% load static %}
 
 {% block title_block %}
   About This Application
@@ -6,10 +7,45 @@
 
 {% block body_block %}
 <div>
+        <img src="/static/images/field.jpeg" id="field" width="420" alt="missing field image"/>
+
+
+<script>
+
+       console.log('fetching field image');
+            displayImage()
+                .then(response => {
+                console.log('the code has worked!');
+            })
+            .catch(error => {
+                console.log('error!');
+                console.error(error);
+            });
+
+       async function displayImage(){
+        // cant get this image to show on the live server - could have something to do
+        // with how ive configured my static files
+            const response = await fetch('static/images/field.jpeg');
+            const blob = await response.blob();
+            document.getElementById('field').src = URL.createObjectURL(blob);
+        }
+
+
+    getData();
+    async function getData(){
+        const response = await fetch('test.csv');
+        const data = await response.text();
+        console.log(data);
+    }
+
+</script>
+</div>
+
+<div>
     <h1 class = 'title'> About </h1>
 
     <!-- main body -->
-    <div class="container" name="main body" >
+    <div class="container" >
      <div class="row my-3">
         <div class="col-9">
           Description of app and some info about using it can go here.
