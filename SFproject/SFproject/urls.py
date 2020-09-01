@@ -15,14 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import include, url
+from django.conf.urls import include, url, static
 from django.conf import settings
 from KirktonApp import views
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     #this maps the url to the home view in the KirktonApp app
     path('', views.home, name='home'),
     path('KirktonApp/', include('KirktonApp.urls')),
-    #path('KirktonApp/', include('KirktonApp.urls')), # this maps any urls startting with KirktonApp/ to be handled by KirktonApp
     path('admin/', admin.site.urls),
-]
+] + staticfiles_urlpatterns()
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.PROJECT_DIR + 'static')
+#     urlpatterns += static('/templates/', document_root=settings.PROJECT_DIR + '/templates/')

@@ -15,7 +15,11 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+PROJECT_DIR = os.path.dirname(os.path.dirname(__file__) + '/../')
+
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'KirktonApp',
+    'livereload',
 
 ]
 
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'SFproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR, ],
+        'DIRS': [TEMPLATES_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,9 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_LOCATION = 'static'
-STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'KirktonApp/static')
-    ]
+#STATICFILES_LOCATION = 'static'
+#STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = [STATIC_DIR, ]
+STATIC_URL = '/KirktonApp/static/'
