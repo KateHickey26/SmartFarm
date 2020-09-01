@@ -9,8 +9,49 @@
 <div>
         <img src="/static/images/field.jpeg" id="field" width="420" alt="missing field image"/>
 
+<canvas id="chart" width="400" height="400"></canvas>
 
 <script>
+
+// chart.js example code
+var ctx = document.getElementById('chart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
 
        console.log('fetching field image');
             displayImage()
@@ -33,9 +74,22 @@
 
     getData();
     async function getData(){
-        const response = await fetch('static/test.csv');
+        const response = await fetch('static/RiverLevelSensor775.csv');
         const data = await response.text();
-        console.log(data);
+
+        // splits data into rows, and removes title row from parsing
+        const table = data.split('\n').slice(1);
+
+        // splitting the rows
+        table.forEach(row => {
+            const columns = row.split(',');
+            const timestamp = columns[0];
+            const timezone = columns[1];
+            const distance = columns[2];
+            console.log(timestamp, distance);
+        });
+
+
     }
 
 </script>
