@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
 from KirktonApp.models import *
-#from datetime import datetime
+from django_jsonforms.forms import JSONSchemaForm
+from .forms import addSensorForm
+
 #from KirktonApp.forms import UserForm
 import copy
 from django.template.loader import render_to_string
@@ -31,6 +33,12 @@ def home(request):
 #about page
 def about(request):
     return render(request, 'KirktonApp/about.html')
+
+def addSensorForm(request):
+    form = addSensorForm()
+
+    output = form.as_p()
+    return render(request, 'KirktonApp/addSensorForm.html', {'form': form})
 
 def user_login(request):
     if request.method == 'POST':
