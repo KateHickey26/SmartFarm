@@ -6,14 +6,15 @@ from django.contrib.auth.models import User
 
 
 
-# class UserProfile(models.Model):
-#     # Links UserProfile to a User model instance.
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     # The additional attributes we wish to include.
-#     profile_image = models.ImageField(upload_to='profile_images', blank=True)
-#
-#     def __str__(self):
-#         return self.user.username
+class UserProfile(models.Model):
+    # Links UserProfile to a User model instance.
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.user.username
+
+
 #
 # # use to have colours for each type of sensor?
 # class SensorStatus(models.Model):

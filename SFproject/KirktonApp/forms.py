@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import UserProfile
 from django.forms import ModelForm, Form
 from django_jsonforms.forms import JSONSchemaField
 import json
@@ -8,6 +9,20 @@ import json
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput())
+
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'is_staff', 'is_superuser',)
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('username', 'email', 'is_staff', 'is_superuser',)
 
 
 class AddSensorForm(Form):
