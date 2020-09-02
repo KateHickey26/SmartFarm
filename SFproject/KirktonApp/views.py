@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-from KirktonApp.models import *
+#from KirktonApp.models import *
 # from KirktonApp.forms import UserForm
 from django_jsonforms.forms import JSONSchemaForm
 from .forms import AddSensorForm
@@ -25,9 +25,10 @@ def home(request):
     # TODO: move this token to Django settings from an environment variable
     # found in the Mapbox account settings and getting started instructions
     # see https://www.mapbox.com/account/ under the "Access tokens" section
+
     mapbox_access_token = 'pk.my_mapbox_access_token'
 
-    sensors = Sensor.objects.all()  # could add status equals here
+    #sensors = Sensor.objects.all()  # could add status equals here
 
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
