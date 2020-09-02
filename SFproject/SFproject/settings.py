@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'KirktonApp',
     'livereload',
+    'django_jsonforms',
 
 ]
 
