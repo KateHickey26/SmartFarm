@@ -12,7 +12,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('about/', views.about, name='about'),
-    path('addSensorForm/', views.addSensorForm, name='addSensorForm'),
+    path('add_sensor_form/', views.add_sensor_form, name='add_sensor_form'),
 
 ]
 

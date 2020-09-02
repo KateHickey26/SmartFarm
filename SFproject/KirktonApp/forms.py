@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput())
 
 
-class addSensorForm(Form):
+class AddSensorForm(Form):
     json = JSONSchemaField(schema={
         "type": "Feature",
         "properties": {

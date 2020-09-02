@@ -4,41 +4,48 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-from KirktonApp.models import *
+#from KirktonApp.models import *
 from django_jsonforms.forms import JSONSchemaForm
-from .forms import addSensorForm
+from .forms import AddSensorForm
 
-#from KirktonApp.forms import UserForm
+# from KirktonApp.forms import UserForm
 import copy
 from django.template.loader import render_to_string
 from django.template.loader import get_template
 import json
 
+
 # Create your views here.
 
-#def index(request):
-    #return HttpResponse("Testing views.py")
+# def index(request):
+# return HttpResponse("Testing views.py")
+
 
 def home(request):
     # TODO: move this token to Django settings from an environment variable
     # found in the Mapbox account settings and getting started instructions
     # see https://www.mapbox.com/account/ under the "Access tokens" section
+
     mapbox_access_token = 'pk.my_mapbox_access_token'
-    sensors = Sensor.objects.all() # could add status equals here
+
+    sensors = Sensor.objects.all()
+
     return render(request, 'KirktonApp/default.html',
-                  { 'mapbox_access_token': mapbox_access_token })
-                 # {'sensors':sensors}
+                  {'mapbox_access_token': mapbox_access_token})
+    # {'sensors':sensors}
 
 
-#about page
+# about page
 def about(request):
     return render(request, 'KirktonApp/about.html')
 
-def addSensorForm(request):
-    form = addSensorForm()
 
-    output = form.as_p()
-    return render(request, 'KirktonApp/addSensorForm.html', {'form': form})
+# def add_sensor_form(request):
+#     form = AddSensorForm()
+#
+#     # output = form.as_p()
+#     return render(request, 'KirktonApp/addSensorForm.html', {'form': form})
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -56,6 +63,7 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'KirktonApp/login.html')
+
 
 @login_required
 def user_logout(request):
