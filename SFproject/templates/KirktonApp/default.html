@@ -13,7 +13,10 @@
    </div>
    <div id='sensors' class='sensors'></div>
  </div>
+
+ <!-- map -->
  <div id='map' class='map'></div>
+
  <script>
    // This will let you use the .remove() function later on
    if (!('remove' in Element.prototype)) {
@@ -40,6 +43,10 @@
      zoom: 8
      //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
+
+   // adds zoom buttons and compass
+     const nav = new mapboxgl.NavigationControl();
+     map.addControl(nav, "top-right");
 
    // sensor GeoJSON data
    var sensors = {
@@ -151,14 +158,12 @@
     // Assigning a unique id to each sensor to associate each point on
     // the map with a listing in the sidebar
    sensors.features.forEach(function(sensor, i){
-
      sensor.properties.id = i;
-
    });
 
 
    map.on('load', function (e) {
-     // add geojson data as source
+     // adds the geojson data as source
      map.addSource("places", {
        "type": "geojson",
        "data": sensors
@@ -167,17 +172,17 @@
      // add sidebar list and map markers to page
      buildLocationList(sensors);
      addMarkers();
-   });
+  });
 
    // method for adding markers to the map for each sensor
    function addMarkers() {
-     /* For each feature in the GeoJSON object above: */
+     // For each feature in the GeoJSON object above
      sensors.features.forEach(function(marker) {
-       /* Create a div element for the marker. */
+       // Create a div element for the marker
        var el = document.createElement('div');
-       /* Assign a unique `id` to the marker. */
+       // Assign a unique `id` to the marker
        el.id = "marker-" + marker.properties.id;
-       /* Assign the `marker` class to each marker for styling. */
+       // Assign the `marker` class to each marker for styling.
        el.className = 'marker';
 
 
@@ -195,11 +200,11 @@
        **/
 
        el.addEventListener('click', function(e){
-         /* Fly to the point */
+         // Fly to the point
          flyToSensor(marker);
-         /* Close all other popups and display popup for clicked sensor */
+         // Close all other popups and display popup for clicked sensor
          createPopUp(marker);
-         /* Highlight listing in sidebar */
+         // Highlight listing in sidebar
          var activeItem = document.getElementsByClassName('active');
          e.stopPropagation();
          if (activeItem[0]) {
@@ -213,7 +218,7 @@
 
    // add each sensor to the sidebar
    function buildLocationList(data) {
-     data.features.forEach(function(sensor, i){
+      data.features.forEach(function(sensor, i){
 
        // variable for sensor properties
        var prop = sensor.properties;
@@ -222,20 +227,20 @@
        var sensors = document.getElementById('sensors');
        var sensor = sensors.appendChild(document.createElement('div'));
 
-       // Assign a unique `id` to the listing.
+       // Assign a unique `id` to the sensor.
        sensor.id = "sensor-" + prop.id;
 
-       // Assign the `item` class to each listing for styling.
+       // Assign the `item` class to each sensor for styling.
        sensor.className = 'item';
 
-       // Add the link to the individual listing created above.
+       // Add the link to the individual sensor created above.
        var link = sensor.appendChild(document.createElement('a'));
        link.href = '#';
        link.className = 'title';
        link.id = "link-" + prop.id;
        link.innerHTML = prop.address;
 
-       // Add details to the individual listing.
+       // Add details to the individual sensors.
        var details = sensor.appendChild(document.createElement('div'));
        details.innerHTML = prop.city;
        if (prop.phone) {
@@ -249,7 +254,6 @@
         * 3. Close all other popups and display popup for clicked sensor
         * 4. Highlight listing in sidebar (and remove highlight for all other listings)
        **/
-
       link.addEventListener('click', function(e){
          for (var i=0; i < data.features.length; i++) {
            if (this.id === "link-" + data.features[i].properties.id) {
@@ -266,7 +270,8 @@
          this.parentNode.classList.add('active');
        });
      });
-   }
+   } // </buildLocationList()>
+
 
    // method for "flying to" a sensor
    function flyToSensor(currentFeature) {
@@ -276,7 +281,8 @@
      });
    }
 
-   // method for popup
+
+   // method for popup on map
    function createPopUp(currentFeature) {
      var popUps = document.getElementsByClassName('mapboxgl-popup');
      if (popUps[0]) popUps[0].remove();
@@ -285,7 +291,24 @@
        .setHTML(currentFeature.properties.title +
          '<h4>' + currentFeature.properties.address + '</h4>')
        .addTo(map);
+       // add "if authenticated" show button to see graph?
+  //     if(user.is_authenticated){
+  //       <button type="button">Show Graph</button>
+  //     }
+        // or
+  //      var button = document.createElement("button");
+  //      button.innerHTML = "Show Graph";
+
+  //      var body = document.getElementsByClassName("mapboxgl-popup");
+  //      body.appendChild(button);
+
+  //      button.addEventListener ("click", function() {
+  //        alert("did something");
+          // open new html page
+  //      });
    }
+
+
 
 
    </script>
