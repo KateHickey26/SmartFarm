@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     # Links UserProfile to a User model instance.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    username = models.charField(blank=False)
 
     def __str__(self):
         return self.user.username

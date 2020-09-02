@@ -22,7 +22,8 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('username', 'email', 'is_staff', 'is_superuser',)
+        fields = ('username',)
+                  #'email', 'is_staff', 'is_superuser',
 
 
 class AddSensorForm(Form):

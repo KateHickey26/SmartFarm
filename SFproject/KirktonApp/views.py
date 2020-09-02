@@ -75,7 +75,7 @@ def user_logout(request):
     return redirect(reverse('KirktonApp/default.html'))
 
 
-def add_user(request):
+def register_user(request):
     # A boolean value for telling the template
     # whether the registration was successful.
     # Set to False initially. Code changes value to

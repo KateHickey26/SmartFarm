@@ -294,6 +294,11 @@ a:hover {
                 <p>
                   <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
                 </p>
+                {% if registered %}
+                <p>
+                    <a class="nav-link" href="{% url 'rango:register' %}">Register a new user</a>
+                </p>
+                {% endif %}
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
