@@ -1,0 +1,28 @@
+{
+         "type": "Feature",
+         "properties": {
+             "title": {
+                 "type": "string",
+                 "description": "Sensor Title",
+                 "minLength": 2,
+                 "default": "Enter the title of the sensor to be added"
+             },
+             "description": {
+                 "type": "string",
+                 "description": "Description of sensor",
+                 "default": "Enter a description of the sensor or location"
+             }
+         },
+         "geometry": {
+             "type": {
+                  "type": "string",
+                 "description": "type of geometry",
+                 "default": "Point expected"
+             },
+             "coordinates": {
+                 "type": "string",
+                 "description": "coordinates of sensor",
+                 "default": "Enter the coordinates, e.g. [-4.4040, 56.2519]"
+             }
+         }
+  }

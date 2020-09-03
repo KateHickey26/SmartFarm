@@ -4,15 +4,61 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.views.generic import FormView
+from django.forms import Form
 # from KirktonApp.models import *
 # from KirktonApp.forms import UserForm
 from django_jsonforms.forms import JSONSchemaForm
-from .forms import AddSensorForm, UserForm, UserProfileForm
+from .forms import UserForm, UserProfileForm, JSONSchemaField
 
 import copy
 from django.template.loader import render_to_string
 from django.template.loader import get_template
 import json
+
+
+# forms
+class JSONTestFormStatic(Form):
+    json = JSONSchemaField(schema='schema.json', options={})
+
+
+class JSONTestFormDouble(Form):
+    json1 = JSONSchemaField(schema='schema.json', options={})
+    json2 = JSONSchemaField(schema='schema.json', options={})
+
+
+class JSONTestForm(Form):
+    json = JSONSchemaField(
+        schema={
+            "type": "Feature",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Sensor Title",
+                    "minLength": 2,
+                    "default": "Enter the title of the sensor to be added"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of sensor",
+                    "default": "Enter a description of the sensor or location"
+                }
+            },
+            "geometry": {
+                "type": {
+                    "type": "string",
+                    "description": "type of geometry",
+                    "default": "Point expected"
+                },
+                "coordinates": {
+                    "type": "string",
+                    "description": "coordinates of sensor",
+                    "default": "Enter the coordinates, e.g. [-4.4040, 56.2519]"
+                }
+            }
+        },
+        options={}
+    )
 
 
 # Create your views here.
@@ -30,7 +76,7 @@ def home(request):
 
     # sensors = Sensor.objects.all()  # could add status equals here
 
-    #request.session.set_test_cookie()
+    # request.session.set_test_cookie()
 
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
@@ -44,17 +90,6 @@ def about(request):
     #     request.session.delete_test_cookie()
 
     return render(request, 'KirktonApp/about.html')
-
-
-# @login_required
-def add_sensor_form(request):
-    form = AddSensorForm()
-
-    output = form.as_p()
-    print(output.find('class=\"editor_holder\"'))
-    media = str(form.media)
-    print(media.find('jsoneditor.min.js'))
-    return render(request, 'KirktonApp/addSensorForm.html', {'form': form})
 
 
 def user_login(request):
@@ -129,3 +164,41 @@ def register_user(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'registered': registered})
+
+
+class JSONFormView(FormView):
+    template_name = "addSensorForm.html"
+    form_class = JSONTestForm
+
+    def get_success_url(self):
+        return reverse('success')
+
+
+class JSONFormViewStatic(FormView):
+    template_name = "addSensorForm.html"
+    form_class = JSONTestFormStatic
+
+    def get_success_url(self):
+        return reverse('success')
+
+
+class JSONFormViewDouble(FormView):
+    template_name = "AddSensorForm.html"
+    form_class = JSONTestFormDouble
+
+    def get_success_url(self):
+        return reverse('success')
+
+
+def success_view(request):
+    return HttpResponse('<p id=\"success\">Success</p>')
+
+# # @login_required
+# def add_sensor_form(request):
+#     form = AddSensorForm()
+#
+#     output = form.as_p()
+#     print(output.find('class=\"editor_holder\"'))
+#     media = str(form.media)
+#     print(media.find('jsoneditor.min.js'))
+#     return render(request, 'KirktonApp/addSensorForm.html', {'form': form})

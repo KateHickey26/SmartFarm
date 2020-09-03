@@ -9,9 +9,13 @@
 
 <div class="container" name="main body" >
 
-    <form action="">
-            {{form.as_p}}
-            {{form.media}}
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.json.errors }}
+        {{ form.as_p }}
+        <input id="submit_button" type="submit" value="Submit">
+
     </form>
 
 </div>
