@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('KirktonApp/', include('KirktonApp.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
 ] + staticfiles_urlpatterns()
 
 # if settings.DEBUG:

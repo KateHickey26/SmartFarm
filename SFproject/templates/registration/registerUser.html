@@ -1,0 +1,28 @@
+{% extends 'KirktonApp/base.html' %}
+
+{%block title_block %}
+    Register a new user
+{% endblock %}
+
+{% block body_block %}
+<h1>Regsiter a new user here</h1>
+
+<!-- only allows registered users to add new users. Could change this to "if superuser" -->
+<!--{% if registered -->
+<form method="post" action=".">
+    {% csrf_token %}
+
+    <!-- Display form -->
+    {{ form.as_p }}
+
+    <!-- button to submit form -->
+    <input type="submit" value="Register" />
+
+</form>
+
+<!--{% else -->
+To register a new user, complete the form above.
+Alternatively, follow the links below to travel to 'Home' or 'About Us'
+
+<!--{% endif -->
+{% endblock %}

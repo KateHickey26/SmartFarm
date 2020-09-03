@@ -21,6 +21,16 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
+# If True, users can register.
+REGISTRATION_OPEN = False
+# If True, the user will be automatically logged in after registering.
+REGISTRATION_AUTO_LOGIN = True
+# The URL that Django redirects users to after logging in.
+LOGIN_REDIRECT_URL = 'KirktonApp:home'
+# The page users are directed to if they are not logged in.
+# This was set in a previous chapter. The registration package uses this, too.
+LOGIN_URL = 'auth_login'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -36,6 +46,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

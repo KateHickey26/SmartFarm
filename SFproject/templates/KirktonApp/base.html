@@ -245,14 +245,14 @@ a:hover {
                    <div class="row justify-content-center">
                      <div class="col-3 mx-1">Welcome {{user.username}} !</div>
                        <div class="col-2 mx-1">
-                         <form method="get" action="{% url 'KirktonApp:logout' %}">
+                         <form method="get" action="{% url 'auth_logout' %}?next={% url 'KirktonApp:index %}">
                              <button class="btn btn-outline-primary px-4">Logout</button>
                          </form>
                          </div>
                      </div>
                      {% else %}
                      <div class="col">
-                     <form method="get" action="{% url 'KirktonApp:login' %}">
+                     <form method="get" action="{% url 'auth_login' %}">
                          <button class="btn btn-outline-primary px-4">Login</button>
                      </form>
                      </div>
@@ -292,11 +292,14 @@ a:hover {
                     <a class="nav-link" href="{% url 'KirktonApp:about'%}">About Us</a>
                 </p>
                 <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
+                  <a class="nav-link" href="{% url 'auth_login' %}">Log in</a>
                 </p>
                             <!--{% if registered -->
                 <p>
-                    <a class="nav-link" href="{% url 'KirktonApp:register_user' %}">Register a new user</a>
+                    <a class="nav-link" href="{% url 'registration_register' %}">Register a new user</a>
+                </p>
+                <p>
+                    <a class="nav-link" href="{% url 'auth_logout' %}?next={% url 'KirktonApp:home %}">Log out</a>
                 </p>
                             <!-- {% endif -->
             </div>
