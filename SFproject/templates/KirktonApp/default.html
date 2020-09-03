@@ -7,6 +7,7 @@
  <div class="container" name="main body" >
 
     <div id='graphButton'></div>
+    <!-- class="nav-link" href="{% url 'KirktonApp/sensorGraph.html'%}"> -->
 
  <!-- Side panel -->
  <div class='sidebar'>
@@ -177,6 +178,7 @@
      addMarkers();
   });
 
+
    // method for adding markers to the map for each sensor
    function addMarkers() {
      // For each feature in the GeoJSON object above
@@ -188,7 +190,6 @@
        // Assign the `marker` class to each marker for styling.
        el.className = 'marker';
 
-
       //  Create a marker using the div element
       //   defined above and add it to the map.
        new mapboxgl.Marker(el, { offset: [0, -23] })
@@ -196,12 +197,12 @@
          .addTo(map);
 
        /**
-        * Listen to the element and when it is clicked, do three things:
+        * Listen to the element and when it is clicked, do four things:
         * 1. Fly to the point
         * 2. Close all other popups and display popup for clicked sensor
         * 3. Highlight listing in sidebar (and remove highlight for all other listings)
+        * 4. Show the 'Show Graph' button
        **/
-
 
        el.addEventListener('click', function(e){
          // Fly to the point
@@ -209,6 +210,8 @@
          // Close all other popups and display popup for clicked sensor
          createPopUp(marker);
          // Highlight listing in sidebar
+         showGraphButton();
+
          var activeItem = document.getElementsByClassName('active');
          e.stopPropagation();
          if (activeItem[0]) {
@@ -258,6 +261,7 @@
         * 3. Close all other popups and display popup for clicked sensor
         * 4. Highlight listing in sidebar (and remove highlight for all other listings)
        **/
+
       link.addEventListener('click', function(e){
          for (var i=0; i < data.features.length; i++) {
            if (this.id === "link-" + data.features[i].properties.id) {
@@ -265,7 +269,6 @@
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
              showGraphButton();
-             // add method here for button in pop up to see graph? or in sidebar?
            }
          }
          var activeItem = document.getElementsByClassName('active');
@@ -276,14 +279,14 @@
          e.preventDefault();
        });
      });
-   } // </buildLocationList()>
+   }
 
 
    // method for "flying to" a sensor
    function flyToSensor(currentFeature) {
      map.flyTo({
        center: currentFeature.geometry.coordinates,
-       zoom: 15
+       zoom: 10
      });
    }
 
@@ -297,28 +300,12 @@
        .setHTML(currentFeature.properties.title +
          '<h4>' + currentFeature.properties.description + '</h4>')
        .addTo(map);
-
-       // add "if authenticated" show button to see graph?
-      // if(user.is_authenticated){
-         showGraphButton();
-    //   }
-  //       <button type="button">Show Graph</button>
-  //     }
-        // or
-  //      var button = document.createElement("button");
-  //      button.innerHTML = "Show Graph";
-
-  //      var body = document.getElementsByClassName("mapboxgl-popup");
-  //      body.appendChild(button);
-
-  //      button.addEventListener ("click", function() {
-  //        alert("did something");
-          // open new html page
-  //      });
    }
 
+   // method for creating the Show Graph button
    function showGraphButton(){
 
+     // empties graphButton div each time this function is called
      $("#graphButton").empty();
 
      var graphDiv = document.getElementById("graphButton");
@@ -331,12 +318,13 @@
      // append button to the pop up
      graphDiv.appendChild(button);
 
-     // remove button again, so they don't pile up when another sensor clicked
-     var activeItem = document.getElementsByClassName('active');
-     if (activeItem[0]) {
-       activeItem[0].classList.remove('active');
+     // add event listener to the button
+     button.addEventListener('click', function(e){
+       // need to add this functionality
+     }
      }
    }
+
    </script>
 
  </div>
