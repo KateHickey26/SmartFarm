@@ -5,12 +5,14 @@
 
 
  <div class="container" name="main body" >
+    <div id='graphButton'></div>
 
  <!-- Side panel -->
  <div class='sidebar'>
    <div class='heading'>
      <h1>Sensors</h1>
    </div>
+
    <div id='sensors' class='sensors'></div>
  </div>
 
@@ -260,6 +262,7 @@
              var clickedSensor = data.features[i];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
+             showGraphButton();
              // add method here for button in pop up to see graph? or in sidebar?
            }
          }
@@ -290,10 +293,13 @@
      var popup = new mapboxgl.Popup({closeOnClick: false})
        .setLngLat(currentFeature.geometry.coordinates)
        .setHTML(currentFeature.properties.title +
-         '<h4>' + currentFeature.properties.address + '</h4>')
+         '<h4>' + currentFeature.properties.description + '</h4>')
        .addTo(map);
+
        // add "if authenticated" show button to see graph?
-  //     if(user.is_authenticated){
+      // if(user.is_authenticated){
+         showGraphButton();
+    //   }
   //       <button type="button">Show Graph</button>
   //     }
         // or
@@ -309,9 +315,18 @@
   //      });
    }
 
+   function showGraphButton(){
 
+     var graphDiv = document.getElementById("graphButton");
 
+     // creates button
+     var button = document.createElement("button");
+     // adds button label
+     button.innerHTML = "Show Graph"
 
+     // append button to the pop up
+     graphDiv.appendChild(button);
+   }
    </script>
 
  </div>

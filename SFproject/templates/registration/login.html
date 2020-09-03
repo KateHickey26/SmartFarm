@@ -1,0 +1,31 @@
+{% extends 'KirktonApp/base.html' %}
+
+
+{% block title_block %}
+Log in
+{% endblock %}
+
+{% block body_block %}
+<h1>Login in here</h1>
+<div class="container">
+  <form method="post" action=".">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Log In" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+
+  <p>
+    Not registered?
+    Use the links below to travel to the 'Home' or 'About Us' pages.
+
+    To request to be registered, please send an email to (admin address).
+
+    If you are already registered, use this page to login.
+  </p>
+
+</div>
+
+{% endblock %}
