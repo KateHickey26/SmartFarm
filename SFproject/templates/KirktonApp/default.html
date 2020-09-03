@@ -5,6 +5,7 @@
 
 
  <div class="container" name="main body" >
+
     <div id='graphButton'></div>
 
  <!-- Side panel -->
@@ -201,6 +202,7 @@
         * 3. Highlight listing in sidebar (and remove highlight for all other listings)
        **/
 
+
        el.addEventListener('click', function(e){
          // Fly to the point
          flyToSensor(marker);
@@ -317,6 +319,8 @@
 
    function showGraphButton(){
 
+     $("#graphButton").empty();
+
      var graphDiv = document.getElementById("graphButton");
 
      // creates button
@@ -326,6 +330,12 @@
 
      // append button to the pop up
      graphDiv.appendChild(button);
+
+     // remove button again, so they don't pile up when another sensor clicked
+     var activeItem = document.getElementsByClassName('active');
+     if (activeItem[0]) {
+       activeItem[0].classList.remove('active');
+     }
    }
    </script>
 
