@@ -30,6 +30,8 @@ def home(request):
 
     # sensors = Sensor.objects.all()  # could add status equals here
 
+    request.session.set_test_cookie()
+
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
     # {'sensors':sensors}
@@ -37,6 +39,10 @@ def home(request):
 
 # about page
 def about(request):
+    if request.session.test_cookie_worked():
+        print("Test Cookie worked")
+        request.session.delete_test_cookie()
+
     return render(request, 'KirktonApp/about.html')
 
 
