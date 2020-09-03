@@ -54,15 +54,18 @@ def add_sensor_form(request):
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('uname')
-        password = request.POST.get('psw')
+        password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
                 login(request, user)
+                # when logged in, user directed to homepage
                 return redirect(reverse('default.html'))
             else:
+                # an inactive account was used
                 return HttpResponse("Your account is disabled.")
         else:
+            # incorrect log in details were provided
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
     else:

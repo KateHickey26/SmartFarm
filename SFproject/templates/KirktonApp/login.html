@@ -1,13 +1,15 @@
 {% extends 'KirktonApp/base.html' %}
+{% load static %}
 
 {% block title_block %}
 Log in
 {% endblock %}
 
 {% block body_block %}
+<h1>Login in here</h1>
 <div class="container">
   <!-- add to forms page so that the below line works -->
-  <form id="login_form" methods="post" action="{% url 'KirktonApp:login' %}">
+  <form id="login_form" method="post" action="{% url 'KirktonApp:login' %}">
   {% csrf_token %}
     <label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" id="username" name="username" required>
