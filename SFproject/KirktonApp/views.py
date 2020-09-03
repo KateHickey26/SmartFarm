@@ -117,7 +117,6 @@ def register_user(request):
 
     return render(request,
                   'KirktonApp/registerUser.html',
-                  context = {'user_form': user_form,
-                             'profile_form': profile_form,
-                             'registered': registered})
-
+                  context={'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered})

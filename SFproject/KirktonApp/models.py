@@ -11,8 +11,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     username = models.CharField(blank=False, max_length=25, default="username")
-    # TO DO change this field to text field
 
+    # method to return a meaningful value when a string
+    # representation of a user profile is requested
     def __str__(self):
         return self.user.username
 

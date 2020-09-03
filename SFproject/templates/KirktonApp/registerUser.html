@@ -1,16 +1,16 @@
 {% extends 'KirktonApp/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {%block title_block %}
     Register a new user
 {% endblock %}
 
 {% block body_block %}
-<h1>Regsiter a new user here</h1>h1>
+<h1>Regsiter a new user here</h1>
 
 <!-- only allows registered users to add new users. Could change this to "if superuser" -->
-{% if registered %}
-<form id="user_form" method="post" action="{% url 'KirktonApp:register' %}" enctype="multipart/form-data">
+<!--{% if registered -->
+<form id="user_form" method="post" action="{% url 'KirktonApp:register_user' %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <!-- Display each form -->
@@ -22,10 +22,10 @@
 
 </form>
 
-{% else %}
+<!--{% else -->
 To request to be registered, please send an email to (admin address).
 
 If you are already registered, follow the links below to login.
 
-{% endif %}
+<!--{% endif -->
 {% endblock %}
