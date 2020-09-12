@@ -7,7 +7,7 @@
  <div class="container" name="main body" >
 
     <div id='graphButton'></div>
-    <!-- class="nav-link" href="{% url 'KirktonApp/sensorGraph.html'%}"> -->
+    <!-- class="nav-link" href="{% url 'KirktonApp/sensorGraph.html'"> -->
 
  <!-- Side panel -->
  <div class='sidebar'>
@@ -33,11 +33,11 @@
 
    mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
-   // //adding variable bounds to the map
-   // var bounds = [
-   //    [-4.60, 56.00], // Southwest coordinates
-   //    [-4.10, 56.88] // Northeast coordinates
-   //  ];
+   //adding variable bounds to the map
+   var bounds = [
+      [-4.60, 56.00], // Southwest coordinates
+      [-4.10, 56.88] // Northeast coordinates
+    ];
 
    // map style
    var map = new mapboxgl.Map({
@@ -45,7 +45,7 @@
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
      center: [-4.7118, 56.4361],
      zoom: 8
-     //maxBounds: bounds // Sets bounds using 'bounds' variable
+     maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
    // adds zoom buttons and compass
@@ -302,6 +302,7 @@
        .addTo(map);
    }
 
+
    // method for creating the Show Graph button
    function showGraphButton(){
 
@@ -318,10 +319,20 @@
      // append button to the pop up
      graphDiv.appendChild(button);
 
-     // add event listener to the button
-     button.addEventListener('click', function(e){
-       // need to add this functionality
-     }
+     // // add event listener to the button
+     // button.addEventListener('click', function(e){
+     //
+     // }
+
+     $(function(){
+       button = $(this);
+
+       $.ajax({
+         type: "GET",
+         url: "sensorGraph.html",
+       })
+     });
+
      }
    }
 
