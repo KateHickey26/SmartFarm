@@ -319,21 +319,32 @@
      // append button to the pop up
      graphDiv.appendChild(button);
 
+     $('#button').click(function() {
+       window.location.href = 'KirktonApp/sensorGraph.html';
+       return false;
+    });
+
      // // add event listener to the button
      // button.addEventListener('click', function(e){
      //
      // }
 
-     $(function(){
-       button = $(this);
+     // solution 1
+      // $(function(){
+      //   button = $(this);
+      //   $.ajax({
+      //     type: "GET",
+      //     url: "sensorGraph.html",
+      //   })
+      // });
 
-       $.ajax({
-         type: "GET",
-         url: "sensorGraph.html",
-       })
-     });
+     // solution 2
+    //  $('.mybtn').on('click', function(event) {
+    //    event.preventDefault();
+    //    var url = $(this).data('target');
+    //    location.replace(url);
+    // });
 
-     }
    }
 
    </script>
