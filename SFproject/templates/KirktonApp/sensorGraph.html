@@ -89,31 +89,18 @@ async function chartIt(){
 
     window.onload = function() {
 			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new window.Chart(ctx);
+			window.myLine = new window.Chart(ctx, config);
 		};
 
-    // take the data after its been used to make the graph and THEN parse it BACK to csv,
-    // - this allows for database and REST API integration later.
-    // May need an if statement for database vs csv.
+    // may need an if statement for database vs csv.
     // currently only for csv files
     // add ranges?
     // if statement for file name? using variables?
     // replace file name with a file name variable? add 'filename' vqariable as a paramter
-    downloadAsCSV = function(filename) {
-      var aLink = document.createElement('a');
-      var data = getData();
-      var evt = document.createEvent("HTMLEvents");
-      evt.initEvent("click");
-      aLink.download = filename;
-      aLink.href = data;
-      aLink.dispatchEvent(evt);
-
-      // var csvFile = new Blob([csv], {type:"static/RiverLevelSensor775.csv"});
-      //
-      // window.open("data:text/csv;charset=utf-8," + escape(csv))
+    window.downloadAsCSV = function() {
+      var response = fetch('static/RiverLevelSensor775.csv');
+      window.open("data:text/response;charset=utf-8," + escape(response))
     };
-
-    downloadAsCSV('static/RiverLevelSensor775.csv');
 
       // test image
        console.log('fetching field image');
@@ -139,23 +126,23 @@ async function chartIt(){
       // and options for csv vd database files. maybe an attribute in json?
     getData();
     async function getData(){
-        var xs = [];
-        var ys = [];
+        const xs = [];
+        const ys = [];
 
         // if statement to get file name? using variables?
-        var response = await fetch('static/RiverLevelSensor775.csv');
-        var data = await response.text();
+        const response = await fetch('static/RiverLevelSensor775.csv');
+        const data = await response.text();
 
         // splits data into rows, and removes title row from parsing
-        var table = data.split('\n').slice(1);
+        const table = data.split('\n').slice(1);
 
         // splitting the rows
         table.forEach(row => {
-            var columns = row.split(',');
-            var timestamp = columns[0];
+            const columns = row.split(',');
+            const timestamp = columns[0];
             xs.push(timestamp); // as each timestamp is read, it is added to the array to be a label on the x axis of the graph
-            var timezone = columns[1];
-            var distance = columns[2];
+            const timezone = columns[1];
+            const distance = columns[2];
             ys.push(distance);
          //   console.log(timestamp, distance);
         });
