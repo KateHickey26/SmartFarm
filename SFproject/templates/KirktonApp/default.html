@@ -45,7 +45,7 @@
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
      center: [-4.7118, 56.4361],
      zoom: 8
-     maxBounds: bounds // Sets bounds using 'bounds' variable
+     //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
    // adds zoom buttons and compass
@@ -316,15 +316,21 @@
      // adds button label
      button.innerHTML = "Show Graph"
 
-     // append button to the pop up
+     // append button
      graphDiv.appendChild(button);
 
-     $('#button').click(function() {
-       window.location.href = 'KirktonApp/sensorGraph.html';
-       return false;
-    });
+     document.getElementById("graphButton").onclick = function(){
+       window.location = "{% url 'KirktonApp:sensor_graph'%}";
+       // cant find this sensorGraph file
+     };
 
-    
+
+    //  $('#button').click(function() {
+    //    window.location.href = 'KirktonApp/sensorGraph.html';
+    //    return false;
+    // });
+
+
 
 //     $('#main-menu a').on('click', function(event) {
 //       event.preventDefault();

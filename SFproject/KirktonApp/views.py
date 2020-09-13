@@ -46,6 +46,11 @@ def about(request):
     return render(request, 'KirktonApp/about.html')
 
 
+def sensor_graph(request):
+
+    return render(request, 'KirktonApp/sensorGraph.html')
+
+
 # @login_required
 def add_sensor_form(request):
     form = AddSensorForm()
