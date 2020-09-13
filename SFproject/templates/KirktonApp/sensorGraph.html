@@ -14,7 +14,7 @@
 		<button onclick="resetZoom()">Reset Zoom</button>
 		<button id="drag-switch" onclick="toggleDragMode()">Disable drag mode</button>
       <!-- {% if registered % -->
-    <button id="download-csv" onclick="getCsvFromCsv()">Download data as CSV file</button>
+    <button id="download-csv" onclick="downloadSensorData()">Download data as CSV file</button>
       <!-- {% endif % -->
 		<canvas id="canvas"></canvas>
 <canvas id="chart" width="800" height="400"></canvas>
@@ -89,7 +89,7 @@ async function chartIt(){
 
     window.onload = function() {
 			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new window.Chart(ctx, config);
+			window.myLine = new window.Chart(ctx);
 		};
 
 
@@ -156,7 +156,10 @@ async function chartIt(){
         return { xs, ys };
     }
 
-    getCsvFromCsv('static/RiverLevelSensor775.csv');
+    var filename = 'static/RiverLevelSensor775.csv';
+    function downloadSensorData(filname){
+      getCsvFromCsv(filename);
+    }
 
     async function getCsvFromCsv(filename){
       // if statement to get file name? using variables?
