@@ -72,35 +72,60 @@ async function chartIt(){
     });
 }
 
+
     // reset zoom button function
     window.resetZoom = function() {
 			   window.myLine.resetZoom();
 		};
+
 
     // toggle drag mode button function
 		window.toggleDragMode = function() {
 			var chart = window.myLine;
 			var zoomOptions = chart.options.plugins.zoom.zoom;
 			zoomOptions.drag = zoomOptions.drag ? false : dragOptions;
-
       chart.update();
 			document.getElementById('drag-switch').innerText = zoomOptions.drag ? 'Disable drag mode' : 'Enable drag mode';
 		};
+
 
     window.onload = function() {
 			var ctx = document.getElementById('canvas').getContext('2d');
 			window.myLine = new window.Chart(ctx, config);
 		};
 
-    // may need an if statement for database vs csv.
+    // take the data after its been used to make the graph and THEN parse it BACK to csv,
+    // - this allows for database and REST API integration later.
+    // May need an if statement for database vs csv.
     // currently only for csv files
     // add ranges?
     // if statement for file name? using variables?
     // replace file name with a file name variable? add 'filename' vqariable as a paramter
-    window.downloadAsCSV = function() {
-      var response = fetch('static/RiverLevelSensor775.csv');
-      window.open("data:text/response;charset=utf-8," + escape(response))
+    downloadAsCSV = function(filename) {
+
+      // var aLink = document.createElement('a');
+      // var data = getData();
+      // var evt = document.createEvent("HTMLEvents");
+      // evt.initEvent("click");
+      // aLink.download = filename;
+      // aLink.href = data;
+      // aLink.dispatchEvent(evt);
+
+      // var csvFile = new Blob([csv], {type:"static/RiverLevelSensor775.csv"});
+
+      // this code works to open window but doesnt have anything in it
+      // var response = fetch('static/RiverLevelSensor775.csv');
+      // window.open("data:text/response;charset=utf-8," + escape(response))
+
+      var csv = "data:text/csv;charset=utf-8";
+      csvContent += myCSVContent
+      var encodedUri = encodeURI(csvContent);
+      window.open(encodedUri);
+      // window.open("data:text/csv;charset=utf-8," + escape(csv))
     };
+
+    downloadAsCSV('static/RiverLevelSensor775.csv');
+
 
       // test image
        console.log('fetching field image');
