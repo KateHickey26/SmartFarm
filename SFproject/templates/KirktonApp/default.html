@@ -76,12 +76,12 @@
 // Use the point layers to create the list
    map.on('load', () => {
      fetch(sensors)
-     .then(response => response.json())
-     .then((data) => {
-       map.addSource("locations",{
-         type: 'geojson',
-         data: data
-       });
+        .then(response => response.json())
+        .then((data) => {
+            map.addSource("locations",{
+              type: 'geojson',
+              data: data
+            });
 
        map.addLayer({
          "id": "locations",
@@ -89,15 +89,15 @@
          "source": "locations"
        });
     //   addMarkers();
-       buildLocationList(sensors);
+       buildLocationList(data);
      });
    });
 
        // Assigning a unique id to each sensor to associate each point on
        // the map with a listing in the sidebar
-      sensors.features.forEach(function(sensor, i){
-        sensor.properties.id = i;
-      });
+      // sensors.features.forEach(function(sensor, i){
+      //   sensor.properties.id = i;
+      // });
 
    // // method for adding markers to the map for each sensor
    // function addMarkers() {
@@ -125,10 +125,13 @@
 
 // add event listeners for the markers
 
-map.on('click', function (el){
-  var features = map.queryRenderedFeatures(el.point, {
+map.on('click', function (e){
+  var features = map.queryRenderedFeatures(e.point, {
     layers: ["locations"]
   });
+
+  if(features.length){
+    var clickedPoint = features[0];
          // Fly to the point
          flyToSensor(marker);
          // Close all other popups and display popup for clicked sensor
@@ -141,44 +144,55 @@ map.on('click', function (el){
          if (activeItem[0]) {
            activeItem[0].classList.remove('active');
          }
+
+         var selectedFeature = clickedPoint.properties.address;
+
+          // code from other github
+		      // for (var i = 0; i < sensors.features.length; i++) {
+			    //      if (sensors.features[i].properties.description === selectedFeature) {
+				  //            selectedFeatureIndex = i;
+			    //      }
+		      // }
+
          var sensor = document.getElementById('sensor-' + marker.properties.id);
          sensor.classList.add('active');
-       });
+       }
+  });
 
 
 
    // add each sensor to the sidebar
-
    function buildLocationList(data) {
      for (i = 0; i < data.features.length; i++) {
 
+       // creating an array of all the sensors
+       var currentFeature = data.features[i];
        // variable for sensor properties
-       var prop = sensor.properties;
+       var prop = currentFeature.properties;
 
-       // add new sensor list to side bar
+       // add new sensor list to side bar, select sensors container in HTML
        var sensors = document.getElementById('sensors');
-
+       // append a sensors div for each sensor in the list
        var sensor = sensors.appendChild(document.createElement('div'));
-
-       // Assign a unique `id` to the sensor.
-       sensor.id = "sensor-" + prop.id;
 
        // Assign the `item` class to each sensor for styling.
        sensor.className = 'item';
+       // give each sensor its own id, for creating the side bar list
+       sensor.id = "listing-" + i;
 
-       // Add the link to the individual sensor created above.
+       // Add the link to the individual sensor created above
        var link = sensor.appendChild(document.createElement('a'));
        link.href = '#';
        link.className = 'title';
        link.id = "link-" + prop.id;
        link.innerHTML = prop.address;
 
-       // Add details to the individual sensors.
+       // Add details to the individual sensors
        var details = sensor.appendChild(document.createElement('div'));
-       details.innerHTML = prop.city;
-       if (prop.phone) {
-         details.innerHTML += ' · ' + prop.phoneFormatted;
-       }
+       details.innerHTML = prop.description;
+       // if (prop.phone) {
+       //   details.innerHTML += ' · ' + prop.phoneFormatted;
+       // }
 
         // Listen to the element and when it is clicked, do four things:
         // 1. Update the `currentFeature` to the sensor associated with the clicked link
@@ -187,16 +201,17 @@ map.on('click', function (el){
         // 4. Highlight listing in sidebar (and remove highlight for all other listings)
       link.addEventListener('click', function(e){
 
-         for (var i=0; i < data.features.length; i++) {
+         // for (var i=0; i < data.features.length; i++) {
+         //   if (this.id === "link-" + data.features[i].properties.id) {
 
-           if (this.id === "link-" + data.features[i].properties.id) {
-
-             var clickedSensor = data.features[i];
+         var clickedSensor = data.features[this.dataPosition];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
              showGraphButton();
-           }
-         }
+
+
+
+
          var activeItem = document.getElementsByClassName('active');
          if (activeItem[0]) {
            activeItem[0].classList.remove('active');
