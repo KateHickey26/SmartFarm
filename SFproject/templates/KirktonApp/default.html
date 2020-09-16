@@ -64,19 +64,41 @@
 
      //load all point layers for the list
      map.on('style.load', function(){
-       map.addSource("points",{
+       map.addSource("points", {
          type: "geojson",
          data: "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson"
        });
-
        map.addLayer({
          "id": "sensors",
          "type": "symbol",
-         "source": "points"
+         "source": "points",
+         "layout": {
+           "icon-image": "marker.png",
+           "icon-size": 1,
+           "icon-anchor": "bottom",
+			     "visibility": "none",
+         }
        });
 
+      // // for (i = 0; i < data.features.length; i++) {
+      //  /* For each feature in the GeoJSON object above: */
+      //   data.features.forEach(function(marker) {
+      //     /* Create a div element for the marker. */
+      //     var el = document.createElement('div');
+      //     /* Assign a unique `id` to the marker. */
+      //     el.id = "marker-" + marker.properties.id;
+      //     /* Assign the `marker` class to each marker for styling. */
+      //     el.className = 'marker';
+        //   /**
+        //    * Create a marker using the div element
+        //    * defined above and add it to the map.
+        //   **/
+        //   new mapboxgl.Marker(el, { offset: [0, -23] })
+        //     .setLngLat(marker.geometry.coordinates)
+        //     .addTo(map);
+        //
+        // //  });
      });
-
 
     var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
 
@@ -94,7 +116,11 @@
        map.addLayer({
          "id": "locations",
          "type": "symbol",
-         "source": "locations"
+         "source": "locations",
+         "layout": {
+           "icon-image": "marker.png",
+           "icon-size": 1,
+         }
        });
        buildLocationList(data);
      });
