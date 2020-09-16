@@ -1,5 +1,5 @@
-var sensors = {
-   "type": "FeatureCollection",
+{
+"type": "FeatureCollection",
      "features": [
        {
         "type": "Feature",
@@ -98,7 +98,7 @@ var sensors = {
         "geometry": {
           "type": "Point",
           "coordinates": [-4.7118, 56.4361]
-        },
+        }
       }
     ]
-   };
+   }
