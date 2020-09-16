@@ -52,131 +52,49 @@
      const nav = new mapboxgl.NavigationControl();
      map.addControl(nav, "top-right");
 
-   // sensor GeoJSON data
-   var sensors = {
-      "type": "FeatureCollection",
-        "features": [
-          {
-           "type": "Feature",
-           "properties": {
-             "title": "LoRaWAN Gateway 1",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.3937, 56.2509]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "LoRaWAN Gateway 2",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.4040, 56.2519]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Level Sensor 1",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.3921, 56.2455]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Sensor 2",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.3946, 56.2458]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Sensor 3",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.3936, 56.2510]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Sensor 4",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.4015, 56.2617]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Sensor 5",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.4006, 56.2607]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "River Sensor 6",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.3942, 56.2616]
-           }
-         },
-         {
-           "type": "Feature",
-           "properties": {
-             "title": "Centre of map",
-             "description": "No description"
-           },
-           "geometry": {
-             "type": "Point",
-             "coordinates": [-4.7118, 56.4361]
-           }
-         }
-       ]
-      };
 
 
-    // Assigning a unique id to each sensor to associate each point on
-    // the map with a listing in the sidebar
-   sensors.features.forEach(function(sensor, i){
-     sensor.properties.id = i;
-   });
+     // sensors, reading in from external geojson file
+         var sensors = {
+         type: 'FeatureCollection',
+         features: [
+         {% for i in 'KirktonApp.geojson' %}
+             {
+             type: 'Feature',
+             geometry: {
+                 type: 'Point',
+                 coordinates: [{{ i.coord_h }}, {{ i.coord_v }}]
+             },
+             properties: {
+                 title: "<div class='place-title'>{{ i.name_pl }}</div>",
+                 description: "<div class='place-post'>{% for post in i.posts.all %}<a href='{{ post.get_absolute_url }}'>{{ post.title_pl }}</a><br/>{% endfor %}</div>"
+             }
+             },
+         {% endfor %}
+         ]
+         };
 
 
-   map.on('load', function (e) {
-     // adds the geojson data as source
-     map.addSource("places", {
-       "type": "geojson",
-       "data": sensors
-     });
+
+
+
+   // var sensors = fetch('KirktonApp.geojson');
+   //
+   //     map.addSource("places", {
+   //       "type": "geojson",
+   //       "data": sensors
+   //     });
+
+
+       // Assigning a unique id to each sensor to associate each point on
+       // the map with a listing in the sidebar
+      sensors.features.forEach(function(sensor, i){
+        sensor.properties.id = i;
+      });
 
      // add sidebar list and map markers to page
      buildLocationList(sensors);
      addMarkers();
-  });
 
 
    // method for adding markers to the map for each sensor

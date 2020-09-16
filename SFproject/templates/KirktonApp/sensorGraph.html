@@ -161,12 +161,16 @@ async function chartIt(){
       getCsvFromCsv(filename);
     }
 
+    // method for getting the csv info when the csv file already exists
+    // and calling the method to download it on the browser
     async function getCsvFromCsv(filename){
       // if statement to get file name? using variables?
       const response = await fetch(filename);
       const data = await response.text();
       download(data);
     }
+    // seperate function to create a csv from just the graph data?
+    // backwards engineer from the getData() method? then call the same download method below
 
     // // youtube tutorial
     // //function to change the graph data to a csv
@@ -196,6 +200,8 @@ async function chartIt(){
     // };
 
     // youtube tutorial
+    // method to download the file on the browser
+    // this method can be used with all functions
     const download = function(data){
       // need to use a blob to download something
       const blob = new Blob([data], {type: 'text/csv'});
