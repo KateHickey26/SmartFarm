@@ -54,75 +54,85 @@
 
 
 
-     // sensors, reading in from external geojson file
-         var sensors = {
-         type: 'FeatureCollection',
-         features: [
-         {% for i in 'KirktonApp.geojson' %}
-             {
-             type: 'Feature',
-             geometry: {
-                 type: 'Point',
-                 coordinates: [{{ i.coord_h }}, {{ i.coord_v }}]
-             },
-             properties: {
-                 title: "<div class='place-title'>{{ i.name_pl }}</div>",
-                 description: "<div class='place-post'>{% for post in i.posts.all %}<a href='{{ post.get_absolute_url }}'>{{ post.title_pl }}</a><br/>{% endfor %}</div>"
-             }
-             },
-         {% endfor %}
-         ]
-         };
+     map.on('style.load', function(){
+       map.addSource("points",{
+         type: "geojson",
+         data: "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson"
+       });
 
+       map.addLayer({
+         "id": "sensors",
+         "type": "symbol",
+         "source": "points"
+       });
+     });
 
+// load all point layers for the list
+    var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
+    
 
+// Use the point layers to create the list
+   map.on('load', () => {
+     fetch(sensors)
+     .then(response => response.json())
+     .then((data) => {
+       map.addSource("locations",{
+         type: 'geojson',
+         data: data
+       });
 
+       map.addLayer({
+         "id": "locations",
+         "type": "symbol",
+         "source": "locations",
+         "layout": {
+           "icon-image": 'marker.png',
+           "icon-anchor": "bottom",
+         }
+       });
+       buildLocationList(data);
+     });
+   });
 
-   // var sensors = fetch('KirktonApp.geojson');
+//   addMarkers();
+
+      //  // Assigning a unique id to each sensor to associate each point on
+      //  // the map with a listing in the sidebar
+      // sensors.features.forEach(function(sensor, i){
+      //   sensor.properties.id = i;
+      // });
+
+   // // method for adding markers to the map for each sensor
+   // function addMarkers() {
+   //   // For each feature in the GeoJSON object above
+   //   sensors.features.forEach(function(marker) {
+   //     // Create a div element for the marker
+   //     var el = document.createElement('div');
+   //     // Assign a unique `id` to the marker
+   //     el.id = "marker-" + marker.properties.id;
+   //     // Assign the `marker` class to each marker for styling.
+   //     el.className = 'marker';
    //
-   //     map.addSource("places", {
-   //       "type": "geojson",
-   //       "data": sensors
-   //     });
+   //    //  Create a marker using the div element
+   //    //   defined above and add it to the map.
+   //     new mapboxgl.Marker(el, { offset: [0, -23] })
+   //       .setLngLat(marker.geometry.coordinates)
+   //       .addTo(map);
+   //
+   //     /**
+   //      * Listen to the element and when it is clicked, do four things:
+   //      * 1. Fly to the point
+   //      * 2. Close all other popups and display popup for clicked sensor
+   //      * 3. Highlight listing in sidebar (and remove highlight for all other listings)
+   //      * 4. Show the 'Show Graph' button
+   //     **/
 
+// add event listeners for the markers
 
-       // Assigning a unique id to each sensor to associate each point on
-       // the map with a listing in the sidebar
-      sensors.features.forEach(function(sensor, i){
-        sensor.properties.id = i;
-      });
-
-     // add sidebar list and map markers to page
-     buildLocationList(sensors);
-     addMarkers();
-
-
-   // method for adding markers to the map for each sensor
-   function addMarkers() {
-     // For each feature in the GeoJSON object above
-     sensors.features.forEach(function(marker) {
-       // Create a div element for the marker
-       var el = document.createElement('div');
-       // Assign a unique `id` to the marker
-       el.id = "marker-" + marker.properties.id;
-       // Assign the `marker` class to each marker for styling.
-       el.className = 'marker';
-
-      //  Create a marker using the div element
-      //   defined above and add it to the map.
-       new mapboxgl.Marker(el, { offset: [0, -23] })
-         .setLngLat(marker.geometry.coordinates)
-         .addTo(map);
-
-       /**
-        * Listen to the element and when it is clicked, do four things:
-        * 1. Fly to the point
-        * 2. Close all other popups and display popup for clicked sensor
-        * 3. Highlight listing in sidebar (and remove highlight for all other listings)
-        * 4. Show the 'Show Graph' button
-       **/
-
-       el.addEventListener('click', function(e){
+map.on('click', function (el){
+  var features = map.queryRenderedFeatures(el.point, {
+    layers: ["locations"]
+  });
          // Fly to the point
          flyToSensor(marker);
          // Close all other popups and display popup for clicked sensor
@@ -138,8 +148,8 @@
          var sensor = document.getElementById('sensor-' + marker.properties.id);
          sensor.classList.add('active');
        });
-     });
-   }
+
+
 
    // add each sensor to the sidebar
    function buildLocationList(data) {
@@ -180,9 +190,13 @@
         * 4. Highlight listing in sidebar (and remove highlight for all other listings)
        **/
 
+
       link.addEventListener('click', function(e){
+
          for (var i=0; i < data.features.length; i++) {
+
            if (this.id === "link-" + data.features[i].properties.id) {
+
              var clickedSensor = data.features[i];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
