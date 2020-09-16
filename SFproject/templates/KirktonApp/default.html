@@ -64,21 +64,28 @@
 
      //load all point layers for the list
      map.on('style.load', function(){
-       map.addSource("points", {
-         type: "geojson",
-         data: "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson"
-       });
-       map.addLayer({
-         "id": "sensors",
-         "type": "symbol",
-         "source": "points",
-         "layout": {
-           "icon-image": "marker.png",
-           "icon-size": 1,
-           "icon-anchor": "bottom",
-			     "visibility": "none",
-         }
-       });
+       map.loadImage("/KirktonApp/static/images/marker.png",
+       function(error, image){
+          map.addImage('marker', image);
+
+          map.addSource("points", {
+            type: "geojson",
+            data: "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson"
+          });
+          map.addLayer({
+            "id": "sensors",
+            "type": "symbol",
+            "source": "points",
+            "layout": {
+              "icon-image": "marker",
+              "icon-size": 1,
+              "icon-anchor": "bottom",
+			           "visibility": "none",
+               }
+        });
+      }
+    );
+  });
 
       // // for (i = 0; i < data.features.length; i++) {
       //  /* For each feature in the GeoJSON object above: */
@@ -98,7 +105,7 @@
         //     .addTo(map);
         //
         // //  });
-     });
+
 
     var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
 
@@ -108,7 +115,10 @@
      fetch(sensors)
         .then(response => response.json())
         .then((data) => {
-            map.addSource("locations",{
+         map.loadImage("/KirktonApp/static/images/marker.png",
+          function(error, image){
+             map.addImage("marker2", image);
+             map.addSource("locations",{
               type: 'geojson',
               data: data
             });
@@ -118,11 +128,14 @@
          "type": "symbol",
          "source": "locations",
          "layout": {
-           "icon-image": "marker.png",
+           "icon-image": "marker2",
            "icon-size": 1,
          }
        });
        buildLocationList(data);
+  //   }
+    });
+
      });
    });
 
@@ -143,14 +156,21 @@ map.on('click', function (e){
          showGraphButton(clickedPoint);
 
          var activeItem = document.getElementsByClassName('active');
-         e.stopPropagation();
+    //     e.stopPropagation();
          if (activeItem[0]) {
            activeItem[0].classList.remove('active');
          }
 
          var selectedFeature = clickedPoint.properties.address;
 
-         var sensor = document.getElementById('sensor-' + marker.properties.id);
+         // for use in ID
+         for (var i = 0; i < sensors.features.length; i++) {
+			        if (sensors.features[i].properties.title === selectedFeature) {
+				            selectedFeatureIndex = i;
+			        }
+		     }
+
+         var sensor = document.getElementById('sensor-' + marker.selectedFeatureIndex);
          sensor.classList.add('active');
        }
   });
