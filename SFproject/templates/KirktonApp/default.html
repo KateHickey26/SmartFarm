@@ -18,10 +18,12 @@
    <div id='sensors' class='sensors'></div>
  </div>
 
+
  <!-- map -->
  <div id='map' class='map'></div>
 
- <script>
+<script>
+
    // This will let you use the .remove() function later on
    if (!('remove' in Element.prototype)) {
      Element.prototype.remove = function() {
@@ -69,7 +71,7 @@
 
 // load all point layers for the list
     var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
-    
+
 
 // Use the point layers to create the list
    map.on('load', () => {
@@ -84,23 +86,18 @@
        map.addLayer({
          "id": "locations",
          "type": "symbol",
-         "source": "locations",
-         "layout": {
-           "icon-image": 'marker.png',
-           "icon-anchor": "bottom",
-         }
+         "source": "locations"
        });
-       buildLocationList(data);
+    //   addMarkers();
+       buildLocationList(sensors);
      });
    });
 
-//   addMarkers();
-
-      //  // Assigning a unique id to each sensor to associate each point on
-      //  // the map with a listing in the sidebar
-      // sensors.features.forEach(function(sensor, i){
-      //   sensor.properties.id = i;
-      // });
+       // Assigning a unique id to each sensor to associate each point on
+       // the map with a listing in the sidebar
+      sensors.features.forEach(function(sensor, i){
+        sensor.properties.id = i;
+      });
 
    // // method for adding markers to the map for each sensor
    // function addMarkers() {
@@ -118,7 +115,6 @@
    //     new mapboxgl.Marker(el, { offset: [0, -23] })
    //       .setLngLat(marker.geometry.coordinates)
    //       .addTo(map);
-   //
    //     /**
    //      * Listen to the element and when it is clicked, do four things:
    //      * 1. Fly to the point
@@ -152,14 +148,16 @@ map.on('click', function (el){
 
 
    // add each sensor to the sidebar
+
    function buildLocationList(data) {
-      data.features.forEach(function(sensor, i){
+     for (i = 0; i < data.features.length; i++) {
 
        // variable for sensor properties
        var prop = sensor.properties;
 
        // add new sensor list to side bar
        var sensors = document.getElementById('sensors');
+
        var sensor = sensors.appendChild(document.createElement('div'));
 
        // Assign a unique `id` to the sensor.
@@ -182,15 +180,11 @@ map.on('click', function (el){
          details.innerHTML += ' · ' + prop.phoneFormatted;
        }
 
-       /**
-        * Listen to the element and when it is clicked, do four things:
-        * 1. Update the `currentFeature` to the sensor associated with the clicked link
-        * 2. Fly to the point
-        * 3. Close all other popups and display popup for clicked sensor
-        * 4. Highlight listing in sidebar (and remove highlight for all other listings)
-       **/
-
-
+        // Listen to the element and when it is clicked, do four things:
+        // 1. Update the `currentFeature` to the sensor associated with the clicked link
+        // 2. Fly to the point
+        // 3. Close all other popups and display popup for clicked sensor
+        // 4. Highlight listing in sidebar (and remove highlight for all other listings)
       link.addEventListener('click', function(e){
 
          for (var i=0; i < data.features.length; i++) {
@@ -210,7 +204,7 @@ map.on('click', function (el){
          this.parentNode.classList.add('active');
          e.preventDefault();
        });
-     });
+     };
    }
 
 
@@ -257,7 +251,7 @@ map.on('click', function (el){
 
    }
 
-   </script>
+</script>
 
  </div>
 
