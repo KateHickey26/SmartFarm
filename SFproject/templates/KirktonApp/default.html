@@ -50,9 +50,16 @@
      //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
-   // adds zoom buttons and compass
-     const nav = new mapboxgl.NavigationControl();
-     map.addControl(nav, "top-right");
+    // adds zoom buttons and compass
+    const nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, "top-right");
+
+    // Add scale bar
+    var scale = new mapboxgl.ScaleControl({
+       unit: 'imperial'
+    });
+
+    map.addControl(scale, 'bottom-right');
 
 
 
@@ -93,38 +100,8 @@
      });
    });
 
-       // Assigning a unique id to each sensor to associate each point on
-       // the map with a listing in the sidebar
-      // sensors.features.forEach(function(sensor, i){
-      //   sensor.properties.id = i;
-      // });
-
-   // // method for adding markers to the map for each sensor
-   // function addMarkers() {
-   //   // For each feature in the GeoJSON object above
-   //   sensors.features.forEach(function(marker) {
-   //     // Create a div element for the marker
-   //     var el = document.createElement('div');
-   //     // Assign a unique `id` to the marker
-   //     el.id = "marker-" + marker.properties.id;
-   //     // Assign the `marker` class to each marker for styling.
-   //     el.className = 'marker';
-   //
-   //    //  Create a marker using the div element
-   //    //   defined above and add it to the map.
-   //     new mapboxgl.Marker(el, { offset: [0, -23] })
-   //       .setLngLat(marker.geometry.coordinates)
-   //       .addTo(map);
-   //     /**
-   //      * Listen to the element and when it is clicked, do four things:
-   //      * 1. Fly to the point
-   //      * 2. Close all other popups and display popup for clicked sensor
-   //      * 3. Highlight listing in sidebar (and remove highlight for all other listings)
-   //      * 4. Show the 'Show Graph' button
-   //     **/
 
 // add event listeners for the markers
-
 map.on('click', function (e){
   var features = map.queryRenderedFeatures(e.point, {
     layers: ["locations"]
@@ -146,13 +123,6 @@ map.on('click', function (e){
          }
 
          var selectedFeature = clickedPoint.properties.address;
-
-          // code from other github
-		      // for (var i = 0; i < sensors.features.length; i++) {
-			    //      if (sensors.features[i].properties.description === selectedFeature) {
-				  //            selectedFeatureIndex = i;
-			    //      }
-		      // }
 
          var sensor = document.getElementById('sensor-' + marker.properties.id);
          sensor.classList.add('active');
@@ -194,31 +164,27 @@ map.on('click', function (e){
        //   details.innerHTML += ' · ' + prop.phoneFormatted;
        // }
 
-        // Listen to the element and when it is clicked, do four things:
-        // 1. Update the `currentFeature` to the sensor associated with the clicked link
-        // 2. Fly to the point
-        // 3. Close all other popups and display popup for clicked sensor
-        // 4. Highlight listing in sidebar (and remove highlight for all other listings)
+       // add event listeners to the items in the list
       link.addEventListener('click', function(e){
-
+         e.preventDefault();
          // for (var i=0; i < data.features.length; i++) {
-         //   if (this.id === "link-" + data.features[i].properties.id) {
+    //     if (this.id === "link-" + prop.id) {
 
-         var clickedSensor = data.features[this.dataPosition];
+           // when clicked, fly to sensor, popup, and show "Show Graph" button
+           var clickedSensor = data.features[this.dataPosition];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
              showGraphButton();
 
-
-
-
-         var activeItem = document.getElementsByClassName('active');
-         if (activeItem[0]) {
-           activeItem[0].classList.remove('active');
-         }
-         this.parentNode.classList.add('active');
-         e.preventDefault();
-       });
+          // highlight sensor and remove other highlights
+          var activeItem = document.getElementsByClassName('active');
+          if (activeItem[0]) {
+              activeItem[0].classList.remove('active');
+          }
+          this.parentNode.classList.add('active');
+          //  e.preventDefault();
+  //      }
+      });
      };
    }
 
