@@ -62,7 +62,7 @@
     map.addControl(scale, 'bottom-right');
 
 
-
+     //load all point layers for the list
      map.on('style.load', function(){
        map.addSource("points",{
          type: "geojson",
@@ -74,13 +74,14 @@
          "type": "symbol",
          "source": "points"
        });
+
      });
 
-// load all point layers for the list
+
     var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
 
 
-// Use the point layers to create the list
+    // Use the point layers to create the list
    map.on('load', () => {
      fetch(sensors)
         .then(response => response.json())
@@ -95,13 +96,12 @@
          "type": "symbol",
          "source": "locations"
        });
-    //   addMarkers();
        buildLocationList(data);
      });
    });
 
 
-// add event listeners for the markers
+// add event listeners for the map markers
 map.on('click', function (e){
   var features = map.queryRenderedFeatures(e.point, {
     layers: ["locations"]
@@ -110,11 +110,11 @@ map.on('click', function (e){
   if(features.length){
     var clickedPoint = features[0];
          // Fly to the point
-         flyToSensor(marker);
+         flyToSensor(clickedPoint);
          // Close all other popups and display popup for clicked sensor
-         createPopUp(marker);
+         createPopUp(clickedPoint);
          // Highlight listing in sidebar
-         showGraphButton();
+         showGraphButton(clickedPoint);
 
          var activeItem = document.getElementsByClassName('active');
          e.stopPropagation();
@@ -174,7 +174,7 @@ map.on('click', function (e){
            var clickedSensor = data.features[this.dataPosition];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
-             showGraphButton();
+             showGraphButton(clickedSensor);
 
           // highlight sensor and remove other highlights
           var activeItem = document.getElementsByClassName('active');
@@ -190,9 +190,9 @@ map.on('click', function (e){
 
 
    // method for "flying to" a sensor
-   function flyToSensor(currentFeature) {
+   function flyToSensor(clickedSensor) {
      map.flyTo({
-       center: currentFeature.geometry.coordinates,
+       center: clickedSensor.geometry.coordinates,
        zoom: 10
      });
    }
@@ -211,7 +211,7 @@ map.on('click', function (e){
 
 
    // method for creating the Show Graph button
-   function showGraphButton(){
+   function showGraphButton(clickedSensor){
 
      // empties graphButton div each time this function is called
      $("#graphButton").empty();
