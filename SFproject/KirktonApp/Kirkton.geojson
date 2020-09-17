@@ -5,8 +5,7 @@
         "type": "Feature",
         "properties": {
           "title": "LoRaWAN Gateway - Kirkton Office",
-          "description": "This is an Ethernet connected RisingHF25008 LoRaWAN Gateway at the SRUC Hill & Mountain Research Centre office at Kirkton. The gateway receives messages from the sensors located across the farm (within an approximate 10 km radius) and forwards them to the Network Server. The gateway is simply a packet forwarding device, it doesn’t understand the packet contents, or decide what to send back, this is handled by the Network Server. The Network Server is responsible for receiving multiple copies of the transmitted packets, decrypting them and removing duplicates, and then forwarding the payloads to whatever Application Server the end user requires. We use 'The Things Network' (TTN) as our Network Server. For most of our environmental sensors we use an Application Server provided by Decentlab, who are the sensor manufacturers. We are able to view the data on a Dashboard provided by Decentlab.",
-          "url_temp": "No link"
+          "description": "This is an Ethernet connected RisingHF25008 LoRaWAN Gateway at the SRUC Hill & Mountain Research Centre office at Kirkton. The gateway receives messages from the sensors located across the farm (within an approximate 10 km radius) and forwards them to the Network Server. The gateway is simply a packet forwarding device, it doesn’t understand the packet contents, or decide what to send back, this is handled by the Network Server. The Network Server is responsible for receiving multiple copies of the transmitted packets, decrypting them and removing duplicates, and then forwarding the payloads to whatever Application Server the end user requires. We use 'The Things Network' (TTN) as our Network Server. For most of our environmental sensors we use an Application Server provided by Decentlab, who are the sensor manufacturers. We are able to view the data on a Dashboard provided by Decentlab."
         },
         "geometry": {
           "type": "Point",
@@ -17,7 +16,7 @@
         "type": "Feature",
         "properties": {
           "title": "LoRaWAN Gateway - Artisan Cafe",
-          "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan.",
+          "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan."
         },
         "geometry": {
           "type": "Point",
@@ -28,7 +27,7 @@
         "type": "Feature",
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 1",
-          "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed).",
+          "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed)."
         },
         "geometry": {
           "type": "Point",
@@ -39,7 +38,7 @@
         "type": "Feature",
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 2",
-          "description": "Still to be delployed, location TBC",
+          "description": "Still to be delployed, location TBC"
         },
         "geometry": {
           "type": "Point",
@@ -50,7 +49,7 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Kirkton Big Meadow Bridge",
-          "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm.",
+          "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm."
         },
         "geometry": {
           "type": "Point",
@@ -73,7 +72,7 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Kirkton Bothy Bridge",
-          "description": "No description",
+          "description": "No description"
         },
         "geometry": {
           "type": "Point",
@@ -84,7 +83,7 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Blue Park Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "description": "Data currently not available due to lack of LoRa coverage at this site."
         },
         "geometry": {
           "type": "Point",
@@ -95,7 +94,7 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Lower Gorge Woodland Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "description": "Data currently not available due to lack of LoRa coverage at this site."
         },
         "geometry": {
           "type": "Point",
@@ -106,7 +105,7 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Upper Gorge Hydro Intake Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "description": "Data currently not available due to lack of LoRa coverage at this site."
         },
         "geometry": {
           "type": "Point",

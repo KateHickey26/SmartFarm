@@ -47,7 +47,7 @@
      container: 'map',
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
      center: [-4.4118, 56.2361],
-     zoom: 12
+     zoom: 10
      //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
@@ -132,7 +132,6 @@
          "layout": {
            "icon-image": "marker2",
            "icon-size": 1,
-           'icon-allow-overlap': true,
          }
        });
        buildLocationList(data);
@@ -236,7 +235,7 @@ map.on('click', function (e){
    function flyToSensor(clickedSensor) {
      map.flyTo({
        center: clickedSensor.geometry.coordinates,
-       zoom: 15
+       zoom: 12
      });
    }
 
