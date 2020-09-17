@@ -29,10 +29,21 @@
 <style>
 body {
   color:#404040;
-  font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  font:700 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
   margin:0;
   padding:10px 5px 15px 20px;
   -webkit-font-smoothing:antialiased;
+}
+
+.body-for-sticky {
+    position: relative;        /* for the footer to move with the page size */
+    min-height: 100%;          /* for the footer to be at the bottom */
+    padding-bottom: 10rem;      /* Space available between last element and bottom border of the page */
+}
+
+.sticky-footer {
+    position: absolute;        /* for it to disappear under last body element */
+    bottom: 0;                 /* so the footer can stick to the bottom*/
 }
 /* #map-container{
   position:relative;
@@ -54,6 +65,7 @@ body {
   height: 200px;
 } */
 
+
 * {
   -webkit-box-sizing:border-box;
   -moz-box-sizing:border-box;
@@ -61,10 +73,11 @@ body {
 }
 
 .sidebar {
-  position:relative;
+  position: absolute;
   width:33.3333%;
   height:100%;
-  top:0;left:0;
+  top:20%;
+  left:3%;
   overflow: hidden;
   border-right:1px solid rgba(0,0,0,0.25);
 }
@@ -73,10 +86,10 @@ body {
 }
 
 .map {
-  position: absolute;
-  left: 33.3333%;
-  width: 66.6666%;
-  top: 0;
+  position: fixed;
+  left: 35%;
+  width: 65%;
+  top: 20%;
   bottom: 0;
 }
 
@@ -209,7 +222,7 @@ a:hover {
   margin:0;
   display:block;
   padding: 10px 10px 10px 10px;
-  font-weight:400;
+  font-weight:350;
 }
 
 .mapboxgl-popup-content div {
@@ -251,12 +264,12 @@ a:hover {
                          </div>
                      </div>
                      {% else %}
-                     <div class="col">
+                     <div class="col-3">
                      <form method="get" action="{% url 'KirktonApp:login' %}">
                          <button class="btn btn-outline-primary px-4">Login</button>
                      </form>
                      </div>
-                    <div>
+                    <div class = "col-6">
                         <form method="get" action="{%url 'KirktonApp:add_sensor_form' %}">
                         <button class="btn btn-outline-primary px-4">Add Sensor</button>
                         </form>
@@ -281,6 +294,7 @@ a:hover {
 <!--Below is a footer that contains a short blurb about the site, some useful links to other parts of the website,
      and contact details where users can reach us. Helps keep the website neat. -->
 <footer class="page-footer font-small blue-grey lighten-5">
+  <div class="footer sticky-footer">
     <div class="container text-center text-md-left mt-5">
         <div class="row mt-3 dark-grey-text">
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-justify text-lg-center">
@@ -307,6 +321,7 @@ a:hover {
             </div>
         </div>
     </div>
+  </div>
     <div class="footer-copyright text-center text-black-50 py-3">
         <a class="dark-grey-text" >KirktonApp</a>
     </div>

@@ -204,13 +204,6 @@ map.on('click', function (e){
        link.id = "link-" + prop.id;
        link.innerHTML = currentFeature.properties.title;
 
-       // Add details to the individual sensors
-      // var details = sensor.appendChild(document.createElement('div'));
-      // details.innerHTML = prop.description;
-       // if (prop.phone) {
-       //   details.innerHTML += ' · ' + prop.phoneFormatted;
-       // }
-
        // add event listeners to the items in the list
       link.addEventListener('click', function(e){
          e.preventDefault();
@@ -252,6 +245,7 @@ map.on('click', function (e){
 
      var popup = new mapboxgl.Popup({closeOnClick: false})
        .setLngLat(currentFeature.geometry.coordinates)
+       // add title, description, and URL link (if there is one) to popup
        .setHTML(currentFeature.properties.title +
          '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL)
        .addTo(map);
