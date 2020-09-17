@@ -6,7 +6,7 @@
 
  <div class="container" name="main body" >
 
-    <div id='graphButton'></div>
+
     <!-- class="nav-link" href="{% url 'KirktonApp/sensorGraph.html'"> -->
 
  <!-- Side panel -->
@@ -14,6 +14,7 @@
    <div class='heading'>
      <h1>Sensors</h1>
    </div>
+   <div id='graphDiv'></div>
 
    <div id='sensors' class='sensors'></div>
  </div>
@@ -258,7 +259,7 @@ map.on('click', function (e){
      // empties graphButton div each time this function is called
      $("#graphButton").empty();
 
-     var graphDiv = document.getElementById("graphButton");
+     var graphDiv = document.getElementById("graphDiv");
 
      // creates button
      var button = document.createElement("button");

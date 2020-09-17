@@ -244,7 +244,7 @@ a:hover {
 
   <header style="background-color: #8FBC8F;">
     <h1>
-      Smart Fields
+        Smart Fields
       {% block title_block %}
      {% endblock %}
    </h1>
@@ -291,8 +291,10 @@ a:hover {
     {% endblock %}
 </div>
 
+
 <!--Below is a footer that contains a short blurb about the site, some useful links to other parts of the website,
      and contact details where users can reach us. Helps keep the website neat. -->
+<!--
 <footer class="page-footer font-small blue-grey lighten-5">
   <div class="footer sticky-footer">
     <div class="container text-center text-md-left mt-5">
@@ -303,16 +305,16 @@ a:hover {
                   <a class="nav-link" href="{% url 'KirktonApp:home' %}">Home</a>
                 </p>
                 <p>
-                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About Us</a>
+                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About</a>
                 </p>
                 <p>
                   <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
                 </p>
-                            <!--{% if registered -->
+                            <!-{% if registered ->
                 <p>
                     <a class="nav-link" href="{% url 'KirktonApp:register_user' %}">Register a new user</a>
                 </p>
-                            <!-- {% endif -->
+                            <!- {% endif ->
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
@@ -321,10 +323,12 @@ a:hover {
             </div>
         </div>
     </div>
-  </div>
+
     <div class="footer-copyright text-center text-black-50 py-3">
         <a class="dark-grey-text" >KirktonApp</a>
     </div>
+  </div>
 </footer>
+-->
 </body>
 </html>
