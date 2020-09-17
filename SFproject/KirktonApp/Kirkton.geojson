@@ -64,9 +64,9 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor - River Fillan (Kirkton Bridge)",
+          "title": "River Level Sensor - River Fillan (Kirkton Bridge)",
           "description": "The graph shows the distance from the sensor to the water surface from 1st July to 18th June 2020 (i.e. the higher the river level the shorter the distance between the sensor and water surface.",
-          "url_temp": "https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>JHG</a>"
         },
         "geometry": {
           "type": "Point",
@@ -76,7 +76,7 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor 3",
+          "title": "River Level Sensor - Kirkton Bothy Bridge",
           "description": "No description",
           "url_temp": "No link"
         },
@@ -88,8 +88,8 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor 4",
-          "description": "No description",
+          "title": "River Level Sensor - Blue Park Bridge",
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
           "url_temp": "No link"
         },
         "geometry": {
@@ -100,8 +100,8 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor 5",
-          "description": "No description",
+          "title": "River Level Sensor - Lower Gorge Woodland Bridge",
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
           "url_temp": "No link"
         },
         "geometry": {
@@ -112,8 +112,8 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor 6",
-          "description": "No description",
+          "title": "River Level Sensor - Upper Gorge Hydro Intake Bridge",
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
           "url_temp": "No link"
         },
         "geometry": {
@@ -126,7 +126,7 @@
         "properties": {
           "title": "Centre of map",
           "description": "No description",
-          "url_temp": "No link"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>JHG</a>"
         },
         "geometry": {
           "type": "Point",

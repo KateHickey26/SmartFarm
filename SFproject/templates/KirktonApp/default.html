@@ -202,11 +202,11 @@ map.on('click', function (e){
        link.href = '#';
        link.className = 'title';
        link.id = "link-" + prop.id;
-       link.innerHTML = currentFeature.properties.title + prop.description;
+       link.innerHTML = currentFeature.properties.title;
 
        // Add details to the individual sensors
-       var details = sensor.appendChild(document.createElement('div'));
-       details.innerHTML = prop.description;
+      // var details = sensor.appendChild(document.createElement('div'));
+      // details.innerHTML = prop.description;
        // if (prop.phone) {
        //   details.innerHTML += ' · ' + prop.phoneFormatted;
        // }
@@ -253,14 +253,8 @@ map.on('click', function (e){
      var popup = new mapboxgl.Popup({closeOnClick: false})
        .setLngLat(currentFeature.geometry.coordinates)
        .setHTML(currentFeature.properties.title +
-         '<h4>' + currentFeature.properties.description + '</h4>')
+         '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL)
        .addTo(map);
-
-       var link = $("<a>", {
-         href: currentFeature.properties.url,
-         text: "click",
-         target: "_blank"
-       }).appendTo(popup);
    }
 
 
