@@ -18,7 +18,6 @@
         "properties": {
           "title": "LoRaWAN Gateway - Artisan Cafe",
           "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan.",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -30,7 +29,6 @@
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 1",
           "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed).",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -42,7 +40,6 @@
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 2",
           "description": "Still to be delployed, location TBC",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -54,7 +51,6 @@
         "properties": {
           "title": "River Level Sensor - Kirkton Big Meadow Bridge",
           "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm.",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -66,7 +62,7 @@
         "properties": {
           "title": "River Level Sensor - River Fillan (Kirkton Bridge)",
           "description": "The graph shows the distance from the sensor to the water surface from 1st July to 18th June 2020 (i.e. the higher the river level the shorter the distance between the sensor and water surface.",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>JHG</a>"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>Snapshot 1st July to 18th June 2020</a>"
         },
         "geometry": {
           "type": "Point",
@@ -78,7 +74,6 @@
         "properties": {
           "title": "River Level Sensor - Kirkton Bothy Bridge",
           "description": "No description",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -90,7 +85,6 @@
         "properties": {
           "title": "River Level Sensor - Blue Park Bridge",
           "description": "Data currently not available due to lack of LoRa coverage at this site.",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -102,7 +96,6 @@
         "properties": {
           "title": "River Level Sensor - Lower Gorge Woodland Bridge",
           "description": "Data currently not available due to lack of LoRa coverage at this site.",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -114,7 +107,6 @@
         "properties": {
           "title": "River Level Sensor - Upper Gorge Hydro Intake Bridge",
           "description": "Data currently not available due to lack of LoRa coverage at this site.",
-          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -126,7 +118,8 @@
         "properties": {
           "title": "Air Temperature and Relative Humidity Sensor - Kirkton Office Field",
           "description": "No description",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/onWpRrB6DIBfCen43mDGSsydpT0pFB71?orgId=0' target='blank'>Air Temperature from 1st January 2020 to 18th June 2020</a><br>href='https://sruc.decentlab.com/dashboard/snapshot/395z2ueSvBX0Y6m9VMcsspd7ZhgGDlfS?orgId=0' target='blank'>Relative humidity from 1st January to 18th June 2020</a>"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/onWpRrB6DIBfCen43mDGSsydpT0pFB71?orgId=0' target='blank'>Air Temperature from 1st January 2020 to 18th June 2020</a>"
+          "URL2": "href='https://sruc.decentlab.com/dashboard/snapshot/395z2ueSvBX0Y6m9VMcsspd7ZhgGDlfS?orgId=0' target='blank'>Relative humidity from 1st January to 18th June 2020</a>"
         },
         "geometry": {
           "type": "Point",

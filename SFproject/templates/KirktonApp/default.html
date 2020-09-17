@@ -47,7 +47,7 @@
      container: 'map',
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
      center: [-4.4118, 56.2361],
-     zoom: 10
+     zoom: 12
      //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
@@ -132,6 +132,7 @@
          "layout": {
            "icon-image": "marker2",
            "icon-size": 1,
+           'icon-allow-overlap': true,
          }
        });
        buildLocationList(data);
@@ -197,6 +198,7 @@ map.on('click', function (e){
        sensor.className = 'item';
        // give each sensor its own id, for creating the side bar list
        sensor.id = "listing-" + i;
+       sensor.index = i;
 
        // Add the link to the individual sensor created above
        var link = sensor.appendChild(document.createElement('a'));
@@ -212,7 +214,7 @@ map.on('click', function (e){
     //     if (this.id === "link-" + prop.id) {
 
            // when clicked, fly to sensor, popup, and show "Show Graph" button
-           var clickedSensor = data.features[this.dataPosition];
+           var clickedSensor = data.features[this.parentElement.index];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
              showGraphButton(clickedSensor);
@@ -234,7 +236,7 @@ map.on('click', function (e){
    function flyToSensor(clickedSensor) {
      map.flyTo({
        center: clickedSensor.geometry.coordinates,
-       zoom: 12
+       zoom: 15
      });
    }
 
@@ -248,7 +250,7 @@ map.on('click', function (e){
        .setLngLat(currentFeature.geometry.coordinates)
        // add title, description, and URL link (if there is one) to popup
        .setHTML(currentFeature.properties.title +
-         '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL)
+         '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL + '<br>' + currentFeature.properties.URL2)
        .addTo(map);
    }
 

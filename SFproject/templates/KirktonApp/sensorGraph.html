@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title_block %}
-  Graph
+  - Graph Page 
 {% endblock %}
 
 {% block body_block %}
@@ -11,12 +11,12 @@
 
 
     <div style="width:75%;">
-		<button onclick="resetZoom()">Reset Zoom</button>
+<!--		<button onclick="resetZoom()">Reset Zoom</button>
 		<button id="drag-switch" onclick="toggleDragMode()">Disable drag mode</button>
       <!-- {% if registered % -->
     <button id="download-csv" onclick="downloadSensorData()">Download data as CSV file</button>
       <!-- {% endif % -->
-		<canvas id="canvas"></canvas>
+
 <canvas id="chart" width="1000" height="800"></canvas>
     </div>
 
@@ -37,12 +37,12 @@ async function chartIt(){
         data: {
             labels: data.xs,
             datasets: [{
-                label: 'River Level distance, at River Level Sensor 775',
+                label: 'River Level distance, Dummy Data',
                 data: data.ys,
                 backgroundColor:'rgba(149, 149, 149, 0.2)',
                 borderColor:'rgba(149, 149, 149, 1)',
                 borderWidth: 1,
-                fill: false
+                fill: true
             }]
         },
         options: {
