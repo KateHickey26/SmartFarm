@@ -124,9 +124,231 @@
       {
         "type": "Feature",
         "properties": {
+          "title": "Air Temperature and Relative Humidity Sensor - Kirkton Office Field",
+          "description": "No description",
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/onWpRrB6DIBfCen43mDGSsydpT0pFB71?orgId=0' target='blank'>Air Temperature from 1st January 2020 to 18th June 2020</a><br>href='https://sruc.decentlab.com/dashboard/snapshot/395z2ueSvBX0Y6m9VMcsspd7ZhgGDlfS?orgId=0' target='blank'>Relative humidity from 1st January to 18th June 2020</a>"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3939, 56.2508]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Air Temperature and Relative Humidity Sensor - Kirkton Glen Park",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3934, 56.2650]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Air Temperature and Relative Humidity - Kirkton Big Meadow Sensor",
+          "description": "Deployed 23/07/2020"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3932, 56.2452]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Air Temperature and Relative Humidity Sensor - Kirkton Face Pine Wood",
+          "description": "Deployed 23/07/2020"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3906, 56.2542]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Air Temperature and Relative Humidity Sensor - Meall Buidhe",
+          "description": "Deployed on Meall Buidhe within the peatland restoration area (NE corner of the fenced area) on 24th August 2020. Out of range of the gateways so no data available."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4109, 56.2622]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Soil Temperature and Moisture Sensor - Trials Field",
+          "description": "No description",
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/wyekDtdM1NJWDTP3P7L2PJodcd3UvzRO?orgId=0' target='blank'>Soil Temperature from 1st June 2020 to the 14th August 2020</a>"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3935, 56.2500]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Soil Temperature and Moisture Sensor - Kirkton Big Meadow",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3933, 56.2451]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Soil Temperature and Moisture Sensor - Woodside",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3954, 56.2503]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Soil Temperature and Moisture Sensor - Kirkton Glen Park",
+          "description": "No description"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3935, 56.2649]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Soil Temperature and Moisture Sensor - Reseed",
+          "description": "Deployed 12th August 2020"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4013, 56.2516]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Soil Temperature and Moisture Sensor - 4 Acre",
+          "description": "Deployed 12th August 2020"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4009, 56.2517]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Soil Temperature and Moisture Sensor - Agroforestry Plot",
+          "description": "Deployed 14th August 2020"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4005, 56.2507]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Soil Temperature and Moisture Profile Sensor",
+          "description": "The soil temperature and moisture profile sensor measures the temperature and soil moisture at six depths through the soil profile (10, 20, 30, 40, 50 and 60 cm). This sensor will be deployed within  an area of restored peatland (location to be confirmed)."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4112, 56.2619]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Soil Temperature and Moisture Profile Sensor",
+          "description": "This sensor will be deployed within an area of un-restored degraded peatland (location to be confirmed)."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4113, 56.2621]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Tipping Bucket Rain Gauge - Kirkton Glen Park",
+          "description": "This tipping bucket rain gauge is located at an altitude of 520 m above sea level at the top of the Kirkton Glen Park. It was deployed on 3rd August 2020."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3937, 56.2648]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Tipping Bucket Rain Gauge - Kirkton Face Pine Wood",
+          "description": "This tipping bucket rain gauge is located at an altitude of 410 m above sea-level, inside the Kirkton Face woodland enclosure. It was deployed on 23rd July 2020."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3907, 56.2543]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Tipping Bucket Rain Gauge - Auchtertyre (Dyke Park)",
+          "description": "This tipping bucket rain gauge is located at an altitude of 200 m above sea-level, just to the west of the Strathfillan Wigwam site at Auchtertyre. The rainfall Gauge was deployed on 19th August 2020."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4018, 56.2529]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New All-in-one Weather Station with Soil Temperature and Moisture Sensor",
+          "description": "Still to be deployed (location to be confirmed)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3855, 56.2733]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New All-in-one Weather Station with Soil Temperature and Moisture Sensor",
+          "description": "Still to be deployed (location to be confirmed)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4057, 56.2659]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Libelium Smart Water Xtreme",
+          "description": "Still to be deployed (location to be confirmed). Dissolved Oxygen, pH, temperature, electrical conductivity sensors"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3947, 56.2458]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
           "title": "Centre of map",
           "description": "No description",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>JHG</a>"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>Graph Link Example</a>"
         },
         "geometry": {
           "type": "Point",
