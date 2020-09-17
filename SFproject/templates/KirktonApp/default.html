@@ -65,7 +65,7 @@
 
      //load all point layers for the list
      map.on('style.load', function(){
-       map.loadImage("/KirktonApp/static/images/marker.png",
+       map.loadImage("/KirktonApp/static/images/marker2.png",
        function(error, image){
           map.addImage('marker', image);
 
@@ -83,11 +83,11 @@
               "icon-size": 1,
               "icon-anchor": "bottom",
 			           "visibility": "none",
-               }
-        });
-      }
-    );
-  });
+            }
+          });
+         }
+       );
+      });
 
       // // for (i = 0; i < data.features.length; i++) {
       //  /* For each feature in the GeoJSON object above: */
@@ -117,7 +117,7 @@
      fetch(sensors)
         .then(response => response.json())
         .then((data) => {
-         map.loadImage("/KirktonApp/static/images/marker.png",
+         map.loadImage("/KirktonApp/static/images/marker2.png",
           function(error, image){
              map.addImage("marker2", image);
              map.addSource("locations",{
@@ -257,22 +257,21 @@ map.on('click', function (e){
    function showGraphButton(clickedSensor){
 
      // empties graphButton div each time this function is called
-     $("#graphButton").empty();
+     $("#graphDiv").empty();
 
      var graphDiv = document.getElementById("graphDiv");
 
      // creates button
      var button = document.createElement("button");
      // adds button label
-     button.innerHTML = "Show Graph"
+     button.innerHTML = "Show Graph";
 
      // append button
      graphDiv.appendChild(button);
 
-     document.getElementById("graphButton").onclick = function(){
+     document.getElementById("graphDiv").onclick = function(clickedSensor){
        window.location = "{% url 'KirktonApp:sensor_graph'%}";
      };
-
    }
 
 </script>

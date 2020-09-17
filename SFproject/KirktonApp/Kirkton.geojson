@@ -348,7 +348,8 @@
         "properties": {
           "title": "Centre of map",
           "description": "No description",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>Graph Link Example</a>"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>Graph Link Example</a>",
+          "filename": "static/RiverLevelSensor775.csv"
         },
         "geometry": {
           "type": "Point",
