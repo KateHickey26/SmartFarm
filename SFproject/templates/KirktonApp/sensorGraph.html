@@ -135,7 +135,7 @@ async function chartIt(){
         const ys = [];
 
         // if statement to get file name? using variables?
-        const response = await fetch('static/RiverLevelSensor775.csv');
+        const response = await fetch('static/test.csv');
         const data = await response.text();
 
         // splits data into rows, and removes title row from parsing
@@ -158,7 +158,7 @@ async function chartIt(){
     // var sensorId = clickedSensor.properties
     // // variable for url / filename
     // var filename
-    var filename = 'static/RiverLevelSensor775.csv';
+    var filename = 'static/test.csv';
     function downloadSensorData(filname){
       getCsvFromCsv(filename);
     }
