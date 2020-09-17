@@ -4,8 +4,9 @@
        {
         "type": "Feature",
         "properties": {
-          "title": "LoRaWAN Gateway 1",
-          "description": "No description"
+          "title": "LoRaWAN Gateway - Kirkton Office",
+          "description": "This is an Ethernet connected RisingHF25008 LoRaWAN Gateway at the SRUC Hill & Mountain Research Centre office at Kirkton. The gateway receives messages from the sensors located across the farm (within an approximate 10 km radius) and forwards them to the Network Server. The gateway is simply a packet forwarding device, it doesn’t understand the packet contents, or decide what to send back, this is handled by the Network Server. The Network Server is responsible for receiving multiple copies of the transmitted packets, decrypting them and removing duplicates, and then forwarding the payloads to whatever Application Server the end user requires. We use 'The Things Network' (TTN) as our Network Server. For most of our environmental sensors we use an Application Server provided by Decentlab, who are the sensor manufacturers. We are able to view the data on a Dashboard provided by Decentlab.",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -15,8 +16,9 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "LoRaWAN Gateway 2",
-          "description": "No description"
+          "title": "LoRaWAN Gateway - Artisan Cafe",
+          "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan.",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -26,8 +28,33 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Level Sensor 1",
-          "description": "No description"
+          "title": "New Off-grid LoRaWAN Gateway 1",
+          "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed).",
+          "url_temp": "No link"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.4039, 56.2611]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "New Off-grid LoRaWAN Gateway 2",
+          "description": "Still to be delployed, location TBC",
+          "url_temp": "No link"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-4.3855, 56.2610]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "River Level Sensor - Kirkton Big Meadow Bridge",
+          "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm.",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -37,8 +64,9 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "River Sensor 2",
-          "description": "No description"
+          "title": "River Sensor - River Fillan (Kirkton Bridge)",
+          "description": "The graph shows the distance from the sensor to the water surface from 1st July to 18th June 2020 (i.e. the higher the river level the shorter the distance between the sensor and water surface.",
+          "url_temp": "https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0"
         },
         "geometry": {
           "type": "Point",
@@ -49,7 +77,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Sensor 3",
-          "description": "No description"
+          "description": "No description",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -60,7 +89,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Sensor 4",
-          "description": "No description"
+          "description": "No description",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -71,7 +101,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Sensor 5",
-          "description": "No description"
+          "description": "No description",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -82,7 +113,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Sensor 6",
-          "description": "No description"
+          "description": "No description",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
@@ -93,7 +125,8 @@
         "type": "Feature",
         "properties": {
           "title": "Centre of map",
-          "description": "No description"
+          "description": "No description",
+          "url_temp": "No link"
         },
         "geometry": {
           "type": "Point",
