@@ -117,7 +117,7 @@
         "properties": {
           "title": "Air Temperature and Relative Humidity Sensor - Kirkton Office Field",
           "description": "No description",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/onWpRrB6DIBfCen43mDGSsydpT0pFB71?orgId=0' target='blank'>Air Temperature from 1st January 2020 to 18th June 2020</a>"
+          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/onWpRrB6DIBfCen43mDGSsydpT0pFB71?orgId=0' target='blank'>Air Temperature from 1st January 2020 to 18th June 2020</a>",
           "URL2": "href='https://sruc.decentlab.com/dashboard/snapshot/395z2ueSvBX0Y6m9VMcsspd7ZhgGDlfS?orgId=0' target='blank'>Relative humidity from 1st January to 18th June 2020</a>"
         },
         "geometry": {
