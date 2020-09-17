@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title_block %}
-  Graph - add a way to get the sensor id/name?
+  Graph
 {% endblock %}
 
 {% block body_block %}
 <div>
-        <img src="/static/images/field.jpeg" id="field" width="420" alt="missing field image"/>
+      <!--  <img src="/static/images/field.jpeg" id="field" width="420" alt="missing field image"/> -->
 
 
     <div style="width:75%;">
@@ -17,7 +17,7 @@
     <button id="download-csv" onclick="downloadSensorData()">Download data as CSV file</button>
       <!-- {% endif % -->
 		<canvas id="canvas"></canvas>
-<canvas id="chart" width="800" height="400"></canvas>
+<canvas id="chart" width="1000" height="800"></canvas>
     </div>
 
 </div>
@@ -27,6 +27,8 @@
 
 chartIt();
 
+// chart function
+// change to a variable to represent the csv filename?
 async function chartIt(){
     const data = await getData(); // makes this function wait until all the data has been retrieved
     const ctx = document.getElementById('chart').getContext('2d');
@@ -37,8 +39,8 @@ async function chartIt(){
             datasets: [{
                 label: 'River Level distance, at River Level Sensor 775',
                 data: data.ys,
-                backgroundColor:'rgba(255, 99, 132, 0.2)',
-                borderColor:'rgba(255, 99, 132, 1)',
+                backgroundColor:'rgba(149, 149, 149, 0.2)',
+                borderColor:'rgba(149, 149, 149, 1)',
                 borderWidth: 1,
                 fill: false
             }]
@@ -73,6 +75,8 @@ async function chartIt(){
     });
 }
 
+
+
     // reset zoom button function
     window.resetZoom = function() {
 			   window.myLine.resetZoom();
@@ -91,8 +95,6 @@ async function chartIt(){
 			var ctx = document.getElementById('canvas').getContext('2d');
 			window.myLine = new window.Chart(ctx);
 		};
-
-
     // take the data after its been used to make the graph and THEN parse it BACK to csv,
     // - this allows for database and REST API integration later.
     // May need an if statement for database vs csv.
@@ -120,10 +122,6 @@ async function chartIt(){
       // window.open(encodedUri);
       // window.open("data:text/csv;charset=utf-8," + escape(csv))
     };
-
-
-
-
   //  downloadAsCSV('static/RiverLevelSensor775.csv');
 
 
@@ -159,12 +157,13 @@ async function chartIt(){
     // // variable for sensor id, sensor name used
     // var sensorId = clickedSensor.properties
     // // variable for url / filename
-    // var filename 
-
+    // var filename
     var filename = 'static/RiverLevelSensor775.csv';
     function downloadSensorData(filname){
       getCsvFromCsv(filename);
     }
+
+
 
     // method for getting the csv info when the csv file already exists
     // and calling the method to download it on the browser
@@ -204,6 +203,7 @@ async function chartIt(){
     //
     // };
 
+
     // youtube tutorial
     // method to download the file on the browser
     // this method can be used with all functions
@@ -231,23 +231,23 @@ async function chartIt(){
 
 
 
-    // test field image
-     console.log('fetching field image');
-          displayImage()
-              .then(response => {
-              console.log('the code has worked!');
-          })
-          .catch(error => {
-              console.log('error!');
-              console.error(error);
-          });
-     async function displayImage(){
-      // cant get this image to show on the live server - could have something to do
-      // with how ive configured my static files
-          const response = await fetch('static/images/field.jpeg');
-          const blob = await response.blob();
-          document.getElementById('field').src = URL.createObjectURL(blob);
-      }
+    // // test field image
+    //  console.log('fetching field image');
+    //       displayImage()
+    //           .then(response => {
+    //           console.log('the code has worked!');
+    //       })
+    //       .catch(error => {
+    //           console.log('error!');
+    //           console.error(error);
+    //       });
+    //  async function displayImage(){
+    //   // cant get this image to show on the live server - could have something to do
+    //   // with how ive configured my static files
+    //       const response = await fetch('static/images/field.jpeg');
+    //       const blob = await response.blob();
+    //       document.getElementById('field').src = URL.createObjectURL(blob);
+    //   }
 
     </script>
 

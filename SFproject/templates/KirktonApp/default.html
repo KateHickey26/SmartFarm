@@ -234,7 +234,7 @@ map.on('click', function (e){
    function flyToSensor(clickedSensor) {
      map.flyTo({
        center: clickedSensor.geometry.coordinates,
-       zoom: 10
+       zoom: 15
      });
    }
 
@@ -244,7 +244,7 @@ map.on('click', function (e){
      var popUps = document.getElementsByClassName('mapboxgl-popup');
      if (popUps[0]) popUps[0].remove();
 
-     var popup = new mapboxgl.Popup({closeOnClick: false})
+     var popup = new mapboxgl.Popup({closeOnClick: true})
        .setLngLat(currentFeature.geometry.coordinates)
        // add title, description, and URL link (if there is one) to popup
        .setHTML(currentFeature.properties.title +
