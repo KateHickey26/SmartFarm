@@ -46,8 +46,8 @@
    var map = new mapboxgl.Map({
      container: 'map',
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
-     center: [-4.7118, 56.4361],
-     zoom: 8
+     center: [-4.4118, 56.2361],
+     zoom: 10
      //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
@@ -234,7 +234,7 @@ map.on('click', function (e){
    function flyToSensor(clickedSensor) {
      map.flyTo({
        center: clickedSensor.geometry.coordinates,
-       zoom: 15
+       zoom: 12
      });
    }
 
