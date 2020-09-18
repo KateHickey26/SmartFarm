@@ -28,13 +28,10 @@ def home(request):
 
     mapbox_access_token = 'pk.my_mapbox_access_token'
 
-    # sensors = Sensor.objects.all()  # could add status equals here
-
     #request.session.set_test_cookie()
 
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
-    # {'sensors':sensors}
 
 
 # about page
@@ -89,6 +86,27 @@ def user_logout(request):
     return redirect(reverse('KirktonApp/default.html'))
 
 
+@login_required
+def my_account(request):
+    user = request.user
+    profile = UserProfileForm.objects.get_or_create(user=user)[0]
+
+    # if post, change data
+    if request.method == 'POST':
+        newname = request.POST.get('username')
+        newpsw = request.POST.get('password')
+        print(request.FILES)
+        if newname is not "":
+            user.username = newname
+        if newpsw is not "":
+            user.set_password(newpsw)
+        user.save()
+        profile.save()
+
+        return render(request, 'KirktonApp/myAccount.html')
+
+
+@login_required
 def register_user(request):
     # A boolean value for telling the template
     # whether the registration was successful.

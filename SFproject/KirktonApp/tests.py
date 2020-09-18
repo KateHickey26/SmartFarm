@@ -48,7 +48,7 @@ class KirktonApp(TestCase):
     def test_home_page_elements(self):
         response = self.client.get("/")
         self.assertContains(response, "Login", msg_prefix="Home page has login button")
-        # self.assertContains(response, "Logout", msg_prefix="Home page has logout button")
+        #self.assertContains(response, "Logout", msg_prefix="Home page has logout button")
         self.assertContains(response, "Add Sensor", msg_prefix="Home page has add sensor button")
         self.assertContains(response, "Map", msg_prefix="Home page contains mapbox map")
         self.assertContains(response, "Sensors", msg_prefix="Home page contains sensors sidebar")

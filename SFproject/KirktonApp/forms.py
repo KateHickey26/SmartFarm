@@ -9,6 +9,7 @@ import json
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput())
+    # this widget keeps the password hidden
 
 
 class UserForm(forms.ModelForm):
@@ -23,7 +24,8 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('username',)
+        fields = ('username', 'password',)
+        # form for user to change username or password
                   #'email', 'is_staff', 'is_superuser',
 
 

@@ -1,0 +1,32 @@
+{% extends 'KirktonApp/base.html' %}
+{% load static %}
+
+{% block title_block %}
+  My Account
+{% endblock %}
+
+{% block body_block %}
+<div class="container" name="mainbody">
+    <div class="row mt-4">
+        <div class="col-5 my-auto">
+            <h1><span class="label label-default">My Account</span></h1>
+        </div>
+        <div class="col-3 my-auto">
+            <div class="form-group"> <!--Below is form for creating a user -->
+                <form action="{% url 'KirktonApp:my_account' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username"
+                           placeholder="{{user.username}}">
+                    <small id="emailHelp" class="form-text text-muted">Input username</small>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Input password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                    </div>
+                    <input class="btn btn-primary my-2 px-2" type="submit" value="Change">
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,10 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
-
-
-
 
 class UserProfile(models.Model):
     # Links UserProfile to a User model instance.
@@ -16,7 +14,6 @@ class UserProfile(models.Model):
     # representation of a user profile is requested
     def __str__(self):
         return self.user.username
-
 
 #
 # # use to have colours for each type of sensor?

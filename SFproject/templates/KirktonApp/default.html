@@ -34,13 +34,8 @@
      };
    }
 
-   mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
-
-   //adding variable bounds to the map
-   var bounds = [
-      [-4.60, 56.00], // Southwest coordinates
-      [-4.10, 56.88] // Northeast coordinates
-    ];
+   mapboxgl.accessToken =
+   'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
    // map style
    var map = new mapboxgl.Map({
@@ -48,18 +43,16 @@
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
      center: [-4.4118, 56.2361],
      zoom: 10
-     //maxBounds: bounds // Sets bounds using 'bounds' variable
    });
 
     // adds zoom buttons and compass
     const nav = new mapboxgl.NavigationControl();
     map.addControl(nav, "top-right");
 
-    // Add scale bar
+    // adds a scale bar
     var scale = new mapboxgl.ScaleControl({
        unit: 'imperial'
     });
-
     map.addControl(scale, 'bottom-right');
 
 
@@ -89,28 +82,7 @@
        );
       });
 
-      // // for (i = 0; i < data.features.length; i++) {
-      //  /* For each feature in the GeoJSON object above: */
-      //   data.features.forEach(function(marker) {
-      //     /* Create a div element for the marker. */
-      //     var el = document.createElement('div');
-      //     /* Assign a unique `id` to the marker. */
-      //     el.id = "marker-" + marker.properties.id;
-      //     /* Assign the `marker` class to each marker for styling. */
-      //     el.className = 'marker';
-        //   /**
-        //    * Create a marker using the div element
-        //    * defined above and add it to the map.
-        //   **/
-        //   new mapboxgl.Marker(el, { offset: [0, -23] })
-        //     .setLngLat(marker.geometry.coordinates)
-        //     .addTo(map);
-        //
-        // //  });
-
-
     var sensors = "https://raw.githubusercontent.com/KateHickey26/SmartFarm/master/SFproject/KirktonApp/Kirkton.geojson";
-
 
     // Use the point layers to create the list
    map.on('load', () => {
@@ -136,9 +108,7 @@
          }
        });
        buildLocationList(data);
-  //   }
     });
-
      });
    });
 
