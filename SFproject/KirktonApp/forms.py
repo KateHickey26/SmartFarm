@@ -20,12 +20,12 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password', 'is_staff', 'is_superuser',)
 
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('username',)
-        # form for user to change username or password
-                  #'email', 'is_staff', 'is_superuser',
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('username',)
+#         # form for user to change username or password
+#                   #'email', 'is_staff', 'is_superuser',
 
 
 class AddSensorForm(Form):
