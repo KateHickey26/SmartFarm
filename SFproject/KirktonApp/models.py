@@ -1,19 +1,19 @@
-from django.db import models
-from django.contrib.auth.models import User
 
 
 # Create your models here.
 
-class UserProfile(models.Model):
-    # Links UserProfile to a User model instance.
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    username = models.CharField(blank=False, max_length=25, default="username")
-
-    # method to return a meaningful value when a string
-    # representation of a user profile is requested
-    def __str__(self):
-        return self.user.username
+# dont need this model as we dont need any extra attributes outside the
+# normal django user model?
+# class UserProfile(models.Model):
+#     # Links UserProfile to a User model instance.
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#
+#     username = models.CharField(blank=False, max_length=25, default="username")
+#
+#     # method to return a meaningful value when a string
+#     # representation of a user profile is requested
+#     def __str__(self):
+#         return self.user.username
 
 #
 # # use to have colours for each type of sensor?

@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile
 from django.forms import ModelForm, Form
 from django_jsonforms.forms import JSONSchemaField
 import json
@@ -23,7 +22,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = User
         fields = ('username',)
         # form for user to change username or password
                   #'email', 'is_staff', 'is_superuser',

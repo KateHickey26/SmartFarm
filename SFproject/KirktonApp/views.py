@@ -4,9 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-from .models import *
 from .forms import UserProfileForm
-from django_jsonforms.forms import JSONSchemaForm
+# from django_jsonforms.forms import JSONSchemaForm
 from .forms import AddSensorForm, UserForm, UserProfileForm
 
 import copy
