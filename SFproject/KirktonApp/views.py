@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-# from KirktonApp.models import *
-# from KirktonApp.forms import UserForm
+from .models import *
+from .forms import UserProfileForm
 from django_jsonforms.forms import JSONSchemaForm
 from .forms import AddSensorForm, UserForm, UserProfileForm
 
@@ -106,7 +106,7 @@ def my_account(request):
         return render(request, 'KirktonApp/myAccount.html')
 
 
-@login_required
+#@login_required
 def register_user(request):
     # A boolean value for telling the template
     # whether the registration was successful.

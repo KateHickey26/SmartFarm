@@ -1,10 +1,10 @@
-# from django.urls import path
 from django.conf.urls import url
 from django.urls import path, include
-from django.conf import settings
 from KirktonApp import views
 
+
 app_name = 'KirktonApp'
+
 
 urlpatterns = [
     # path('', views.home, name='home'),

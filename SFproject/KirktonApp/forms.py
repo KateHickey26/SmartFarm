@@ -24,7 +24,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('username', 'password',)
+        fields = ('username',)
         # form for user to change username or password
                   #'email', 'is_staff', 'is_superuser',
 
