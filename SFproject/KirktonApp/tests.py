@@ -45,7 +45,7 @@ class KirktonApp(TestCase):
 
     # HOME PAGE TESTS ###################################################
     # Testing that the home page has buttons for logging in and out
-    def test_login_logout_buttons(self):
+    def test_home_page_elements(self):
         response = self.client.get("/")
         self.assertContains(response, "Login", msg_prefix="Home page has login button")
         # self.assertContains(response, "Logout", msg_prefix="Home page has logout button")
@@ -53,12 +53,10 @@ class KirktonApp(TestCase):
         self.assertContains(response, "Map", msg_prefix="Home page contains mapbox map")
         self.assertContains(response, "Sensors", msg_prefix="Home page contains sensors sidebar")
 
-
     # ABOUT PAGE TESTS ###################################################
     def test_about_page(self):
         response = self.client.get(reverse('KirktonApp:about'))
         self.assertEqual(response.status_code, 200)
-
 
 # class LoginViewTests(TestCase):
 # # LOGIN PAGE TESTS ###################################################
