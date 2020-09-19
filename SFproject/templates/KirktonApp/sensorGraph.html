@@ -11,17 +11,18 @@
 
 
     <div style="width:75%;">
-<!--		<button onclick="resetZoom()">Reset Zoom</button>
+		<button onclick="resetZoom()">Reset Zoom</button>
 		<button id="drag-switch" onclick="toggleDragMode()">Disable drag mode</button>
       <!-- {% if registered % -->
     <button id="download-csv" onclick="downloadSensorData()">Download data as CSV file</button>
+    <button id="refresh-chart" onclick="myChart.update()">Refresh Chart</button>
+
       <!-- {% endif % -->
 
-<canvas id="chart" width="1000" height="800"></canvas>
+<canvas id="chart" width="1000" height="800" aria-label="Sensor Graph"></canvas>
     </div>
 
 </div>
-
 
 <script>
 
@@ -62,13 +63,37 @@ async function chartIt(){
             pan: {
               enabled: true,
               mode: 'xy',
-              speed: 20
+              rangeMin: {
+				       // Format of min pan range depends on scale type
+				      x: null,
+				      y: null
+			        },
+			        rangeMax: {
+				      // Format of max pan range depends on scale type
+				      x: null,
+				      y: null
+			        },
+              speed: 20,
+              // Minimal pan distance required before actually applying pan
+			        threshold: 10
             },
             zoom: {
               enabled: true,
               drag: true,
               mode: 'x',
-              speed: 0.1
+              rangeMin: {
+				      // Format of min zoom range depends on scale type
+				      x: null,
+				      y: null
+			        },
+			        rangeMax: {
+				      // Format of max zoom range depends on scale type
+				      x: null,
+				      y: null
+			        },
+              speed: 0.1,
+              // Minimal zoom distance required before actually applying zoom
+			        threshold: 2
             }
         }
     }
@@ -229,6 +254,9 @@ async function chartIt(){
     // download(csvData);
 
 
+    myChart.update({
+      duration: 800, // time for redraw in milliseconds
+    });
 
 
     // // test field image

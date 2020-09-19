@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'KirktonApp',
     'livereload',
     'django_jsonforms',
+    'registration',
 
 ]
 

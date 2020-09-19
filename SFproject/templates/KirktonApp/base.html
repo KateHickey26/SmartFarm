@@ -31,8 +31,179 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.7"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="KirktonApp/static/css/style.css">
+<!--<link rel="stylesheet" type="text/css" href="KirktonApp/static/css/style.css">-->
+<style>
+    body {
+  color:#404040;
+  font:500 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin:0;
+  padding:10px 5px 15px 20px;
+  -webkit-font-smoothing:antialiased;
+}
 
+/* Style the header links */
+.header a {
+<!--  float: left;-->
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.btn {
+  color: #2E8B57;
+  background: #eee;
+}
+
+.btn a:hover {
+  color:#8FBC8F;
+
+ }
+
+.body-for-sticky {
+    min-height: 100%;          /* for the footer to be at the bottom */
+    padding-bottom: 10rem;      /* Space available between last element and bottom border of the page */
+}
+
+.sticky-footer {
+    position: absolute;        /* for it to disappear under last body element */
+    bottom: 0;                 /* so the footer can stick to the bottom*/
+}
+
+
+* {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+.sidebar {
+  position: fixed;
+  width:33.3333%;
+  height:100%;
+  top:20%;
+  left:3%;
+  overflow: hidden;
+  border-right:1px solid rgba(0,0,0,0.25);
+}
+.pad2 {
+  padding:20px;
+}
+
+.map {
+  position: fixed;
+  left: 35%;
+  width: 65%;
+  top: 20%;
+  bottom: 0;
+}
+
+
+h1 {
+  font-size:22px;
+  margin:0;
+  font-weight:400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+
+a {
+  color:#8FBC8F;
+  text-decoration:none;
+}
+
+a:hover {
+  color:#8FBC8F;
+}
+
+/* adds colour and style to the "Sensors" heading */
+.heading {
+  background:#fff;
+  border-bottom:1px solid #eee;
+  min-height:60px;
+  line-height:60px;
+  padding:0 10px;
+  background-color: #2E8B57;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width:3px;
+  height:3px;
+  border-left:0;
+  background:rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-track {
+  background:none;
+}
+
+::-webkit-scrollbar-thumb {
+  background:#00853e;
+  border-radius:0;
+}
+
+.clearfix { display:block; }
+
+.clearfix:after {
+  content:'.';
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+}
+
+.mapboxgl-popup-close-button {
+  display:none;
+}
+
+.mapboxgl-popup-content {
+  font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  padding:0;
+  width:180px;
+}
+
+.mapboxgl-popup-content-wrapper {
+  padding:1%;
+}
+
+.mapboxgl-popup-content h3 {
+  background:#91c949;
+  color:#fff;
+  margin:0;
+  display:block;
+  padding:10px;
+  border-radius:3px 3px 0 0;
+  font-weight:700;
+  margin-top:-15px;
+}
+
+.mapboxgl-popup-content h4 {
+  margin:0;
+  display:block;
+  padding: 10px 10px 10px 10px;
+  font-weight:350;
+}
+
+.mapboxgl-popup-content div {
+  padding:10px;
+}
+
+.mapboxgl-container .leaflet-marker-icon {
+  cursor:pointer;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+  border-bottom-color: #91c949;
+}
+</style>
 <!--  <header style="background-color: #8FBC8F;"> -->
     <h1>
         SRUC Kirkton & Auchtertyre
@@ -44,27 +215,35 @@
      <div class="header" name="header" >
        <div class="row">
          <div class="col-5 align-self-center">
-             <div class="row mt-4 md-2 py-2 justify-content-end" name="login" >
+             <div class="row mt-4 md-2 py-2 justify-content-end" name="toolbar" >
                  {% if user.is_authenticated %}
-                   <div class="row justify-content-center">
-                     <div class="col-3 mx-1">Welcome {{user.username}} !</div>
-                       <div class="col-2 mx-1">
-                         <form method="get" action="{% url 'KirktonApp:logout' %}">
-                             <button class="btn btn-outline-primary px-4">Logout</button>
-                         </form>
-                         </div>
-                     </div>
-                     {% else %}
-                     <div class="col-3">
-                     <form method="get" action="{% url 'KirktonApp:login' %}">
-                         <button class="btn btn-outline-primary px-4">Login</button>
+                 <div class="col-3 mx-1">Welcome {{user.username}}!</div>
+                 {% endif %}
+                 <p>
+                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About</a>
+                </p>
+                 <p>
+                     <a class="nav-link" href="{% url 'KirktonApp:home'%}">Home</a>
+                 </p>
+                 {% if user.is_authenticated %}
+                 <p>
+                    <a class="nav-link" href="{% url 'KirktonApp:add_sensor_form'%}">Add Sensor to map</a>
+                </p>
+                </div>
+                <p>
+                    <a class="nav-link" href="{% url 'KirktonApp:register_user' %}">Register a new user</a>
+                </P>
+                <div class="col">
+                     <form method="get" action="{% url 'KirktonApp:logout' %}">
+                         <button class="btn btn-outline-primary px-4">Logout</button>
                      </form>
+                 </div>
+                     {% else %}
+                     <div class="col">
+                     <p>
+                        <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
+                     </p>
                      </div>
-                    <div class = "col-6">
-                        <form method="get" action="{%url 'KirktonApp:add_sensor_form' %}">
-                        <button class="btn btn-outline-primary px-4">Add Sensor</button>
-                        </form>
-                    </div>
                      {% endif %}
                  </div>
            </div>
@@ -87,38 +266,10 @@
      and contact details where users can reach us. Helps keep the website neat. -->
 
 <footer class="page-footer font-small blue-grey lighten-5">
-  <div class="footer sticky-footer">
-    <div class="container text-center text-md-left mt-5">
-        <div class="row mt-3 dark-grey-text">
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-justify text-lg-center">
-                <h6 class="text-uppercase font-weight-bold">Website Links</h6>
-                <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:home' %}">Home</a>
-                </p>
-                <p>
-                    <a class="nav-link" href="{% url 'KirktonApp:about'%}">About</a>
-                </p>
-                <p>
-                  <a class="nav-link" href="{% url 'KirktonApp:login' %}">Log in</a>
-                </p>
-                            <!-{% if registered ->
-                <p>
-                    <a class="nav-link" href="{% url 'KirktonApp:register_user' %}">Register a new user</a>
-                </p>
-                            <!- {% endif ->
-            </div>
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                <p>Glasgow, UK</p>
-                <p>2032000h@student.glasgow.ac.uk</p>
-            </div>
-        </div>
-    </div>
 
     <div class="footer-copyright text-center text-black-50 py-3">
         <a class="dark-grey-text" >KirktonApp</a>
     </div>
-  </div>
 </footer>
 
 </html>
