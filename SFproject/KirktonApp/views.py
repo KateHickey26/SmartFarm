@@ -98,10 +98,11 @@ def my_account(request):
         if newpassword is not "":
             user.set_password(newpassword)
         user.save()
-    
+        return render(request, 'KirktonApp/myAccount.html')
 
-        return render(request, 'KirktonApp/myAccount.html',
-                context_instance=RequestContext(request))
+    else:
+
+        return render(request, 'KirktonApp/myAccount.html')
 
 
 @login_required

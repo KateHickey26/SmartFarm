@@ -12,13 +12,12 @@
             <h1><span class="label label-default">My Account</span></h1>
         </div>
         <div class="col-3 my-auto">
-            <div class="form-group"> <!--Below is form for creating a user -->
+            <div class="form-group"> <!--Below is form for a user -->
                 <form action="{% url 'KirktonApp:my_account' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username"
+                    <label for="exampleInputUsername">Email</label>
+                    <input type="username" class="form-control" id="exampleInputUsername"  name="username"
                            placeholder="{{user.username}}">
-                    <small id="emailHelp" class="form-text text-muted">Input username</small>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Input password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
