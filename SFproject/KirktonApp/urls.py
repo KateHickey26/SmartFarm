@@ -16,5 +16,4 @@ urlpatterns = [
     path('add_sensor_form/', views.add_sensor_form, name='add_sensor_form'),
     path('register_user/', views.register_user, name='register_user'),
     path('my_account/', views.my_account, name='my_account'),
-
 ]

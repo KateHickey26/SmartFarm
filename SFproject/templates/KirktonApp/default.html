@@ -41,8 +41,8 @@
    var map = new mapboxgl.Map({
      container: 'map',
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
-     center: [-4.4118, 56.2361],
-     zoom: 10
+     center: [-4.659, 56.42],
+     zoom: 11
    });
 
     // adds zoom buttons and compass
@@ -206,7 +206,7 @@ map.on('click', function (e){
    function flyToSensor(clickedSensor) {
      map.flyTo({
        center: clickedSensor.geometry.coordinates,
-       zoom: 12
+       zoom: 13
      });
    }
 

@@ -87,24 +87,24 @@ def user_logout(request):
 @login_required
 def my_account(request):
     user = request.user
-    # profile = UserForm.objects.get_or_create(user=user)[0]
 
     # if post, change data
     if request.method == 'POST':
         newname = request.POST.get('username')
-        newpsw = request.POST.get('password')
+        newpassword = request.POST.get('password')
         print(request.FILES)
         if newname is not "":
             user.username = newname
-        if newpsw is not "":
-            user.set_password(newpsw)
+        if newpassword is not "":
+            user.set_password(newpassword)
         user.save()
-        # profile.save()
+    
 
-        return render(request, 'KirktonApp/myAccount.html')
+        return render(request, 'KirktonApp/myAccount.html',
+                context_instance=RequestContext(request))
 
 
-#@login_required
+@login_required
 def register_user(request):
     # A boolean value for telling the template
     # whether the registration was successful.
@@ -143,10 +143,8 @@ def register_user(request):
     else:
         # if not an Http post render using two ModelForm instances
         user_form = UserForm()
-        profile_form = UserForm()
 
     return render(request,
                   'KirktonApp/registerUser.html',
                   context={'user_form': user_form,
-                           # 'profile_form': profile_form,
                            'registered': registered})

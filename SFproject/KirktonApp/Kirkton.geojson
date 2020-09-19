@@ -335,18 +335,6 @@
           "coordinates": [-4.66305556, 56.41611111]
         }
       },
-      {
-        "type": "Feature",
-        "properties": {
-          "title": "Centre of map",
-          "description": "No description",
-          "URL": "<a href='https://sruc.decentlab.com/dashboard/snapshot/1ymShDXXjXlsiKst4TPBw72wi0Z4Z8Hf?orgId=0' target='blank'>Graph Link Example</a>",
-          "filename": "static/RiverLevelSensor775.csv"
-        },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [-4.4118, 56.2361]
-        }
       }
     ]
    }

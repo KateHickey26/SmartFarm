@@ -127,7 +127,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-#STATICFILES_LOCATION = 'static'
-#STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_URL = '/KirktonApp/static/'
