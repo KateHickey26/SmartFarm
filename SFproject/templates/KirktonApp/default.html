@@ -220,7 +220,7 @@ map.on('click', function (e){
        .setLngLat(currentFeature.geometry.coordinates)
        // add title, description, and URL link (if there is one) to popup
        .setHTML(currentFeature.properties.title +
-         '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL + '<br>' + currentFeature.properties.URL2)
+         '<h4>' + currentFeature.properties.description + '</h4>' + '<br>'+ currentFeature.properties.URL)
        .addTo(map);
    }
 

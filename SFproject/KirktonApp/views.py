@@ -149,3 +149,4 @@ def register_user(request):
                   'KirktonApp/registerUser.html',
                   context={'user_form': user_form,
                            'registered': registered})
+    return redirect(reverse('KirktonApp:home'))
