@@ -4,29 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-# from django_jsonforms.forms import JSONSchemaForm
 from .forms import AddSensorForm, UserForm
-
-import copy
-from django.template.loader import render_to_string
-from django.template.loader import get_template
-import json
-
 
 # Create your views here.
 
-# def index(request):
-# return HttpResponse("Testing views.py")
-
 
 def home(request):
-    # TODO: move this token to Django settings from an environment variable
-    # found in the Mapbox account settings and getting started instructions
-    # see https://www.mapbox.com/account/ under the "Access tokens" section
 
     mapbox_access_token = 'pk.my_mapbox_access_token'
-
-    #request.session.set_test_cookie()
 
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
@@ -46,7 +31,7 @@ def sensor_graph(request):
     return render(request, 'KirktonApp/sensorGraph.html')
 
 
-# @login_required
+@login_required
 def add_sensor_form(request):
     form = AddSensorForm()
 
@@ -125,16 +110,6 @@ def register_user(request):
             # hash the password with set_password method and update the user object
             user.set_password(user.password)
             user.save()
-
-            # commit = False because we need to set the user attribute ourselves
-            # avoids any integrity problems with saving the model until we are ready to.
-            # Stops django saving the data to the database in the first instance.
-            # Attempting to save the new instance in an incomplete state would raise a referential integrity error
-            # profile = profile_form.save(commit=False)
-            # profile.user = user
-
-            # manually saves the new instance to the database
-            # profile.save()
 
             # update variable to indicate the template registration was successful
             registered = True

@@ -9,9 +9,13 @@
 
 <div class="container" name="main body" >
 
-    <form action="">
+    <form id="sensor_form" method="post" action="{% url 'KirktonApp:add_sensor' %}" enctype="multipart/form-data">
+            <!-- display the form -->
             {{form.as_p}}
             {{form.media}}
+
+        <!-- button to submit form -->
+    <input type="submit" name="submit" value="Add_sensor" />
     </form>
 
 </div>

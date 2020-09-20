@@ -97,9 +97,8 @@ async function chartIt(){
             }
         }
     }
-    });
+  });
 }
-
 
 
     // reset zoom button function
@@ -120,40 +119,11 @@ async function chartIt(){
 			var ctx = document.getElementById('canvas').getContext('2d');
 			window.myLine = new window.Chart(ctx);
 		};
-    // take the data after its been used to make the graph and THEN parse it BACK to csv,
-    // - this allows for database and REST API integration later.
-    // May need an if statement for database vs csv.
-    // currently only for csv files
-    // add ranges?
-    // if statement for file name? using variables?
-    // replace file name with a file name variable? add 'filename' vqariable as a paramter
     downloadAsCSV = function(filename) {
-      // var aLink = document.createElement('a');
-      // var data = getData();
-      // var evt = document.createEvent("HTMLEvents");
-      // evt.initEvent("click");
-      // aLink.download = filename;
-      // aLink.href = data;
-      // aLink.dispatchEvent(evt);
-
-      // var csvFile = new Blob([csv], {type:"static/RiverLevelSensor775.csv"});
-
-      // this code works to open window but doesnt have anything in it
-      // var response = fetch('static/RiverLevelSensor775.csv');
-      // window.open("data:text/response;charset=utf-8," + escape(response))
-
-      // var csvContent = "data:text/csv;charset=utf-8";
-      // var encodedUri = encodeURI(csvContent);
-      // window.open(encodedUri);
-      // window.open("data:text/csv;charset=utf-8," + escape(csv))
     };
-  //  downloadAsCSV('static/RiverLevelSensor775.csv');
-
 
 
     // graph function to fill data
-    // change this to get correct in file name from sensor name data?
-    // and options for csv vd database files. maybe an attribute in json?
     getData();
     async function getData(){
         const xs = [];
@@ -166,7 +136,6 @@ async function chartIt(){
         // splits data into rows, and removes title row from parsing
         const table = data.split('\n').slice(1);
 
-        // reverse this for creating the csv file
         // splitting the rows
         table.forEach(row => {
             const columns = row.split(',');
@@ -179,15 +148,10 @@ async function chartIt(){
         return { xs, ys };
     }
 
-    // // variable for sensor id, sensor name used
-    // var sensorId = clickedSensor.properties
-    // // variable for url / filename
-    // var filename
     var filename = 'static/test.csv';
-    function downloadSensorData(filname){
+    function downloadSensorData(filename){
       getCsvFromCsv(filename);
     }
-
 
 
     // method for getting the csv info when the csv file already exists
@@ -198,38 +162,8 @@ async function chartIt(){
       const data = await response.text();
       download(data);
     }
-    // seperate function to create a csv from just the graph data?
-    // backwards engineer from the getData() method? then call the same download method below
-
-    // // youtube tutorial
-    // //function to change the graph data to a csv
-    // const objectToCsv = async function() {
-    //   const data = await getData(); // makes this function wait until all the data has been retrieved
-    //   const table = [];
-    //
-    //   // get the headers - this method uses a json object
-    //   const headers = data.xs;
-    //   csvRows.push(headers.join(',')); // comma separates
-    //
-    //   // loop over rows
-    //   for(const row of data){
-    //     const values = headers.map(header => {
-    //       // rejex to replace values, raplaces quotes with backslash quote to
-    //       // prevent messing up if commas are included in data
-    //       const escaped = row[header].replace(/"/g, '\\"');
-    //       return '"${row[header]}"';
-    //
-    //     });
-    //     csvRows.push(values.join(','));
-    //   }
-    //
-    //   // join everything by new myLine
-    //   return csvRows.join('\n');
-    //
-    // };
 
 
-    // youtube tutorial
     // method to download the file on the browser
     // this method can be used with all functions
     const download = function(data){
@@ -250,32 +184,10 @@ async function chartIt(){
       document.body.removeChild(a);
     }
 
-    // const csvData = objectToCsv(getData());
-    // download(csvData);
-
 
     myChart.update({
       duration: 800, // time for redraw in milliseconds
     });
-
-
-    // // test field image
-    //  console.log('fetching field image');
-    //       displayImage()
-    //           .then(response => {
-    //           console.log('the code has worked!');
-    //       })
-    //       .catch(error => {
-    //           console.log('error!');
-    //           console.error(error);
-    //       });
-    //  async function displayImage(){
-    //   // cant get this image to show on the live server - could have something to do
-    //   // with how ive configured my static files
-    //       const response = await fetch('static/images/field.jpeg');
-    //       const blob = await response.blob();
-    //       document.getElementById('field').src = URL.createObjectURL(blob);
-    //   }
 
     </script>
 

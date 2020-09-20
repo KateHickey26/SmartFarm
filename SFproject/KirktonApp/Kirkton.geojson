@@ -5,7 +5,8 @@
         "type": "Feature",
         "properties": {
           "title": "LoRaWAN Gateway - Kirkton Office",
-          "description": "This is an Ethernet connected RisingHF25008 LoRaWAN Gateway at the SRUC Hill & Mountain Research Centre office at Kirkton. The gateway receives messages from the sensors located across the farm (within an approximate 10 km radius) and forwards them to the Network Server. The gateway is simply a packet forwarding device, it doesn’t understand the packet contents, or decide what to send back, this is handled by the Network Server. The Network Server is responsible for receiving multiple copies of the transmitted packets, decrypting them and removing duplicates, and then forwarding the payloads to whatever Application Server the end user requires. We use 'The Things Network' (TTN) as our Network Server. For most of our environmental sensors we use an Application Server provided by Decentlab, who are the sensor manufacturers. We are able to view the data on a Dashboard provided by Decentlab."
+          "description": "This is an Ethernet connected RisingHF25008 LoRaWAN Gateway at the SRUC Hill & Mountain Research Centre office at Kirkton. The gateway receives messages from the sensors located across the farm (within an approximate 10 km radius) and forwards them to the Network Server. The gateway is simply a packet forwarding device, it doesn’t understand the packet contents, or decide what to send back, this is handled by the Network Server. The Network Server is responsible for receiving multiple copies of the transmitted packets, decrypting them and removing duplicates, and then forwarding the payloads to whatever Application Server the end user requires. We use 'The Things Network' (TTN) as our Network Server. For most of our environmental sensors we use an Application Server provided by Decentlab, who are the sensor manufacturers. We are able to view the data on a Dashboard provided by Decentlab.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -16,7 +17,8 @@
         "type": "Feature",
         "properties": {
           "title": "LoRaWAN Gateway - Artisan Cafe",
-          "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan."
+          "description": "Our second Ethernet connected LoRaWAN gateway is a Kerlink IoT Station. This is located at the Artisan Cafe in Strathfillan.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -27,7 +29,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 1",
-          "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed)."
+          "description": "This is one of two off-grid RAK7249 LoRaWAN gateways. It is powered by a 12V leisure battery which is charged by a solar panel. It has a 3G mobile connection to the Network Server. Both off-grid gateways are currently undergoing testing close to the farm office and are still to be deployed at their final locations on the slopes of Meall Buidhe and Ben Challum (locations to be confirmed).",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -38,7 +41,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Off-grid LoRaWAN Gateway 2",
-          "description": "Still to be delployed, location TBC"
+          "description": "Still to be deployed, location TBC",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -49,7 +53,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Kirkton Big Meadow Bridge",
-          "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm."
+          "description": "This is an ultrasonic level sensor which is used to measure the water level within the Kirkton Burn. It measures the distance from the sensor to the surface of the water every 10 minutes. There are a number of river level sensors across the farm.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -72,7 +77,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Kirkton Bothy Bridge",
-          "description": "No description"
+          "description": "No description",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -83,7 +89,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Blue Park Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site."
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -94,7 +101,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Lower Gorge Woodland Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site."
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -105,7 +113,8 @@
         "type": "Feature",
         "properties": {
           "title": "River Level Sensor - Upper Gorge Hydro Intake Bridge",
-          "description": "Data currently not available due to lack of LoRa coverage at this site."
+          "description": "Data currently not available due to lack of LoRa coverage at this site.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -128,7 +137,8 @@
         "type": "Feature",
         "properties": {
           "title": "Air Temperature and Relative Humidity Sensor - Kirkton Glen Park",
-          "description": "No description"
+          "description": "No description",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -139,7 +149,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Air Temperature and Relative Humidity - Kirkton Big Meadow Sensor",
-          "description": "Deployed 23/07/2020"
+          "description": "Deployed 23/07/2020",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -150,7 +161,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Air Temperature and Relative Humidity Sensor - Kirkton Face Pine Wood",
-          "description": "Deployed 23/07/2020"
+          "description": "Deployed 23/07/2020",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -161,7 +173,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Air Temperature and Relative Humidity Sensor - Meall Buidhe",
-          "description": "Deployed on Meall Buidhe within the peatland restoration area (NE corner of the fenced area) on 24th August 2020. Out of range of the gateways so no data available."
+          "description": "Deployed on Meall Buidhe within the peatland restoration area (NE corner of the fenced area) on 24th August 2020. Out of range of the gateways so no data available.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -184,7 +197,8 @@
         "type": "Feature",
         "properties": {
           "title": "Soil Temperature and Moisture Sensor - Kirkton Big Meadow",
-          "description": "No description"
+          "description": "No description",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -195,7 +209,8 @@
         "type": "Feature",
         "properties": {
           "title": "Soil Temperature and Moisture Sensor - Woodside",
-          "description": "No description"
+          "description": "No description",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -206,7 +221,8 @@
         "type": "Feature",
         "properties": {
           "title": "Soil Temperature and Moisture Sensor - Kirkton Glen Park",
-          "description": "No description"
+          "description": "No description",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -217,7 +233,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Soil Temperature and Moisture Sensor - Reseed",
-          "description": "Deployed 12th August 2020"
+          "description": "Deployed 12th August 2020",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -228,7 +245,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Soil Temperature and Moisture Sensor - 4 Acre",
-          "description": "Deployed 12th August 2020"
+          "description": "Deployed 12th August 2020",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -239,7 +257,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Soil Temperature and Moisture Sensor - Agroforestry Plot",
-          "description": "Deployed 14th August 2020"
+          "description": "Deployed 14th August 2020",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -250,7 +269,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Soil Temperature and Moisture Profile Sensor",
-          "description": "The soil temperature and moisture profile sensor measures the temperature and soil moisture at six depths through the soil profile (10, 20, 30, 40, 50 and 60 cm). This sensor will be deployed within  an area of restored peatland (location to be confirmed)."
+          "description": "The soil temperature and moisture profile sensor measures the temperature and soil moisture at six depths through the soil profile (10, 20, 30, 40, 50 and 60 cm). This sensor will be deployed within  an area of restored peatland (location to be confirmed).",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -261,7 +281,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Soil Temperature and Moisture Profile Sensor",
-          "description": "This sensor will be deployed within an area of un-restored degraded peatland (location to be confirmed)."
+          "description": "This sensor will be deployed within an area of un-restored degraded peatland (location to be confirmed).",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -272,7 +293,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Tipping Bucket Rain Gauge - Kirkton Glen Park",
-          "description": "This tipping bucket rain gauge is located at an altitude of 520 m above sea level at the top of the Kirkton Glen Park. It was deployed on 3rd August 2020."
+          "description": "This tipping bucket rain gauge is located at an altitude of 520 m above sea level at the top of the Kirkton Glen Park. It was deployed on 3rd August 2020.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -283,7 +305,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Tipping Bucket Rain Gauge - Kirkton Face Pine Wood",
-          "description": "This tipping bucket rain gauge is located at an altitude of 410 m above sea-level, inside the Kirkton Face woodland enclosure. It was deployed on 23rd July 2020."
+          "description": "This tipping bucket rain gauge is located at an altitude of 410 m above sea-level, inside the Kirkton Face woodland enclosure. It was deployed on 23rd July 2020.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -294,7 +317,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Tipping Bucket Rain Gauge - Auchtertyre (Dyke Park)",
-          "description": "This tipping bucket rain gauge is located at an altitude of 200 m above sea-level, just to the west of the Strathfillan Wigwam site at Auchtertyre. The rainfall Gauge was deployed on 19th August 2020."
+          "description": "This tipping bucket rain gauge is located at an altitude of 200 m above sea-level, just to the west of the Strathfillan Wigwam site at Auchtertyre. The rainfall Gauge was deployed on 19th August 2020.",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -305,7 +329,8 @@
         "type": "Feature",
         "properties": {
           "title": "New All-in-one Weather Station with Soil Temperature and Moisture Sensor",
-          "description": "Still to be deployed (location to be confirmed)"
+          "description": "Still to be deployed (location to be confirmed)",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -316,7 +341,8 @@
         "type": "Feature",
         "properties": {
           "title": "New All-in-one Weather Station with Soil Temperature and Moisture Sensor",
-          "description": "Still to be deployed (location to be confirmed)"
+          "description": "Still to be deployed (location to be confirmed)",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",
@@ -327,7 +353,8 @@
         "type": "Feature",
         "properties": {
           "title": "New Libelium Smart Water Xtreme",
-          "description": "Still to be deployed (location to be confirmed). Dissolved Oxygen, pH, temperature, electrical conductivity sensors"
+          "description": "Still to be deployed (location to be confirmed). Dissolved Oxygen, pH, temperature, electrical conductivity sensors",
+          "URL": " "
         },
         "geometry": {
           "type": "Point",

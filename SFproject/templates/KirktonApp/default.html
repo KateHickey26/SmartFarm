@@ -6,14 +6,12 @@
 
  <div class="container" name="main body" >
 
-
-    <!-- class="nav-link" href="{% url 'KirktonApp/sensorGraph.html'"> -->
-
  <!-- Side panel -->
  <div class='sidebar'>
    <div class='heading'>
      <h1>Sensors</h1>
    </div>
+     <!-- creation of a div for the graph button to be appended to -->
    <div id='graphDiv'></div>
 
    <div id='sensors' class='sensors'></div>
@@ -25,7 +23,7 @@
 
 <script>
 
-   // This will let you use the .remove() function later on
+   // This will let the .remove() function be used later on
    if (!('remove' in Element.prototype)) {
      Element.prototype.remove = function() {
        if (this.parentNode) {
@@ -34,10 +32,11 @@
      };
    }
 
+    // provided by mapbox API
    mapboxgl.accessToken =
    'pk.eyJ1Ijoia2F0ZWhpY2tleTI2IiwiYSI6ImNrZDk5bzVxMTA2MWQzNHJ4NGRucjFxbGMifQ.XeSYaehxN9YwUmHB35pTag';
 
-   // map style
+   // map styling
    var map = new mapboxgl.Map({
      container: 'map',
      style: 'mapbox://styles/mapbox/satellite-streets-v10',
@@ -108,9 +107,9 @@
          }
        });
        buildLocationList(data);
+      });
     });
-     });
-   });
+  });
 
 
 // add event listeners for the map markers
@@ -129,14 +128,12 @@ map.on('click', function (e){
          showGraphButton(clickedPoint);
 
          var activeItem = document.getElementsByClassName('active');
-    //     e.stopPropagation();
          if (activeItem[0]) {
            activeItem[0].classList.remove('active');
          }
 
          var selectedFeature = clickedPoint.properties.address;
 
-         // for use in ID
          for (var i = 0; i < sensors.features.length; i++) {
 			        if (sensors.features[i].properties.title === selectedFeature) {
 				            selectedFeatureIndex = i;
@@ -179,9 +176,8 @@ map.on('click', function (e){
 
        // add event listeners to the items in the list
       link.addEventListener('click', function(e){
+         // prevents default behaviour so it doesn't try to open a new page
          e.preventDefault();
-         // for (var i=0; i < data.features.length; i++) {
-    //     if (this.id === "link-" + prop.id) {
 
            // when clicked, fly to sensor, popup, and show "Show Graph" button
            var clickedSensor = data.features[this.parentElement.index];
@@ -195,8 +191,6 @@ map.on('click', function (e){
               activeItem[0].classList.remove('active');
           }
           this.parentNode.classList.add('active');
-          //  e.preventDefault();
-  //      }
       });
      };
    }
