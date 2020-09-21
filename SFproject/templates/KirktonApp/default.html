@@ -95,7 +95,6 @@
               type: 'geojson',
               data: data
             });
-
        map.addLayer({
          "id": "locations",
          "type": "symbol",
@@ -111,7 +110,6 @@
     });
   });
 
-
 // add event listeners for the map markers
 map.on('click', function (e){
   var features = map.queryRenderedFeatures(e.point, {
@@ -120,20 +118,18 @@ map.on('click', function (e){
 
   if(features.length){
     var clickedPoint = features[0];
-         // Fly to the point
+         // Fly to the selected sensor point on the map
          flyToSensor(clickedPoint);
          // Close all other popups and display popup for clicked sensor
          createPopUp(clickedPoint);
-         // Highlight listing in sidebar
+         // shows the "Show Graph" button
          showGraphButton(clickedPoint);
-
+         // Highlight listing in sidebar
          var activeItem = document.getElementsByClassName('active');
          if (activeItem[0]) {
            activeItem[0].classList.remove('active');
          }
-
          var selectedFeature = clickedPoint.properties.address;
-
          for (var i = 0; i < sensors.features.length; i++) {
 			        if (sensors.features[i].properties.title === selectedFeature) {
 				            selectedFeatureIndex = i;
@@ -148,23 +144,19 @@ map.on('click', function (e){
    // add each sensor to the sidebar
    function buildLocationList(data) {
      for (i = 0; i < data.features.length; i++) {
-
        // creating an array of all the sensors
        var currentFeature = data.features[i];
        // variable for sensor properties
        var prop = currentFeature.properties;
-
        // add new sensor list to side bar, select sensors container in HTML
        var sensors = document.getElementById('sensors');
        // append a sensors div for each sensor in the list
        var sensor = sensors.appendChild(document.createElement('div'));
-
        // Assign the `item` class to each sensor for styling.
        sensor.className = 'item';
        // give each sensor its own id, for creating the side bar list
        sensor.id = "listing-" + i;
        sensor.index = i;
-
        // Add the link to the individual sensor created above
        var link = sensor.appendChild(document.createElement('a'));
        link.href = '#';
@@ -176,13 +168,11 @@ map.on('click', function (e){
       link.addEventListener('click', function(e){
          // prevents default behaviour so it doesn't try to open a new page
          e.preventDefault();
-
            // when clicked, fly to sensor, popup, and show "Show Graph" button
            var clickedSensor = data.features[this.parentElement.index];
              flyToSensor(clickedSensor);
              createPopUp(clickedSensor);
              showGraphButton(clickedSensor);
-
           // highlight sensor and remove other highlights
           var activeItem = document.getElementsByClassName('active');
           if (activeItem[0]) {
@@ -207,7 +197,7 @@ map.on('click', function (e){
    function createPopUp(currentFeature) {
      var popUps = document.getElementsByClassName('mapboxgl-popup');
      if (popUps[0]) popUps[0].remove();
-
+     // closes the pop up when a click is made on screen away from it
      var popup = new mapboxgl.Popup({closeOnClick: true})
        .setLngLat(currentFeature.geometry.coordinates)
        // add title, description, and URL link (if there is one) to popup
@@ -219,20 +209,15 @@ map.on('click', function (e){
 
    // method for creating the Show Graph button
    function showGraphButton(clickedSensor){
-
      // empties graphButton div each time this function is called
      $("#graphDiv").empty();
-
      var graphDiv = document.getElementById("graphDiv");
-
      // creates button
      var button = document.createElement("button");
      // adds button label
      button.innerHTML = "Show Graph";
-
-     // append button
+     // append button to the graphDiv
      graphDiv.appendChild(button);
-
      document.getElementById("graphDiv").onclick = function(clickedSensor){
        window.location = "{% url 'KirktonApp:sensor_graph'%}";
      };

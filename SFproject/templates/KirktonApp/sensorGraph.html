@@ -7,15 +7,13 @@
 
 {% block body_block %}
 <div>
-      <!--  <img src="/static/images/field.jpeg" id="field" width="420" alt="missing field image"/> -->
-
 
     <div style="width:75%;">
 		<button onclick="resetZoom()">Reset Zoom</button>
-		<button id="drag-switch" onclick="toggleDragMode()">Disable drag mode</button>
+		<button id="drag-switch" onclick="toggleDragMode()">Disable drag mode</button><!--Not functioning as required-->
      {% if user.is_authenticated %}
-    <button id="download-csv" onclick="downloadSensorData()">Download data as CSV file</button>
-    <button id="refresh-chart" onclick="myChart.update()">Refresh Chart</button>
+    <button id="download-csv" onclick="getCsvFromCsv()">Download data as CSV file</button>
+    <button id="refresh-chart" onclick="myChart.update()">Refresh Graph</button>
 
      {% endif %}
 
@@ -29,7 +27,6 @@
 chartIt();
 
 // chart function
-// change to a variable to represent the csv filename?
 async function chartIt(){
     const data = await getData(); // makes this function wait until all the data has been retrieved
     const ctx = document.getElementById('chart').getContext('2d');
@@ -119,8 +116,6 @@ async function chartIt(){
 			var ctx = document.getElementById('canvas').getContext('2d');
 			window.myLine = new window.Chart(ctx);
 		};
-    downloadAsCSV = function(filename) {
-    };
 
 
     // graph function to fill data
@@ -154,10 +149,7 @@ async function chartIt(){
     }
 
 
-    // method for getting the csv info when the csv file already exists
-    // and calling the method to download it on the browser
     async function getCsvFromCsv(filename){
-      // if statement to get file name? using variables?
       const response = await fetch(filename);
       const data = await response.text();
       download(data);
@@ -184,10 +176,10 @@ async function chartIt(){
       document.body.removeChild(a);
     }
 
-
-    myChart.update({
-      duration: 800, // time for redraw in milliseconds
-    });
+    // // method for updating chart for future use
+    // myChart.update({
+    //   duration: 800, // time for redraw in milliseconds
+    // });
 
     </script>
 

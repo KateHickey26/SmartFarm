@@ -6,28 +6,21 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from .forms import AddSensorForm, UserForm
 
+
 # Create your views here.
 
-
 def home(request):
-
     mapbox_access_token = 'pk.my_mapbox_access_token'
-
     return render(request, 'KirktonApp/default.html',
                   {'mapbox_access_token': mapbox_access_token})
 
 
 # about page
 def about(request):
-    # if request.session.test_cookie_worked():
-    #     print("Test Cookie worked")
-    #     request.session.delete_test_cookie()
-
     return render(request, 'KirktonApp/about.html')
 
 
 def sensor_graph(request):
-
     return render(request, 'KirktonApp/sensorGraph.html')
 
 
